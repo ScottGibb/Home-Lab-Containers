@@ -2,4 +2,6 @@
 
 ## Summary
 
-For Prusaprint, the docker structure is as simple as two containers which are constructed using the utils folder structure.
+For Prusaprint, the following docker stacks are enabled:
+
+- utils

@@ -1,3 +1,12 @@
 [submodule "utils/wifi-connect"]
 	path = utils/wifi-connect
 	url = git@github.com:balena-os/wifi-connect.git
+[submodule "PiHome/IOT/Web-Based-Fan-Controller"]
+	path = PiHome/IOT/Web-Based-Fan-Controller
+	url = https://github.com/ScottGibb/Web-Based-Fan-Controller
+[submodule "PiHome/IOT/Smart-RF-Plug-Transmitter"]
+	path = PiHome/IOT/Smart-RF-Plug-Transmitter
+	url = git@github.com:ScottGibb/Smart-RF-Plug-Transmitter.git
+[submodule "PiHome/IOT/LED-Strip-Controller-Software"]
+	path = PiHome/IOT/LED-Strip-Controller-Software
+	url = https://github.com/ScottGibb/LED-Strip-Controller-Software

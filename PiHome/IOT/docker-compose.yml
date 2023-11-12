@@ -1,0 +1,60 @@
+version: '3.7'
+
+services:
+  
+  node-red:
+    container_name: Node-Red
+    image: nodered/node-red:latest
+    stdin_open: true
+    tty: true
+    environment:
+      - TZ=Europe/London
+#    ports:
+#     - 1880:1880
+#     - 3456:3456
+    volumes:
+      - type: bind
+        source: /home/pi/node-red
+        target: /data
+    privileged: true
+    restart: unless-stopped
+    network_mode: host
+
+  LED-Strip-Controller-CMD-Line:
+    container_name: LED-STRIP-CTRL-CI
+    build: "./LED-Strip-Controller-Software/Python CMD Interface"
+    network_mode: "host"
+    restart: unless-stopped
+
+  Fan-Controller-Backend:
+    container_name: back-end
+    build: "./Web-Based-Fan-Controller/BackEnd"
+    ports:
+      - "5000:5000"
+    privileged: true # Required for GPIO access
+    restart: unless-stopped
+
+  Fan-Controller-Frontend:
+    container_name: Front-end
+    build: "./Web-Based-Fan-Controller/FrontEnd"
+    ports:
+      - "5001:80"
+    depends_on:
+      - back-end
+    restart: unless-stopped
+
+  socket-rf-transmitter:
+    container_name: smart-rf-transmitter
+    build:
+      context: "./Smart-RF-Plug-Transmitter/src"
+    stdin_open: true
+    tty: true
+    environment:
+      - TZ=Europe/London
+      - TSMT_PIN_NUMBER= 13
+    ports:
+      - 60000:60000
+    privileged: true
+    restart: unless-stopped
+
+  
