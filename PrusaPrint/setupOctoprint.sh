@@ -19,3 +19,6 @@ echo "Setup Complete"
 echo "Installing telegram dependencies"
 apt-get install cpulimit -y
 echo "Finished Installation"
+
+# Install Octodash Plugin
+sh <(wget -qO- https://github.com/UnchartedBull/OctoDash/raw/main/scripts/install.sh)
