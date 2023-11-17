@@ -7,3 +7,8 @@ cd /home/pi || exit
 echo "Downloading LED Strip Controller Code"
 git clone https://github.com/ScottGibb/LED-Strip-Controller-Octoprint.git
 echo "Finished Download"
+
+# Install Temp Sensor drivers DHT11
+pip3 install adafruit-circuitpython-dht
+sudo apt-get update
+sudo apt-get install libgpiod2 -y
