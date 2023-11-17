@@ -12,5 +12,5 @@ echo "Finished Download"
 echo "Setting up DHT11 Drivers
 pip3 install adafruit-circuitpython-dht
 sudo apt-get update -y
-sudo apt-get install libgpiod2 -y
+sudo apt-get install libgpiod2
 echo "Setup Complete"
