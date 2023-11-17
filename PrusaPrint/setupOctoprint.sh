@@ -18,4 +18,4 @@ echo "Setup Complete"
 # Install CPU limit for creating gifs
 echo "Installing telegram dependencies"
 apt-get install cpulimit -y
-echo "Finished Installation
+echo "Finished Installation"
