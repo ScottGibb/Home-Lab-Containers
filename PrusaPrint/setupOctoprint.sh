@@ -24,5 +24,5 @@ echo "Finished Installation"
 # Install Octodash Plugin
 
 echo "Installing Octodash"
-bash <(wget -qO- https://github.com/UnchartedBull/OctoDash/raw/main/scripts/install.sh)
+bash -c "<(wget -qO- https://github.com/UnchartedBull/OctoDash/raw/main/scripts/install.sh)"
 echo "Finished Install"
