@@ -19,9 +19,3 @@ echo "Setup Complete"
 echo "Installing telegram dependencies"
 apt-get install cpulimit -y
 echo "Finished Installation"
-
-# Install Octodash Plugin
-cd "$current_dir" || { echo "Failed to navigate back to the original directory. Exiting."; exit 1; }
-echo "Downloading Octodash"
-wget -qO- https://github.com/UnchartedBull/OctoDash/raw/main/scripts/install.sh > setupOctoDash.sh || { echo "Failed to download Octodash. Exiting."; exit 1; }
-echo "Please run setupOctoDash.sh"
