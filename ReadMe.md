@@ -1,7 +1,5 @@
 # Home Lab Containers
 
-## Summary 
+## Summary
 
 ## Project Structure  
-
-# throw an error
