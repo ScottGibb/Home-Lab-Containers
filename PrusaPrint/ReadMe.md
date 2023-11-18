@@ -6,7 +6,7 @@ For Prusaprint, the setupOctoprint.sh should be called and the following docker 
 
 - utils
 
-## Setup Octoprint 
+## Setup Octoprint
 
 As for setting up Octoprint, the script setupOctoprint.sh will need to be run along the extra installs section of this ReadMe.md
 
@@ -27,7 +27,7 @@ As for extra installs, Octodash cant be installed using the plugin manager and t
 bash <(wget -qO- https://github.com/UnchartedBull/OctoDash/raw/main/scripts/install.sh)
 ```
 
-## Useful Links 
+## Useful Links
 
 - [OctoDash](https://github.com/UnchartedBull/OctoDash/wiki/Installation)
 - [Camera Module V3 Autofocus Settings](https://community.octoprint.org/t/manual-raspi-camera-v3-webcam-auto-focus/53025)
