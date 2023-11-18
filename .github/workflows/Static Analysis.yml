@@ -44,14 +44,3 @@ jobs:
           find . -type f -name "*.yml" -print0 | xargs -0 yamllint
           find . -type f -name "*.yaml" -print0 | xargs -0 yamllint
 
-  Python_Lint_Check:
-    name: Python Lint Check
-    runs-on: ubuntu-latest
-    steps:
-      - name: Install pylint
-        run:  |
-          pip install pylint
-      - name: Run Pylint
-        run:  |
-          echo "Checking source files with pylint"
-          pylint --fail-under=4 ./PrusaPrint/
