@@ -1,7 +1,9 @@
+---
+
 version: '3.7'
 
 services:
-  
+
   node-red:
     container_name: Node-Red
     image: nodered/node-red:latest
@@ -9,9 +11,9 @@ services:
     tty: true
     environment:
       - TZ=Europe/London
-#    ports:
-#     - 1880:1880
-#     - 3456:3456
+    # ports:
+    #   - 1880:1880
+    #   - 3456:3456
     volumes:
       - type: bind
         source: /home/pi/node-red
@@ -56,5 +58,3 @@ services:
       - 60000:60000
     privileged: true
     restart: unless-stopped
-
-  
