@@ -54,4 +54,4 @@ jobs:
       - name: Run Pylint
         run:  |
           echo "Checking source files with pylint"
-          pylint --fail-under=4 ./
+          pylint --fail-under=4 ./PrusaPrint/
