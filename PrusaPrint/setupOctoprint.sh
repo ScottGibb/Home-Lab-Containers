@@ -19,3 +19,8 @@ echo "Setup Complete"
 echo "Installing telegram dependencies"
 apt-get install cpulimit -y
 echo "Finished Installation"
+
+# Installing Libcamera.conf
+echo "Copying over libcamera config"
+cp libcamera.conf /boot/camera-streamer/libcamera.conf
+echo "Finsihing Libcamera config"
