@@ -16,7 +16,8 @@
           - name: Shell Check
             run: |
               echo "Checking shell scripts"
-              shellcheck **/**/*.sh
+              find . -type f -name "*.sh" -print0 | xargs -0 shellcheck
+
     
       Markdown_Lint_Check:
         name: Markdown Lint Check
