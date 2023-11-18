@@ -1,6 +1,9 @@
 #!/bin/sh
 
 # Setup Script for downloading the LED Strip Controller Script
+
+echo "Starting OCtoprint Install"
+
 current_dir=$(pwd)
 echo "Navigating to Home Directory"
 cd /home/pi || { echo "Failed to navigate to /home/pi. Exiting."; exit 1; }
@@ -24,3 +27,10 @@ echo "Finished Installation"
 echo "Copying over libcamera config"
 cp libcamera.conf /boot/camera-streamer/libcamera.conf
 echo "Finsihing Libcamera config"
+
+# Overwriting getDHTTemp.py
+echo "Overwriting getDHTTemp.py"
+cp -rf getDHTTemp.py ~/oprint/lib/python3.9/site-packages/octoprint_enclosure/getDHTTemp.py
+echo "Finished Overwriting getDHTTemp.py"
+
+echo "Finished, octoprint setup"
