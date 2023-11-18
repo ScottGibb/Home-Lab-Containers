@@ -25,7 +25,7 @@ max_retries = 3
 retry_count = 0
 while retry_count <= max_retries:
 #    try:
-     if True:
+    if True:
         humidity=dhtDevice.humidity
         temperature=dhtDevice.temperature
 
@@ -36,8 +36,8 @@ while retry_count <= max_retries:
 #        print('-1 | -1')
 #        sys.exit(1)
 
-     time.sleep(1)
-     retry_count += 1
+    time.sleep(1)
+    retry_count += 1
 
 print('-1 | -1')
 sys.exit(1)
