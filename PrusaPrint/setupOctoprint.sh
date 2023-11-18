@@ -9,7 +9,9 @@ echo "Navigating to Home Directory"
 cd /home/pi || { echo "Failed to navigate to /home/pi. Exiting."; exit 1; }
 echo "Downloading LED Strip Controller Code"
 git clone https://github.com/ScottGibb/LED-Strip-Controller-Octoprint.git || { echo "Failed to download LED Strip Controller Code. Exiting."; exit 1; }
+cd "$current_dir" || { echo "Failed to navigate back to the original directory. Exiting."; exit 1; }
 echo "Finished Download"
+
 
 # Install Temp Sensor drivers DHT11
 echo "Setting up DHT11 Drivers"
