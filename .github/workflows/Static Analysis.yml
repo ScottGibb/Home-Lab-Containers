@@ -43,4 +43,3 @@ jobs:
           echo "Checking YAML files"
           find . -type f -name "*.yml" -print0 | xargs -0 yamllint
           find . -type f -name "*.yaml" -print0 | xargs -0 yamllint
-
