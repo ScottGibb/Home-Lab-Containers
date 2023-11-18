@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # Setup Script for downloading the LED Strip Controller Script
 current_dir=$(pwd)
