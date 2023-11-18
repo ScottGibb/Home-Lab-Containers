@@ -1,7 +1,9 @@
+---
+
 version: '3.7'
 
 services:
-  
+
   node-red:
     container_name: Node-Red
     image: nodered/node-red:latest
@@ -56,5 +58,4 @@ services:
       - 60000:60000
     privileged: true
     restart: unless-stopped
-
-  
+    

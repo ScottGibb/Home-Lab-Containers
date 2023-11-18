@@ -1,9 +1,9 @@
 ---
 
     name: Static Analysis
-    
+
     on: [push]
-    
+
     jobs:
       Shell_Check:
         name: Shell Check
@@ -30,7 +30,7 @@
             run: |
               echo "Checking Markdown files"
               find . -type f -name "*.md" -print0 | xargs -0 markdownlint
-    
+
       YAML_Lint_Check:
         name: YAML Lint Check
         runs-on: ubuntu-latest
@@ -45,7 +45,6 @@
               find . -type f -name "*.yml" -print0 | xargs -0 yamllint
               find . -type f -name "*.yaml" -print0 | xargs -0 yamllint
 
-      
       Python_Lint_Check:
         name: Python Lint Check
         runs-on: ubuntu-latest

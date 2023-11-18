@@ -1,18 +1,18 @@
 version: "3.7"
 
 services:
-       motion-eye:
-         image: ccrisan/motioneye:master-armhf
-         container_name: Motion-Eye
-         environment:
-           - TZ=Europe/London
-         volumes:
-           - type: bind
-             source: /home/pi/motion-eye/etc
-             target: /etc
-           - type: bind
-             source: /home/pi/motion-eye/var
-             target: /var
-         ports:
-           - 8765:8765
-         restart: unless-stopped
+  motion-eye:
+    image: ccrisan/motioneye:master-armhf
+    container_name: Motion-Eye
+    environment:
+      - TZ=Europe/London
+    volumes:
+      - type: bind
+        source: /home/pi/motion-eye/etc
+        target: /etc
+      - type: bind
+        source: /home/pi/motion-eye/var
+        target: /var
+    ports:
+      - 8765:8765
+    restart: unless-stopped
