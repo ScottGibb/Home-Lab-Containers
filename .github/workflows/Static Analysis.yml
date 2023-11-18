@@ -42,7 +42,7 @@
           - name: Run yamllint
             run: |
               echo "Checking YAML files"
-              yamllint -c .yamllint.yaml .github/**/**.yaml
+              yamllint -c .yamllint.yaml .github/**/**.yml
               yamllint -c .yamllint.yaml **/**/**.yml
       
       Python_Lint_Check:
@@ -50,7 +50,9 @@
         runs-on: ubuntu-latest
         steps:
           - name: Install pylint
-            run:  sudo apt-get install pip -y
-                    pip install pylint
+            run:  |
+                  pip install pylint
           - name: Run Pylint
-            run:  pylint --fail-under=4 **/*.py
+            run:  |
+                  echo "Checking source files with pylint"
+                  pylint --fail-under=4 **/*.py
