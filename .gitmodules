@@ -10,3 +10,6 @@
 [submodule "PiHome/IOT/LED-Strip-Controller-Software"]
 	path = PiHome/IOT/LED-Strip-Controller-Software
 	url = https://github.com/ScottGibb/LED-Strip-Controller-Software
+[submodule "PiNas/NAS-Media"]
+	path = PiNas/NAS-Media
+	url = http://192.168.0.67:1080/SGIBB/NAS-Media.git
