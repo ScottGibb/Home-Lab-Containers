@@ -13,3 +13,6 @@
 [submodule "PiNas/NAS-Media"]
 	path = PiNas/NAS-Media
 	url = http://192.168.0.67:1080/SGIBB/NAS-Media.git
+[submodule "PiDesk/Cups_Dymo-450"]
+	path = PiDesk/Cups_Dymo-450
+	url = git@github.com:ScottGibb/Cups_Dymo-450.git
