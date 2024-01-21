@@ -35,7 +35,7 @@ services:
       - 3001:3001
     volumes:
       - type: bind
-        source: /home/pi/configs/uptime-kuma
+        source: /home/pi/config/uptime-kuma
         target: /app/data
     restart: unless-stopped
 
