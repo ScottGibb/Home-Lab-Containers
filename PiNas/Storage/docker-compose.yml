@@ -25,12 +25,10 @@ services:
       - /mnt/MediaStorage/AudioBooks:/AudioBooks
     command: '-u "USERNAMEGOESHERE;PASSWORDGOESHERE"'
     restart: unless-stopped
-    network_mode: bridge
 
   Gitlab:
     image: gitlab/gitlab-ce
     container_name: GitLab
-    network_mode: bridge
     restart: unless-stopped
     ports:
      - "1443:1443"
