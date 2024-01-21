@@ -37,7 +37,6 @@ services:
       - type: bind
         source: /home/pi/configs/uptime-kuma
         target: /app/data
-      - uptime-kuma-config:/app/data
     restart: unless-stopped
 
 volumes:
