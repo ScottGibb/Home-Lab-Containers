@@ -21,7 +21,7 @@ It is recommended you do it, by first installing the plugins then applying the b
 
 ### Installing the Spool Manager Plugin
 
-Sadly as of the 15/0/2024, the Spool Manager provided by the Octoprint plugin repository is out of date and no longer works in terms of QR code functionality. In order to fix this the following repo can be used [mdziekon Fork](https://github.com/mdziekon/OctoPrint-SpoolManager). However this plugin also doesnt install properly using the link. The best result is to download the plugin using gihub clone specifically the V2.0.0 release.
+Its best to install the Spool Manager using Scott Gibbs Fork listed [here](https://github.com/ScottGibb/OctoPrint-SpoolManager)
 
 ### Extra Installs
 
