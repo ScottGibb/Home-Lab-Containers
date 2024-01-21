@@ -28,5 +28,17 @@ services:
       - 9001:9001
     restart: unless-stopped
 
+  uptime-kuma:
+    image: louislam/uptime-kuma
+    container_name: uptime-kuma
+    ports:
+      - 3001:3001
+    volumes:
+      - type: bind
+        source: /home/pi/configs/uptime-kuma
+        target: /app/data
+      - uptime-kuma-config:/app/data
+    restart: unless-stopped
+
 volumes:
   portainer_data:
