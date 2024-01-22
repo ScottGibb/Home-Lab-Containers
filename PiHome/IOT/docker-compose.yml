@@ -3,6 +3,27 @@
 version: '3.7'
 
 services:
+  mqtt-broker:
+    image: eclipse-mosquitto:latest
+    container_name: mqtt-broker
+    ports:
+      - "1883:1883"  # MQTT port
+      - "9001:9001"  # MQTT over WebSockets (optional, for MQTT over WebSocket support)
+    volumes:
+      - mosquitto_data:/mosquitto/data
+      - mosquitto_config:/mosquitto/config
+      - mosquitto_log:/mosquitto/log
+
+  homeassistant:
+    container_name: homeassistant
+    image: "ghcr.io/home-assistant/home-assistant:stable"
+    volumes:
+      - /PATH_TO_YOUR_CONFIG:/config
+      - /etc/localtime:/etc/localtime:ro
+      - /run/dbus:/run/dbus:ro
+    restart: unless-stopped
+    privileged: true
+    network_mode: host
 
   node-red:
     container_name: Node-Red
@@ -58,3 +79,8 @@ services:
       - 60000:60000
     privileged: true
     restart: unless-stopped
+
+volumes:
+  mosquitto_data:
+  mosquitto_config:
+  mosquitto_log:
