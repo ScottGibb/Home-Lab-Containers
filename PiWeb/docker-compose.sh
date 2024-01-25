@@ -32,5 +32,5 @@ esac
 # Iterate through the directories and run docker-compose
 for dir in "${directories[@]}"; do
     echo "Running docker-compose $action in directory: $dir"
-    (cd "$dir" && docker-compose $action)
+    (cd "$dir" && docker compose $action)
 done
