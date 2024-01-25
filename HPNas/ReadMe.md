@@ -8,7 +8,7 @@
 - NAS-Media
 - Storag
 
-Run the following commands to set up and take down the PiWeb Stack:
+Run the following commands to set up and take down the HPNas Stack:
 
 ```bash
 

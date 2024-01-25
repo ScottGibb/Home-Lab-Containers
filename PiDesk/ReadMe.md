@@ -12,5 +12,8 @@ This system runs on a Raspberry Pi Zero underneath the Standing Desk. This Pi is
 Simply run the following to get the PiDesk Docker stack up and then cd into the utils directory to use that docker stack as well.
 
 ```bash
-docker compose up -d
+
+bash docker-compose.sh --up # Bring up Stack
+bash docker-compose.sh --up # Bring down Stack
+
 ```

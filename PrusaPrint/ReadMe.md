@@ -23,6 +23,17 @@ It is recommended you do it, by first installing the plugins then applying the b
 
 Its best to install the Spool Manager using Scott Gibbs Fork listed [here](https://github.com/ScottGibb/OctoPrint-SpoolManager)
 
+### Installing the Docker Stack
+
+Run the following commands to set up and take down the PrusaPrint Stack:
+
+```bash
+
+bash docker-compose.sh --up # Bring up Stack
+bash docker-compose.sh --up # Bring down Stack
+
+```
+
 ### Extra Installs
 
 As for extra installs, Octodash cant be installed using the plugin manager and the following command must be used:
