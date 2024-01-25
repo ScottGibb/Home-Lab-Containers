@@ -8,4 +8,5 @@
 - NAS-Media
 - Storage
 
- The stacks can be activated by using the ```docker compose up -d``` in each of the directories.
+ The stacks can be activated by using the ```docker compose up -d``` in each of the directories. Or the helper [script](./docker-compose.sh)
+ 
