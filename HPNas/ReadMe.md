@@ -6,7 +6,13 @@
 
 - utils
 - NAS-Media
-- Storage
+- Storag
 
- The stacks can be activated by using the ```docker compose up -d``` in each of the directories. Or the helper [script](./docker-compose.sh)
- 
+Run the following commands to set up and take down the PiWeb Stack:
+
+```bash
+
+bash docker-compose.sh --up # Bring up Stack
+bash docker-compose.sh --up # Bring down Stack
+
+```
