@@ -18,7 +18,7 @@ services:
     container_name: homeassistant
     image: "ghcr.io/home-assistant/home-assistant:stable"
     volumes:
-      - /home/pi/config/mqtt:/config
+      - /home/pi/config/homeassistant:/config
       - /etc/localtime:/etc/localtime:ro
       - /run/dbus:/run/dbus:ro
     restart: unless-stopped
@@ -37,7 +37,7 @@ services:
     #   - 3456:3456
     volumes:
       - type: bind
-        source: /home/pi/node-red
+        source: /home/pi/docker-mounts/node-red
         target: /data
     privileged: true
     restart: unless-stopped

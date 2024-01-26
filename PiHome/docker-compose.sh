@@ -4,6 +4,7 @@
 directories=(
     "../utils/"  # Add more directories as needed
     "./Security"
+    "./IOT"
 )
 
 # Function to display usage
