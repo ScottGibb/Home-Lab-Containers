@@ -50,7 +50,7 @@ services:
     restart: unless-stopped
 
   fan-controller-back-end:
-    container_name: Back-end
+    container_name: Back-End
     build: "./Web-Based-Fan-Controller/BackEnd"
     ports:
       - "5000:5000"
