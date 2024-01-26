@@ -43,14 +43,14 @@ services:
     restart: unless-stopped
     network_mode: host
 
-  LED-Strip-Controller-CMD-Line:
-    container_name: LED-STRIP-CTRL-CI
+  led-strip-controller-cli:
+    container_name: LED-Strip-Controller-CLI
     build: "./LED-Strip-Controller-Software/Python CMD Interface"
     network_mode: "host"
     restart: unless-stopped
 
-  Fan-Controller-Backend:
-    container_name: back-end
+  fan-controller-back-end:
+    container_name: Back-end
     build: "./Web-Based-Fan-Controller/BackEnd"
     ports:
       - "5000:5000"
@@ -59,13 +59,13 @@ services:
       - node-red
     restart: unless-stopped
 
-  Fan-Controller-Frontend:
+  fan-controller-front-end:
     container_name: Front-end
     build: "./Web-Based-Fan-Controller/FrontEnd"
     ports:
       - "5001:80"
     depends_on:
-      - Fan-Controller-Backend
+      - fan-controller-backend
       - node-red
     restart: unless-stopped
 
