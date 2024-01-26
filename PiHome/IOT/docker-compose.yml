@@ -65,7 +65,7 @@ services:
     ports:
       - "5001:80"
     depends_on:
-      - back-end
+      - Fan-Controller-Backend
       - node-red
     restart: unless-stopped
 
