@@ -13,7 +13,7 @@ services:
         source: /home/pi/docker-mounts/motion-eye/etc
         target: /etc
       - type: bind
-        source: /home/pi/docker-mount/motion-eyes/var
+        source: /home/pi/docker-mounts/motion-eyes/var
         target: /var
     ports:
       - 8765:8765
