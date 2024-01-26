@@ -18,7 +18,7 @@ services:
     container_name: homeassistant
     image: "ghcr.io/home-assistant/home-assistant:stable"
     volumes:
-      - /PATH_TO_YOUR_CONFIG:/config
+      - /home/pi/config/mqtt:/config
       - /etc/localtime:/etc/localtime:ro
       - /run/dbus:/run/dbus:ro
     restart: unless-stopped
@@ -55,6 +55,8 @@ services:
     ports:
       - "5000:5000"
     privileged: true # Required for GPIO access
+    depends_on:
+      - node-red
     restart: unless-stopped
 
   Fan-Controller-Frontend:
@@ -64,6 +66,7 @@ services:
       - "5001:80"
     depends_on:
       - back-end
+      - node-red
     restart: unless-stopped
 
   socket-rf-transmitter:
@@ -77,7 +80,9 @@ services:
       - TSMT_PIN_NUMBER= 13
     ports:
       - 60000:60000
-    privileged: true
+    depends_on: 
+      - node-red
+    privileged: true # Required for GPIO Access
     restart: unless-stopped
 
 volumes:

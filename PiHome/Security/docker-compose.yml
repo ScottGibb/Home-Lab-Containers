@@ -10,10 +10,10 @@ services:
       - TZ=Europe/London
     volumes:
       - type: bind
-        source: /home/pi/motion-eye/etc
+        source: /home/pi/docker-mounts/etc
         target: /etc
       - type: bind
-        source: /home/pi/motion-eye/var
+        source: /home/pi/docker-mounts/var
         target: /var
     ports:
       - 8765:8765
