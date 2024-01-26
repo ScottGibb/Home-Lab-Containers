@@ -60,7 +60,7 @@ services:
     restart: unless-stopped
 
   fan-controller-front-end:
-    container_name: Front-end
+    container_name: Front-End
     build: "./Web-Based-Fan-Controller/FrontEnd"
     ports:
       - "5001:80"
