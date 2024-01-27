@@ -17,7 +17,7 @@ services:
       - firefly_iii
     restart: always
     volumes:
-      - firefly_iii_upload:/var/www/html/storage/upload
+      - /home/pi/docker-mounts/firefly-iii/upload:/var/www/html/storage/upload
     env_file: .env
     ports:
       - '80:8080'
@@ -32,7 +32,7 @@ services:
     restart: always
     env_file: .db.env
     volumes:
-      - firefly_iii_db:/var/lib/mysql
+      - /home/pi/docker-mounts/firefly-iii/mysql:/var/lib/mysql
 
   importer:
     image: fireflyiii/data-importer:latest
@@ -60,7 +60,6 @@ services:
       - firefly_iii
 volumes:
    firefly_iii_upload:
-   firefly_iii_db:
 
 networks:
   firefly_iii:
