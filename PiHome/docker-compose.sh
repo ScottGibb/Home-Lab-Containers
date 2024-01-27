@@ -3,8 +3,10 @@
 # Define the list of directories
 directories=(
     "../utils/"  # Add more directories as needed
-    "./Security"
-    "./IOT"
+    "./Security/"
+    "./IOT/"
+    "./Finances/"
+    
 )
 
 # Function to display usage
