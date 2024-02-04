@@ -4,6 +4,7 @@
 directories=(
     "../utils/"  # Add more directories as needed
     "./Storage/"
+    "./Networking/"
     "./NAS-Media/"
 )
 
