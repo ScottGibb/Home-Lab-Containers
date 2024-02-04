@@ -6,7 +6,6 @@ directories=(
     "./Security/"
     "./Networking/"
     "./IOT/"
-    "./Misc"
     "./Finances/"
     
 )
