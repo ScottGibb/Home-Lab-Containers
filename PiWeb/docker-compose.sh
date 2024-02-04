@@ -3,6 +3,7 @@
 # Define the list of directories
 directories=(
     "../utils/"  # Add more directories as needed
+    "../Networking/"
 )
 
 # Function to display usage
