@@ -1,5 +1,5 @@
 CREATE DATABASE fireflyiiiDb;
-create user fireflyiiiUser@'%' identified by 'fireflyiiiPassword';
-grant all privileges on fireflyiiiDb.* to fireflyiiiUser@'%';
+create user firefly@'%' identified by 'secret_firefly_password';
+grant all privileges on fireflyiiiDb.* to firefly@'%';
 flush privileges;
 quit
