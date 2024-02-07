@@ -9,3 +9,5 @@ The finances stack consists mainly of Firefly III related services which include
 When installing this, make sure to read the docs!
 
 - [Installation Instructions](https://docs.firefly-iii.org/how-to/data-importer/installation/docker/)
+
+- [https://peppe8o.com/manage-your-finance-with-firefly-iii-and-raspberry-pi/]( Firefly III on Raspberry Pi)

@@ -1,4 +1,4 @@
-version: '3.3'
+version: "3.3"
 
 #
 # The Firefly III Data Importer will ask you for the Firefly III URL and a "Client ID".
@@ -20,11 +20,11 @@ services:
       - /home/pi/docker-mounts/firefly-iii/upload:/var/www/html/storage/upload
     env_file: .env
     ports:
-      - '8080:8080'
+      - "8080:8080"
     depends_on:
       - db
   db:
-    image: monstrenyatko/rpi-mariadb
+    build: ./mariadb
     hostname: db
     container_name: firefly_iii_db
     networks:
@@ -42,7 +42,7 @@ services:
     networks:
       - firefly_iii
     ports:
-      - '8180:8080'
+      - "8180:8080"
     depends_on:
       - app
     env_file: .importer.env
@@ -59,7 +59,7 @@ services:
     networks:
       - firefly_iii
 volumes:
-   firefly_iii_upload:
+  firefly_iii_upload:
 
 networks:
   firefly_iii:
