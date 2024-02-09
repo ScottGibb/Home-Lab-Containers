@@ -11,5 +11,3 @@ When downloading the repository it is advised to recursively download all the su
 ```bash
 git submodule update --init --recursive
 ```
-
-## Useful Links
