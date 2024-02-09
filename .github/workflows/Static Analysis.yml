@@ -29,7 +29,23 @@ jobs:
         run: |
           echo "Checking Markdown files"
           find . -type f -name "*.md" -print0 | xargs -0 markdownlint
-
+  Dockerfile_Lint_Check:
+    name: Dockerfile Lint Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      - name: Download Packages
+        run: |
+          sudo wget -O /bin/hadolint https://github.com/hadolint/hadolint/releases/download/v2.10.0/hadolint-Linux-x86_64
+          sudo chmod +x /bin/hadolint .
+      - name: Dockerfile Lint
+        run: |
+          hadolint --failure-threshold error --verbose *Dockerfile
+      - name: Docker Compose Lint
+        run: |
+          docker-compose config  || { echo "Invalid Docker Compose file"; exit 1; }
+          
   YAML_Lint_Check:
     name: YAML Lint Check
     runs-on: ubuntu-latest
