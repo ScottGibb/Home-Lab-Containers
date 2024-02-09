@@ -24,15 +24,15 @@ services:
     depends_on:
       - db
   db:
-    build: ./mariadb
-    hostname: db
     container_name: firefly_iii_db
+    image: "postgres:10"
+    environment:
+      - POSTGRES_PASSWORD=secret_firefly_password
+      - POSTGRES_USER=firefly
     networks:
-      - firefly_iii
-    restart: always
-    env_file: .db.env
+      - firefly_iii_net
     volumes:
-      - /home/pi/docker-mounts/firefly-iii/mysql:/var/lib/mysql
+      - f/home/pi/docker-mounts/firefly-iii/postgresql/data:/var/lib/postgresql/data
 
   importer:
     image: fireflyiii/data-importer:latest
