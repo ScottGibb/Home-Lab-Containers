@@ -32,7 +32,7 @@ services:
     networks:
       - firefly_iii
     volumes:
-      - f/home/pi/docker-mounts/firefly-iii/postgresql/data:/var/lib/postgresql/data
+      - /home/pi/docker-mounts/firefly-iii/postgresql/data:/var/lib/postgresql/data
 
   importer:
     image: fireflyiii/data-importer:latest
