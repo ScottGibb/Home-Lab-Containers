@@ -1,3 +1,5 @@
+---
+
 version: "3.7"
 
 services:
@@ -30,12 +32,12 @@ services:
     container_name: GitLab
     restart: unless-stopped
     ports:
-     - "1443:1443"
-     - "1080:80"
-     - "1022:22"
+      - "1443:1443"
+      - "1080:80"
+      - "1022:22"
     volumes:
-    - /mnt/USB3.0-1TB/GitLab/config:/etc/gitlab
-    - /mnt/USB3.0-1TB/GitLab/logs:/var/log/gitlab
-    - /mnt/USB3.0-1TB/GitLab/data:/var/opt/gitlab
+      - /mnt/USB3.0-1TB/GitLab/config:/etc/gitlab
+      - /mnt/USB3.0-1TB/GitLab/logs:/var/log/gitlab
+      - /mnt/USB3.0-1TB/GitLab/data:/var/opt/gitlab
     stdin_open: true
     tty: true

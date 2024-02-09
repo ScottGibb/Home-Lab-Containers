@@ -80,7 +80,7 @@ services:
       - TSMT_PIN_NUMBER= 13
     ports:
       - 60000:60000
-    depends_on: 
+    depends_on:
       - node-red
     privileged: true # Required for GPIO Access
     restart: unless-stopped
