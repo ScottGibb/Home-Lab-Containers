@@ -30,7 +30,7 @@ services:
       - POSTGRES_PASSWORD=secret_firefly_password
       - POSTGRES_USER=firefly
     networks:
-      - firefly_iii_net
+      - firefly_iii
     volumes:
       - f/home/pi/docker-mounts/firefly-iii/postgresql/data:/var/lib/postgresql/data
 
