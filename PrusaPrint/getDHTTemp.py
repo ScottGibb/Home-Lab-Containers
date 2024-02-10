@@ -2,6 +2,10 @@ import sys
 import time
 import board
 import adafruit_dht
+import os
+
+TMP_RESULTS_PATH = "/tmp/oprint/enclosure_plugin/"
+os.makedirs(exist_ok = True, name =TMP_RESULTS_PATH)
 
 # Parse command line parameters.
 sensor_args =   {
@@ -15,29 +19,34 @@ if len(sys.argv) == 3 and sys.argv[1] in sensor_args:
     pin = "D%s" % sys.argv[2]
     pin = getattr(board,pin)
 else:
-    sys.exit(1)
+    sys.exit(2)
 
 dhtDevice = sensor(pin)
 
 # DHT sensor read fails quite often, causing enclosure plugin to report value of 0.
 # If this happens, retry as suggested in the adafruit_dht docs.
-max_retries = 3
+MAX_RETRIES = 10
 retry_count = 0
-while retry_count <= max_retries:
-#    try:
-    if True:
+while retry_count <= MAX_RETRIES:
+    try:
         humidity=dhtDevice.humidity
         temperature=dhtDevice.temperature
 
         if humidity is not None and temperature is not None:
-            print(('{0:0.1f} | {1:0.1f}'.format(temperature, humidity)))
+            results_str = ('{0:0.1f} | {1:0.1f}'.format(temperature, humidity))
+            print(results_str)
+            with open(f"{TMP_RESULTS_PATH}/dht_results.txt", "w") as file:
+                file.write(results_str)
             sys.exit(1)
-#    except Exception as e:
-#        print('-1 | -1')
-#        sys.exit(1)
 
-    time.sleep(1)
+    except RuntimeError as e:
+        # Try Again?
+        continue
+    time.sleep(0.1)
     retry_count += 1
 
-print('-1 | -1')
-sys.exit(1)
+# If all else fails read the last saved result
+with open(f"{TMP_RESULTS_PATH}/dht_results.txt", "r") as file:
+    results_str =file.readline()
+    print(results_str)
+sys.exit(3)
