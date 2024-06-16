@@ -16,3 +16,6 @@
 [submodule "PiDesk/Cups_Dymo-450"]
 	path = PiDesk/Cups_Dymo-450
 	url = git@github.com:ScottGibb/Cups_Dymo-450.git
+[submodule "PC/Sleep-and-Wake-On-LAN-Node-Red-System"]
+	path = PC/Sleep-and-Wake-On-LAN-Node-Red-System
+	url = https://github.com/ScottGibb/Sleep-and-Wake-On-LAN-Node-Red-System.git
