@@ -16,3 +16,4 @@ services:
     environment:
       - NGINX_HOST=192.168.0.93
       - NGINX_PORT=80
+    restart: unless-stopped
