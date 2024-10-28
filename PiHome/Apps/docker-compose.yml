@@ -1,0 +1,17 @@
+---
+
+version: "3"
+
+services:
+  scratchmap:
+    container_name: scratchmap
+    image: ad3m3r5/scratch-map:latest
+    ports:
+      - "3000:3000"
+    environment:
+      DBLOCATION: '/data'
+    volumes:
+      - type: bind
+        source: /home/pi/docker-mounts/scratchmap
+        target: /data
+    restart: unless-stopped
