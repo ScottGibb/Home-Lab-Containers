@@ -9,4 +9,3 @@ For the Home Pi, the following docker stacks are enabled:
 - networking
 - apps
 - security
-
