@@ -19,23 +19,20 @@ You will also need to reinstall the plugins. This is done through the Octoprint 
 
 Simply upload it and it will do the rest of installing them.
 
-### Installing the Docker Stack
-
-You will also need to install Docker on the Raspbian image too.
-Run the following commands to set up and take down the PrusaPrint Stack:
-
-```bash
-
-bash docker-compose.sh --up # Bring up Stack
-bash docker-compose.sh --up # Bring down Stack
-
-```
-
 ### Extra Installs
 
 #### Docker
 
 Required for the rest of the home lab network, will need to install docker engine and then run the docker compose.
+You will need to install it using the following [instructions](https://docs.docker.com/engine/install/raspberry-pi-os/)
+
+Once this is done you can then do the following:
+
+```bash
+
+bash docker-compose.sh --up # Bring up Stack
+bash docker-compose.sh --up # Bring down Stack
+```
 
 #### LED Strip Controller
 
