@@ -28,7 +28,7 @@ echo "Finished Installation"
 # Installing Libcamera.conf
 echo "Copying over libcamera config"
 cp libcamera.conf /boot/camera-streamer/libcamera.conf
-echo "Finsihing Libcamera config"
+echo "Finishing Libcamera config"
 
 # Overwriting getDHTTemp.py
 echo "Overwriting getDHTTemp.py"
