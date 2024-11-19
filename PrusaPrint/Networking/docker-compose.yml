@@ -5,12 +5,12 @@ services:
     container_name: nginx
     image: nginx
     volumes:
-      # - type: bind
-      #   source: /home/pi/config/nginx/etc/nginx/templates
-      #   target: /etc/nginx/templates
       - type: bind
-        source: /home/pi/config/nginx/etc/nginx/nginx.conf
-        target: /home/pi/Home-Lab-Containers/PrusaPrint/Networking/nginx/nginx.conf
+        source: /home/pi/config/nginx/etc/nginx/templates
+        target: /etc/nginx/templates
+      - type: bind
+        source: /home/pi/Home-Lab-Containers/PrusaPrint/Networking/nginx/nginx.conf
+        target: /etc/nginx/nginx.conf
     ports:
       - "80:80"
     environment:
