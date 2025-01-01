@@ -67,7 +67,7 @@ services:
     tty: true
     environment:
       - TZ=Europe/London
-      - TSMT_PIN_NUMBER= 13
+      - TSMT_PIN_NUMBER= 13 # BOARD
     ports:
       - 60000:60000
     depends_on:
