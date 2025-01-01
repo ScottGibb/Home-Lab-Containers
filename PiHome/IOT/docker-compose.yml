@@ -102,7 +102,7 @@ services:
       - MQTT_CLIENT_ID=presence-detector
       - ROOM=master-bedroom
       - SENSOR_ID=1
-      - PIN=19 #GPIO10
+      - PIN=10 #GPIO10 / Physical Pin 19
       - RUST_LOG=info
     depends_on:
       - mqtt-broker
