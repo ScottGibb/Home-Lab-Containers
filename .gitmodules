@@ -19,3 +19,6 @@
 [submodule "PC/Sleep-and-Wake-On-LAN-Node-Red-System"]
 	path = PC/Sleep-and-Wake-On-LAN-Node-Red-System
 	url = https://github.com/ScottGibb/Sleep-and-Wake-On-LAN-Node-Red-System.git
+[submodule "PiHome/IOT/HC-SR501-Node-Red-Presence-Detector"]
+	path = PiHome/IOT/HC-SR501-Node-Red-Presence-Detector
+	url = git@github.com:ScottGibb/HC-SR501-Node-Red-Presence-Detector.git
