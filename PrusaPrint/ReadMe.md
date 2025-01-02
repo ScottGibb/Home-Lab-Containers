@@ -81,6 +81,10 @@ Turn off the Lights
 
 This is so that the images are actually seeable in the dark.
 
+##### Potential Issues
+
+When setting up the telegram plugin, I had issues where i could not have the multicam plugin enabled at the same time. This meant that the status plugin command didnt work.
+
 #### Octolapse
 
 The scripts within octolapse have to be from the root level and cant use `~`, thus the scripts are as follows:
