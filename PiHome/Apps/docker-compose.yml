@@ -1,5 +1,4 @@
 ---
-
 version: "3"
 
 services:
@@ -9,7 +8,7 @@ services:
     ports:
       - "3000:3000"
     environment:
-      DBLOCATION: '/data'
+      DBLOCATION: "/data"
     volumes:
       - type: bind
         source: /home/pi/docker-mounts/scratchmap

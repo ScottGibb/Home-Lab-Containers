@@ -1,5 +1,4 @@
 ---
-
 services:
   motion-eye:
     image: ccrisan/motioneye:master-armhf
