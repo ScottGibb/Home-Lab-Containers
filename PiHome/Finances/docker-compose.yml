@@ -24,7 +24,7 @@ services:
     depends_on:
       - db
     stdin_open: true # docker run -i
-    tty: true        # docker run -t
+    tty: true # docker run -t
 
   db:
     container_name: firefly_iii_db
