@@ -34,7 +34,7 @@ services:
 
   led-strip-controller-cli:
     container_name: LED-Strip-Controller-CLI
-    build: "./LED-Strip-Controller-Software/Python CMD Interface"
+    build: "./LED-Strip-Controller-Software/tui"
     network_mode: "host"
     restart: unless-stopped
 
