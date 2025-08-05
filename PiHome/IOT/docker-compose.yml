@@ -34,7 +34,7 @@ services:
 
   led-strip-controller-cli:
     container_name: LED-Strip-Controller-CLI
-    build: "./LED-Strip-Controller-Software/tui"
+    build: "./LED-Strip-Controller-Software/Tui"
     network_mode: "host"
     restart: unless-stopped
 
