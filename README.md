@@ -1,6 +1,6 @@
 # Home Lab Containers
 
-[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0) [![MegaLinter](https://github.com/ScottGibb/Home-Lab-Containers/actions/workflows/Mega%20Linter.yaml/badge.svg)](https://github.com/ScottGibb/Home-Lab-Containers/actions/workflows/Mega%20Linter.yaml)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0) [![MegaLinter](https://github.com/ScottGibb/Home-Lab-Containers/actions/workflows/mega_linter.yaml/badge.svg)](https://github.com/ScottGibb/Home-Lab-Containers/actions/workflows/mega_linter.yaml)
 
 ![Tools and Processes](./docs/Languages%20and%20Tools.png)
 
