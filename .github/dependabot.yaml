@@ -15,8 +15,6 @@ updates:
   - package-ecosystem: "gitsubmodule"
     directories: 
     - "/"
-    - "/**/"
-    - "/**/**/"
     schedule:
       interval: "weekly"
     commit-message:
