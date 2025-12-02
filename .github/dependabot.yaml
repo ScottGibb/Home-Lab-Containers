@@ -12,9 +12,15 @@ updates:
     commit-message:
       prefix: chore
       include: scope
+
   - package-ecosystem: "gitsubmodule"
-    directories: 
-    - "/"
+    directories:
+      - "/PC/Sleep-and-Wake-On-LAN-Node-Red-System"
+      - "/PiDesk/Cups_Dymo-450"
+      - "/PiHome/IOT/HC-SR501-Node-Red-Presence-Detector"
+      - "/PiHome/IOT/LED-Strip-Controller-Software"
+      - "/PiHome/IOT/Smart-RF-Plug-Transmitter"
+      - "/PiHome/IOT/Web-Based-Fan-Controller"
     schedule:
       interval: "weekly"
     commit-message:
