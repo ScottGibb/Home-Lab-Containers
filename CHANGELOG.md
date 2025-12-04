@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.1](https://github.com/ScottGibb/Home-Lab-Containers/compare/v1.4.0...v1.4.1) (2025-12-04)
+
+
+### Bug Fixes
+
+* **ci:** Add directory scope to Dependabot ([e371e89](https://github.com/ScottGibb/Home-Lab-Containers/commit/e371e89a8e58d6056e484bdef2eaa58b80393beb))
+
 ## [1.4.0](https://github.com/ScottGibb/Home-Lab-Containers/compare/v1.3.2...v1.4.0) (2025-12-02)
 
 
