@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.5.0](https://github.com/ScottGibb/Home-Lab-Containers/compare/v1.4.0...v1.5.0) (2025-12-15)
+
+
+### Features
+
+* **ci:** Update Dependabot workflow for auto-merging ([a5f691f](https://github.com/ScottGibb/Home-Lab-Containers/commit/a5f691fa971a8ab964d132e02d44d61aa865faf4))
+
+
+### Bug Fixes
+
+* **ci:** Add directory scope to Dependabot ([e371e89](https://github.com/ScottGibb/Home-Lab-Containers/commit/e371e89a8e58d6056e484bdef2eaa58b80393beb))
+
 ## [1.4.0](https://github.com/ScottGibb/Home-Lab-Containers/compare/v1.3.2...v1.4.0) (2025-12-02)
 
 
