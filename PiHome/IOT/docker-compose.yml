@@ -61,7 +61,7 @@ services:
   socket-rf-transmitter:
     container_name: smart-rf-transmitter
     build:
-      context: "./Smart-RF-Plug-Transmitter/src"
+      context: "./Smart-RF-Plug-Transmitter/socket_transmitter"
     stdin_open: true
     tty: true
     environment:
@@ -96,7 +96,7 @@ services:
     restart: unless-stopped
     privileged: true
     environment:
-      - MQTT_HOST=192.168.0.68
+      - MQTT_HOST=127.0.0.1
       - MQTT_PORT=1883
       - MQTT_CLIENT_ID=presence-detector
       - ROOM=master-bedroom
