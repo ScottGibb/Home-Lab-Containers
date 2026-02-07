@@ -12,9 +12,23 @@ updates:
     commit-message:
       prefix: chore
       include: scope
- - package-ecosystem: "docker-compose"
-   schedule:
-     interval: "weekly"
-   commit-message:
-     prefix: chore
-     include: scope
+  - package-ecosystem: "docker-compose"
+    directories:
+      - "HPNas/Misc/"
+      - "HPNas/Networking/"
+      - "HPNas/Storage/"
+      - "PC/"
+      - "PiHome/Apps/"
+      - "PiHome/Finances/"
+      - "PiHome/IOT/"
+      - "PiHome/Networking/"
+      - "PiHome/Security/"
+      - "PiLab/Networking/"
+      - "PiWeb/Networking/"
+      - "PrusaPrint/Networking/"
+      - "Utils/"
+    schedule:
+      interval: "weekly"
+    commit-message:
+      prefix: chore
+      include: scope
