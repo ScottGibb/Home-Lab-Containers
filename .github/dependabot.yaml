@@ -27,6 +27,17 @@ updates:
       - "PiWeb/Networking/"
       - "PrusaPrint/Networking/"
       - "Utils/"
+    exclude-paths:
+      - "HPNas/NAS-media"
+    schedule:
+      interval: "weekly"
+    commit-message:
+      prefix: chore
+      include: scope
+  - package-ecosystem: "gitsubmodule"
+    directory: "/"
+    exclude-paths:
+      - "HPNas/NAS-media"
     schedule:
       interval: "weekly"
     commit-message:
