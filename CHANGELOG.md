@@ -1,5 +1,28 @@
 # Changelog
 
+## [2.0.0](https://github.com/ScottGibb/Home-Lab-Containers/compare/v1.5.0...v2.0.0) (2026-02-08)
+
+
+### ⚠ BREAKING CHANGES
+
+* removing piweb
+
+### Features
+
+* Add Docker Compose to Dependabot configuration ([f436bfa](https://github.com/ScottGibb/Home-Lab-Containers/commit/f436bfa0ce2c3d2f005dd5eabb10b14b3caba07d))
+* bump deps ([e21ac93](https://github.com/ScottGibb/Home-Lab-Containers/commit/e21ac93688672964a765bf4b64a0a300870e6a8f))
+* removing piweb ([b1a0f30](https://github.com/ScottGibb/Home-Lab-Containers/commit/b1a0f3023a9ad6f03c597a4964d8626ae11c6331))
+* use prebuilt image for presence detector ([e43103b](https://github.com/ScottGibb/Home-Lab-Containers/commit/e43103bad0c76dcba48932be4625e825a729d0fa))
+
+
+### Bug Fixes
+
+* dependabot ([993f0f9](https://github.com/ScottGibb/Home-Lab-Containers/commit/993f0f97be16c60e4e18701c7dcccbe80a909d4d))
+* docker path for smart rf transmitter ([23916b9](https://github.com/ScottGibb/Home-Lab-Containers/commit/23916b9b3ee3c3ea0454d4ded80be52707b43aa9))
+* **docs:** naming conventions ([37e862d](https://github.com/ScottGibb/Home-Lab-Containers/commit/37e862d42bd5970370f0413f6b137a38e59d1abd))
+* **docs:** remove png ([150649c](https://github.com/ScottGibb/Home-Lab-Containers/commit/150649cdd51e915a9c0659d4a4de55e8787451fb))
+* tty issues with cmdline tui ([afeb7c2](https://github.com/ScottGibb/Home-Lab-Containers/commit/afeb7c227cbe23b597f6528686fe5c0092d41393))
+
 ## [1.5.0](https://github.com/ScottGibb/Home-Lab-Containers/compare/v1.4.0...v1.5.0) (2025-12-15)
 
 
