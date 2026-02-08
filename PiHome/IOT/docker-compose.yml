@@ -37,6 +37,9 @@ services:
     build: "./LED-Strip-Controller-Software/Tui"
     network_mode: "host"
     restart: unless-stopped
+    privileged: true
+    stdin_open: true # Keep stdin open
+    tty: true # Allocate a pseudo-TTY
 
   fan-controller-back-end:
     container_name: Back-End
@@ -94,7 +97,7 @@ services:
     restart: unless-stopped
     privileged: true
     environment:
-      - MQTT_HOST=127.0.0.1
+      - MQTT_HOST=192.168.0.68
       - MQTT_PORT=1883
       - MQTT_CLIENT_ID=presence-detector
       - ROOM=master-bedroom
