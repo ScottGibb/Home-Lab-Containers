@@ -26,7 +26,7 @@ services:
     restart: unless-stopped
 
   Gitlab:
-    image: gitlab/gitlab-ce:18.5.5-ce.0
+    image: gitlab/gitlab-ce:18.6.5-ce.0
     container_name: GitLab
     restart: unless-stopped
     ports:
