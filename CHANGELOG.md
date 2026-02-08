@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.1.0](https://github.com/ScottGibb/Home-Lab-Containers/compare/v2.0.0...v2.1.0) (2026-02-08)
+
+
+### Features
+
+* add pinned utils ([dcdfde0](https://github.com/ScottGibb/Home-Lab-Containers/commit/dcdfde03d0b80845646c937e8aa5c14832b31d6b))
+
+
+### Bug Fixes
+
+* use pinned image for gitlab ([dc7700a](https://github.com/ScottGibb/Home-Lab-Containers/commit/dc7700a1607fa1b33e442ddea306fbfe00f9335e))
+
 ## [2.0.0](https://github.com/ScottGibb/Home-Lab-Containers/compare/v1.5.0...v2.0.0) (2026-02-08)
 
 
