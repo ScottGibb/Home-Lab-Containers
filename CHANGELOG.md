@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.1.1](https://github.com/ScottGibb/Home-Lab-Containers/compare/v2.1.0...v2.1.1) (2026-02-08)
+
+
+### Bug Fixes
+
+* nginx ip ([f067775](https://github.com/ScottGibb/Home-Lab-Containers/commit/f06777531c43e3280fdf7d85fbc4e8babbe59524))
+* pin nginx ([8d93c3a](https://github.com/ScottGibb/Home-Lab-Containers/commit/8d93c3aee92f8fdc8a4ce6c10e40acb52aabdd83))
+
 ## [2.1.0](https://github.com/ScottGibb/Home-Lab-Containers/compare/v2.0.0...v2.1.0) (2026-02-08)
 
 
