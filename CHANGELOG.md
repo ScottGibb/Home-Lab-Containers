@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.2](https://github.com/ScottGibb/Home-Lab-Containers/compare/v2.1.1...v2.1.2) (2026-02-11)
+
+
+### Bug Fixes
+
+* Gitlab version ([43897d3](https://github.com/ScottGibb/Home-Lab-Containers/commit/43897d3c2b94fe71a2a7fd3030c34a2123a0976f))
+
 ## [2.1.1](https://github.com/ScottGibb/Home-Lab-Containers/compare/v2.1.0...v2.1.1) (2026-02-08)
 
 
