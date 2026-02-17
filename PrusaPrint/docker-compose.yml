@@ -1,0 +1,9 @@
+---
+# Main docker-compose file for PrusaPrint
+# This file includes all services for the PrusaPrint system using Docker Compose's include feature
+
+name: prusaprint
+
+include:
+  - ../utils/docker-compose.yml
+  - ./Networking/docker-compose.yml
