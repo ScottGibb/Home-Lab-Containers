@@ -4,13 +4,25 @@
 
 For the Lab Pi, the following docker stacks are enabled:
 
-- Utils
+- utils
+- networking
 
-Run the following commands to set up and take down the PiLab Stack:
+## Usage
+
+To start all services:
 
 ```bash
+docker compose up -d
+```
 
-bash docker-compose.sh --up # Bring up Stack
-bash docker-compose.sh --up # Bring down Stack
+To stop all services:
 
+```bash
+docker compose down
+```
+
+To view logs:
+
+```bash
+docker compose logs -f
 ```

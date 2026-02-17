@@ -7,6 +7,26 @@ For Prusaprint, the setupOctoprint.sh should be called and the following docker 
 - utils
 - networking
 
+## Usage
+
+To start all services:
+
+```bash
+docker compose up -d
+```
+
+To stop all services:
+
+```bash
+docker compose down
+```
+
+To view logs:
+
+```bash
+docker compose logs -f
+```
+
 ## Setup Octoprint
 
 As for setting up Octoprint, the script setupOctoprint.sh will need to be run along the extra installs section of this ReadMe.md
@@ -23,15 +43,13 @@ Simply upload it and it will do the rest of installing them.
 
 #### Docker
 
-Required for the rest of the home lab network, will need to install docker engine and then run the docker compose.
+Required for the rest of the home lab network, will need to install docker engine and then run docker compose.
 You will need to install it using the following [instructions](https://docs.docker.com/engine/install/raspberry-pi-os/)
 
-Once this is done you can then do the following:
+Once this is done you can then start the stack using:
 
 ```bash
-
-bash docker-compose.sh --up # Bring up Stack
-bash docker-compose.sh --up # Bring down Stack
+docker compose up -d
 ```
 
 #### LED Strip Controller
