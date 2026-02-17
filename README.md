@@ -50,6 +50,7 @@ docker compose logs -f
 ### System Organization
 
 Each system's main `docker-compose.yml` includes:
+
 - **utils/**: Shared services (Portainer, uptime-kuma) used across all systems
 - **System-specific services**: Organized in subdirectories (Networking, Storage, IOT, etc.)
 
