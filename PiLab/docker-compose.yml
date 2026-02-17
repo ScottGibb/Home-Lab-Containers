@@ -1,0 +1,9 @@
+---
+# Main docker-compose file for PiLab
+# This file includes all services for the PiLab system using Docker Compose's include feature
+
+name: pilab
+
+include:
+  - ../utils/docker-compose.yml
+  - ./Networking/docker-compose.yml
