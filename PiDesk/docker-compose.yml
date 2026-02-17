@@ -1,14 +1,11 @@
 ---
-version: "3"
+# Main docker-compose file for PiDesk
+# This file includes all services for the PiDesk system using Docker Compose's include feature
 
-services:
-  cups:
-    build: ./Cups_Dymo-450
-    container_name: Cups
-    restart: unless-stopped
-    stdin_open: true
-    tty: true
-    ports:
-      - "631:631"
-    devices:
-      - /dev/bus/usb:/dev/bus/usb
+name: printing
+
+include:
+  - ../utils/docker-compose.yml
+  - ./Networking/docker-compose.yml
+  - ./docker-compose.local.yml
+

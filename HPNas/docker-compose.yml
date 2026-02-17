@@ -1,0 +1,11 @@
+---
+# Main docker-compose file for HPNas
+# This file includes all services for the HPNas system using Docker Compose's include feature
+
+name: hpnas
+
+include:
+  - ../utils/docker-compose.yml
+  - ./Storage/docker-compose.yml
+  - ./Networking/docker-compose.yml
+  - ./Misc/docker-compose.yml

@@ -1,6 +1,4 @@
 ---
-version: "3"
-
 services:
   scratchmap:
     container_name: scratchmap
