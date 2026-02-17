@@ -15,3 +15,46 @@ When downloading the repository, it is advised to recursively download all the s
 ```bash
 git submodule update --init --recursive
 ```
+
+## Usage
+
+The repository uses Docker Compose's include feature to organize services across multiple compose files. Each system (HPNas, PiDesk, PiHome, PiLab, PrusaPrint) has a main `docker-compose.yml` file that includes all necessary service definitions.
+
+### Starting Services
+
+To start all services for a specific system, navigate to its directory and run:
+
+```bash
+cd <system-directory>  # e.g., cd PiHome
+docker compose up -d
+```
+
+### Stopping Services
+
+To stop all services for a specific system:
+
+```bash
+cd <system-directory>
+docker compose down
+```
+
+### Viewing Logs
+
+To view logs for all services:
+
+```bash
+cd <system-directory>
+docker compose logs -f
+```
+
+### System Organization
+
+Each system's main `docker-compose.yml` includes:
+- **utils/**: Shared services (Portainer, uptime-kuma) used across all systems
+- **System-specific services**: Organized in subdirectories (Networking, Storage, IOT, etc.)
+
+The project name for each system is defined in the main compose file using the `name` attribute.
+
+### Environment Variables
+
+All environment variables are now defined inline in the docker-compose files. You can customize them by editing the respective `docker-compose.yml` files directly.

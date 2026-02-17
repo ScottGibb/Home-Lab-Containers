@@ -2,17 +2,29 @@
 
 ## Summary
 
- The NAS system consists of the following docker stacks:
+The NAS system consists of the following docker stacks:
 
 - utils
-- NAS-Media
-- Storag
+- Storage
+- Networking
+- Misc
 
-Run the following commands to set up and take down the HPNas Stack:
+## Usage
+
+To start all services:
 
 ```bash
+docker compose up -d
+```
 
-bash docker-compose.sh --up # Bring up Stack
-bash docker-compose.sh --up # Bring down Stack
+To stop all services:
 
+```bash
+docker compose down
+```
+
+To view logs:
+
+```bash
+docker compose logs -f
 ```
