@@ -2,7 +2,6 @@
 
 ## [2.1.1](https://github.com/ScottGibb/Home-Lab-Containers/compare/v2.1.0...v2.1.1) (2026-02-08)
 
-
 ### Bug Fixes
 
 * nginx ip ([f067775](https://github.com/ScottGibb/Home-Lab-Containers/commit/f06777531c43e3280fdf7d85fbc4e8babbe59524))
@@ -10,18 +9,15 @@
 
 ## [2.1.0](https://github.com/ScottGibb/Home-Lab-Containers/compare/v2.0.0...v2.1.0) (2026-02-08)
 
-
 ### Features
 
 * add pinned utils ([dcdfde0](https://github.com/ScottGibb/Home-Lab-Containers/commit/dcdfde03d0b80845646c937e8aa5c14832b31d6b))
-
 
 ### Bug Fixes
 
 * use pinned image for gitlab ([dc7700a](https://github.com/ScottGibb/Home-Lab-Containers/commit/dc7700a1607fa1b33e442ddea306fbfe00f9335e))
 
 ## [2.0.0](https://github.com/ScottGibb/Home-Lab-Containers/compare/v1.5.0...v2.0.0) (2026-02-08)
-
 
 ### ⚠ BREAKING CHANGES
 
@@ -34,7 +30,6 @@
 * removing piweb ([b1a0f30](https://github.com/ScottGibb/Home-Lab-Containers/commit/b1a0f3023a9ad6f03c597a4964d8626ae11c6331))
 * use prebuilt image for presence detector ([e43103b](https://github.com/ScottGibb/Home-Lab-Containers/commit/e43103bad0c76dcba48932be4625e825a729d0fa))
 
-
 ### Bug Fixes
 
 * dependabot ([993f0f9](https://github.com/ScottGibb/Home-Lab-Containers/commit/993f0f97be16c60e4e18701c7dcccbe80a909d4d))
@@ -45,11 +40,9 @@
 
 ## [1.5.0](https://github.com/ScottGibb/Home-Lab-Containers/compare/v1.4.0...v1.5.0) (2025-12-15)
 
-
 ### Features
 
 * **ci:** Update Dependabot workflow for auto-merging ([a5f691f](https://github.com/ScottGibb/Home-Lab-Containers/commit/a5f691fa971a8ab964d132e02d44d61aa865faf4))
-
 
 ### Bug Fixes
 
@@ -57,11 +50,9 @@
 
 ## [1.4.0](https://github.com/ScottGibb/Home-Lab-Containers/compare/v1.3.2...v1.4.0) (2025-12-02)
 
-
 ### Features
 
 * Remove gitsubmodule configuration from dependabot ([ff35c81](https://github.com/ScottGibb/Home-Lab-Containers/commit/ff35c81247846c3d9ba8a8a238d1922dab837b05))
-
 
 ### Bug Fixes
 
@@ -70,7 +61,6 @@
 * **ci:** fix dependabot again ([27e45ae](https://github.com/ScottGibb/Home-Lab-Containers/commit/27e45aea47cb0d9bf48eb56b5a9a79ab39d33ca4))
 
 ## [1.3.2](https://github.com/ScottGibb/Home-Lab-Containers/compare/v1.3.1...v1.3.2) (2025-11-30)
-
 
 ### Bug Fixes
 
