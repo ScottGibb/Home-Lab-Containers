@@ -1,6 +1,11 @@
 ---
 # Main docker-compose file for PiLab
 # This file includes all services for the PiLab system using Docker Compose's include feature
+#
+# Project Name: pilab
+# All included services (utils, networking) are part of this unified project.
+# Previously, each subdirectory had its own project name (utils, networking),
+# but with the include directive, all services are consolidated under one project name.
 
 name: pilab
 
