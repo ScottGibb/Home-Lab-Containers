@@ -1,6 +1,11 @@
 ---
 # Main docker-compose file for PiDesk
 # This file includes all services for the PiDesk system using Docker Compose's include feature
+#
+# Project Name: printing
+# All included services (utils, networking, local printing services) are part of this unified project.
+# Previously, each subdirectory had its own project name (networking, printing),
+# but with the include directive, all services are consolidated under one project name.
 
 name: printing
 

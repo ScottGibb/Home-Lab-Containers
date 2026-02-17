@@ -54,7 +54,17 @@ Each system's main `docker-compose.yml` includes:
 - **utils/**: Shared services (Portainer, uptime-kuma) used across all systems
 - **System-specific services**: Organized in subdirectories (Networking, Storage, IOT, etc.)
 
-The project name for each system is defined in the main compose file using the `name` attribute.
+### Project Names
+
+Each system has a unified project name defined in its main compose file:
+
+- **HPNas**: `hpnas`
+- **PiDesk**: `printing`
+- **PiHome**: `pihome`
+- **PiLab**: `pilab`
+- **PrusaPrint**: `prusaprint`
+
+**Note**: Previously, each subdirectory had its own project name (e.g., `networking`, `iot`, `apps`, `storage`). With the Docker Compose `include` directive, all services are now consolidated under a single project name per system. This is the correct and expected behavior - all included services become part of the parent project.
 
 ### Environment Variables
 
