@@ -11,5 +11,6 @@ name: pidesk
 
 include:
   - ../utils/docker-compose.yml
-  - ./Networking/docker-compose.yml
+  - path: ../utils/Networking/docker-compose.yml
+    env_file: ./Networking/.env
   - ./docker-compose-cups.yml
