@@ -2,3 +2,9 @@
 *.dtmp
 
 megalinter-reports/
+
+# Rust build artifacts
+target/
+Cargo.lock
+*.rs.bk
+*.pdb

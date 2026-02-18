@@ -1,0 +1,17 @@
+[package]
+name = "dht_sensor"
+version = "0.1.0"
+edition = "2021"
+
+[[bin]]
+name = "dht_sensor"
+path = "src/main.rs"
+
+[[bin]]
+name = "test_dht11"
+path = "src/test_dht11.rs"
+
+[dependencies]
+rppal = "0.19"
+tokio = { version = "1.41", features = ["full"] }
+anyhow = "1.0"

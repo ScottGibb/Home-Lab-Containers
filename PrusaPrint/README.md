@@ -70,14 +70,41 @@ Turn off the Lights
 
 #### Setup DHT11 Sensor
 
-To setup the Enclosure Temp and Humidity Sensor you will have to set up the Enclosure plugin for input using the following configuration:
+The DHT11 sensor implementation has been refactored to use Rust with async GPIO methods via the `rppal` library. This provides better performance and more reliable sensor readings on Raspberry Pi.
+
+The setup script (`setupOctoprint.sh`) will automatically:
+- Install the Rust toolchain if not present
+- Build the DHT11 sensor binaries with async GPIO support
+- Install the binaries to `/usr/local/bin/`
+- Create compatibility wrappers for existing tools
+
+**Manual Testing:**
+
+To test the DHT11 sensor, run:
 
 ```bash
-sudo apt install libgpiod2
-python3 -m pip install adafruit-circuitpython-dht
+test_dht11
 ```
 
-You should then be able to run the following [script](./testDHT11.py)
+This will continuously read and display temperature and humidity values from GPIO pin 18 (configurable in the source).
+
+**Usage with Octoprint Enclosure Plugin:**
+
+The `dht_sensor` binary can be used directly:
+
+```bash
+dht_sensor 11 18  # For DHT11 on GPIO 18
+```
+
+Or via the compatibility wrapper:
+
+```bash
+getDHTTemp.sh 11 18
+```
+
+**Legacy Python Implementation:**
+
+The original Python scripts ([getDHTTemp.py](./getDHTTemp.py), [testDHT11.py](./testDHT11.py)) are kept for reference but are no longer used by default. The Rust implementation provides the same functionality with improved reliability through async GPIO operations.
 
 #### Telegram
 
