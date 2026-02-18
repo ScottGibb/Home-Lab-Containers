@@ -15,7 +15,6 @@ updates:
   - package-ecosystem: "docker-compose"
     directories:
       - "HPNas/Misc/"
-      - "HPNas/Networking/"
       - "HPNas/Storage/"
       - "PC/"
       - "PiHome/Apps/"
@@ -23,8 +22,6 @@ updates:
       - "PiHome/IOT/"
       - "PiHome/Networking/"
       - "PiHome/Security/"
-      - "PiLab/Networking/"
-      - "PiWeb/Networking/"
       - "PrusaPrint/Networking/"
       - "Utils/"
     exclude-paths:
