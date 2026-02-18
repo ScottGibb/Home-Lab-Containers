@@ -28,19 +28,3 @@ services:
     # - NET_ADMIN # Required if you are using Pi-hole as your DHCP server, else not needed
     restart: unless-stopped
 
-  nginx:
-    container_name: nginx
-    image: nginx:1.29-alpine
-    volumes:
-      - type: bind
-        source: /home/pi/config/nginx/etc/nginx/templates
-        target: /etc/nginx/templates
-      - type: bind
-        source: /home/pi/Home-Lab-Containers/PiHome/Networking/nginx.conf
-        target: /etc/nginx/nginx.conf
-    ports:
-      - "80:80"
-    environment:
-      - NGINX_HOST=192.168.0.68
-      - NGINX_PORT=80
-    restart: unless-stopped

@@ -11,5 +11,15 @@ name: pidesk
 
 include:
   - ../utils/docker-compose.yml
-  - ./Networking/docker-compose.yml
-  - ./docker-compose-cups.yml
+
+services:
+   cups:
+    build: ./Cups_Dymo-450
+    container_name: Cups
+    restart: unless-stopped
+    stdin_open: true
+    tty: true
+    ports:
+      - "631:631"
+    devices:
+      - /dev/bus/usb:/dev/bus/usb
