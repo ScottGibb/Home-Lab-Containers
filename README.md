@@ -59,7 +59,7 @@ Each system's main `docker-compose.yml` includes:
 Each system has a unified project name defined in its main compose file:
 
 - **HPNas**: `hpnas`
-- **PiDesk**: `printing`
+- **PiDesk**: `pidesk`
 - **PiHome**: `pihome`
 - **PiLab**: `pilab`
 - **PrusaPrint**: `prusaprint`
