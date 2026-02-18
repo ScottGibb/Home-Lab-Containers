@@ -2,14 +2,12 @@
 
 ## [2.2.0](https://github.com/ScottGibb/Home-Lab-Containers/compare/v2.1.1...v2.2.0) (2026-02-18)
 
-
 ### Features
 
 * Add name attribute to all subdirectory docker-compose files ([a587178](https://github.com/ScottGibb/Home-Lab-Containers/commit/a58717875e7eb00ad8c4b381346b6d96581e4c7b))
 * Create main docker-compose files with include directives and inline env vars ([a40643b](https://github.com/ScottGibb/Home-Lab-Containers/commit/a40643b98a8d2bfe3a0cf56c7602c0f50d92d761))
 * migrate to one nginx ([c861adf](https://github.com/ScottGibb/Home-Lab-Containers/commit/c861adf5d0bb2a13482fdc2c116a320573b2ed8b))
 * Remove all bash scripts and .env files ([e958e30](https://github.com/ScottGibb/Home-Lab-Containers/commit/e958e30f4d801da6afeba632e5822dba418eee58))
-
 
 ### Bug Fixes
 
