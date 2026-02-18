@@ -1,5 +1,24 @@
 # Changelog
 
+## [2.2.0](https://github.com/ScottGibb/Home-Lab-Containers/compare/v2.1.1...v2.2.0) (2026-02-18)
+
+
+### Features
+
+* Add name attribute to all subdirectory docker-compose files ([a587178](https://github.com/ScottGibb/Home-Lab-Containers/commit/a58717875e7eb00ad8c4b381346b6d96581e4c7b))
+* Create main docker-compose files with include directives and inline env vars ([a40643b](https://github.com/ScottGibb/Home-Lab-Containers/commit/a40643b98a8d2bfe3a0cf56c7602c0f50d92d761))
+* migrate to one nginx ([c861adf](https://github.com/ScottGibb/Home-Lab-Containers/commit/c861adf5d0bb2a13482fdc2c116a320573b2ed8b))
+* Remove all bash scripts and .env files ([e958e30](https://github.com/ScottGibb/Home-Lab-Containers/commit/e958e30f4d801da6afeba632e5822dba418eee58))
+
+
+### Bug Fixes
+
+* add nas stack ([b28a81d](https://github.com/ScottGibb/Home-Lab-Containers/commit/b28a81d3cfb57d4a62265469a9b76f7bd3f2e443))
+* case sensitivity in Dependabot exclude paths for private submodule ([f555f7b](https://github.com/ScottGibb/Home-Lab-Containers/commit/f555f7b0b5acd99163ad70195094c7bf15d0198e))
+* **docs:** README ([6dac1e7](https://github.com/ScottGibb/Home-Lab-Containers/commit/6dac1e75f8e4c0984c6e8f3f609f4c7c568e1a11))
+* Gitlab version ([43897d3](https://github.com/ScottGibb/Home-Lab-Containers/commit/43897d3c2b94fe71a2a7fd3030c34a2123a0976f))
+* make portainer data persistent ([0ec9f03](https://github.com/ScottGibb/Home-Lab-Containers/commit/0ec9f038bfc5a461d2a7d3f99c99c8850d16e5d7))
+
 ## [2.1.1](https://github.com/ScottGibb/Home-Lab-Containers/compare/v2.1.0...v2.1.1) (2026-02-08)
 
 ### Bug Fixes
