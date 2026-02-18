@@ -13,7 +13,7 @@ include:
   - ../utils/docker-compose.yml
 
 services:
-   cups:
+  cups:
     build: ./Cups_Dymo-450
     container_name: Cups
     restart: unless-stopped
