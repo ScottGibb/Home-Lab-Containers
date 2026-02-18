@@ -1,4 +1,5 @@
 ---
+name: cups
 services:
   cups:
     build: ./Cups_Dymo-450
