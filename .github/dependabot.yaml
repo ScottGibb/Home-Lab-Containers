@@ -28,7 +28,7 @@ updates:
       - "PrusaPrint/Networking/"
       - "Utils/"
     exclude-paths:
-      - "HPNas/NAS-media"
+      - "HPNas/NAS-Media"
     schedule:
       interval: "weekly"
     commit-message:
@@ -37,7 +37,7 @@ updates:
   - package-ecosystem: "gitsubmodule"
     directory: "/"
     exclude-paths:
-      - "HPNas/NAS-media"
+      - "HPNas/NAS-Media"
     schedule:
       interval: "weekly"
     commit-message:
