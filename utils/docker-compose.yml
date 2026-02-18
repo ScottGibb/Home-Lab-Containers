@@ -38,5 +38,19 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:ro
     restart: unless-stopped
 
+  megalinter:
+    image: oxsecurity/megalinter-documentation:v9
+    container_name: megalinter
+    volumes:
+      - type: bind
+        source: ${MEGALINTER_SOURCE_PATH:-.}
+        target: /tmp/lint
+    environment:
+      - APPLY_FIXES=all
+      - VALIDATE_ALL_CODEBASE=true
+      - DEFAULT_WORKSPACE=/tmp/lint
+    profiles:
+      - tools
+
 volumes:
   portainer_data:

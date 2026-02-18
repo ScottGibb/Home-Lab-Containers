@@ -69,3 +69,34 @@ Each system has a unified project name defined in its main compose file:
 ### Environment Variables
 
 All environment variables are now defined inline in the docker-compose files. You can customize them by editing the respective `docker-compose.yml` files directly.
+
+## Development Tools
+
+### MegaLinter
+
+MegaLinter is available as a Docker Compose service for local code quality and security linting. It's configured with the `tools` profile to keep it separate from the main services.
+
+#### Running MegaLinter Locally
+
+To run MegaLinter on the entire repository:
+
+```bash
+cd utils
+docker compose --profile tools run --rm megalinter
+```
+
+To run MegaLinter on a specific directory:
+
+```bash
+cd utils
+MEGALINTER_SOURCE_PATH=/path/to/code docker compose --profile tools run --rm megalinter
+```
+
+MegaLinter can also be accessed from any system directory (HPNas, PiHome, etc.) since it's included in the utils compose file:
+
+```bash
+cd PiHome  # or any other system directory
+MEGALINTER_SOURCE_PATH=$(pwd)/.. docker compose --profile tools run --rm megalinter
+```
+
+For more details about MegaLinter configuration and usage, see [utils/README.md](utils/README.md#megalinter-usage).
