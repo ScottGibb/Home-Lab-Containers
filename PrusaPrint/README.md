@@ -104,7 +104,7 @@ getDHTTemp.sh 11 18
 
 **Legacy Python Implementation:**
 
-The original Python scripts ([getDHTTemp.py](./getDHTTemp.py), [testDHT11.py](./testDHT11.py)) are kept for reference but are no longer used by default. The Rust implementation provides the same functionality with improved reliability through async GPIO operations.
+The original Python scripts ([getDHTTemp.py](./getDHTTemp.py), [testDHT11.py](./testDHT11.py)) are retained in the repository for reference and backward compatibility, but are no longer used by default in the setup process. The Rust implementation provides the same functionality with improved reliability through async GPIO operations and better performance.
 
 #### Telegram
 

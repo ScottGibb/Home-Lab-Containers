@@ -18,7 +18,7 @@ struct DhtReading {
 }
 
 /// Reads data from DHT11 or DHT22 sensor using async GPIO
-async fn read_dht_sensor(pin_number: u8, _sensor_type: &str) -> Result<DhtReading> {
+async fn read_dht_sensor(pin_number: u8, sensor_type: &str) -> Result<DhtReading> {
     let gpio = Gpio::new().context("Failed to initialize GPIO")?;
     
     // Send start signal - set pin as output
@@ -103,9 +103,24 @@ async fn read_dht_sensor(pin_number: u8, _sensor_type: &str) -> Result<DhtReadin
         );
     }
 
-    // Parse temperature and humidity (DHT11 format)
-    let humidity = data[0] as f32 + (data[1] as f32 * 0.1);
-    let temperature = data[2] as f32 + (data[3] as f32 * 0.1);
+    // Parse temperature and humidity based on sensor type
+    let (temperature, humidity) = if sensor_type == "11" {
+        // DHT11: Integer values only
+        let humidity = data[0] as f32 + (data[1] as f32 * 0.1);
+        let temperature = data[2] as f32 + (data[3] as f32 * 0.1);
+        (temperature, humidity)
+    } else {
+        // DHT22/DHT2302: 16-bit values
+        let humidity = ((data[0] as u16) << 8 | data[1] as u16) as f32 / 10.0;
+        let mut temperature = (((data[2] & 0x7F) as u16) << 8 | data[3] as u16) as f32 / 10.0;
+        
+        // Check for negative temperature (MSB of data[2] indicates sign)
+        if data[2] & 0x80 != 0 {
+            temperature = -temperature;
+        }
+        
+        (temperature, humidity)
+    };
 
     Ok(DhtReading {
         temperature,
@@ -153,7 +168,7 @@ async fn main() -> Result<()> {
                 fs::write(&results_path, &results_str)
                     .context("Failed to write results file")?;
 
-                std::process::exit(1);
+                std::process::exit(0);
             }
             Err(e) => {
                 eprintln!("Read attempt {} failed: {}", retry_count + 1, e);

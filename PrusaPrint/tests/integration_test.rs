@@ -23,6 +23,12 @@ fn test_dht_sensor_invalid_args() {
         .expect("Failed to execute command");
 
     assert_eq!(output.status.code(), Some(2), "Should exit with code 2 for missing arguments");
+    
+    // Check that usage message is present in stderr
+    let stderr = String::from_utf8_lossy(&output.stderr);
+    assert!(stderr.contains("Usage:"), "Should print usage message");
+    assert!(stderr.contains("sensor_type"), "Should mention sensor_type parameter");
+    assert!(stderr.contains("pin_number"), "Should mention pin_number parameter");
 }
 
 #[test]
