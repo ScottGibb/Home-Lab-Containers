@@ -12,6 +12,12 @@ pub struct DhtReading {
 }
 
 /// Reads data from DHT11 or DHT22 sensor using async GPIO
+/// 
+/// Note: This implementation uses tokio::time::sleep for timing, which may have
+/// reduced precision compared to blocking implementations. For timing-critical
+/// DHT sensor communication, the timeout values have been adjusted to work
+/// reliably with async scheduler overhead. If more precise timing is required,
+/// consider using blocking GPIO operations instead.
 pub async fn read_dht_sensor(pin_number: u8, sensor_type: &str) -> Result<DhtReading> {
     let gpio = Gpio::new().context("Failed to initialize GPIO")?;
     
@@ -99,9 +105,10 @@ pub async fn read_dht_sensor(pin_number: u8, sensor_type: &str) -> Result<DhtRea
 
     // Parse temperature and humidity based on sensor type
     let (temperature, humidity) = if sensor_type == "11" {
-        // DHT11: Integer values only
-        let humidity = data[0] as f32 + (data[1] as f32 * 0.1);
-        let temperature = data[2] as f32 + (data[3] as f32 * 0.1);
+        // DHT11: data[0] = integer part, data[1] = fractional part (in tenths)
+        // Example: 55.3% = data[0]=55, data[1]=3
+        let humidity = data[0] as f32 + (data[1] as f32 / 10.0);
+        let temperature = data[2] as f32 + (data[3] as f32 / 10.0);
         (temperature, humidity)
     } else {
         // DHT22/DHT2302: 16-bit values
