@@ -38,5 +38,21 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:ro
     restart: unless-stopped
 
+  nginx:
+    container_name: nginx
+    image: nginx:1.29-alpine
+    volumes:
+      - type: bind
+        source: /home/pi/config/nginx/etc/nginx/templates
+        target: /etc/nginx/templates
+      - type: bind
+        source: ${NGINX_CONF_PATH}
+        target: /etc/nginx/nginx.conf
+    ports:
+      - "80:80"
+    environment:
+      - NGINX_HOST=${NGINX_HOST}
+      - NGINX_PORT=${NGINX_PORT}
+    restart: unless-stopped
 volumes:
   portainer_data:

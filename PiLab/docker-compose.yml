@@ -5,4 +5,3 @@ name: pilab
 
 include:
   - ../utils/docker-compose.yml
-  - ./Networking/docker-compose.yml
