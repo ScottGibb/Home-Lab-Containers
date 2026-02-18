@@ -8,3 +8,4 @@ include:
   - ./Storage/docker-compose.yml
   - ./Networking/docker-compose.yml
   - ./Misc/docker-compose.yml
+  - ./NAS-Media/docker-compose.yml
