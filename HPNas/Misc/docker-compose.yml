@@ -1,4 +1,6 @@
 ---
+name: misc
+
 services:
   heimdall:
     image: linuxserver/heimdall

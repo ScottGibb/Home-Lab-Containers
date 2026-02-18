@@ -1,4 +1,6 @@
 ---
+name: apps
+
 services:
   scratchmap:
     container_name: scratchmap

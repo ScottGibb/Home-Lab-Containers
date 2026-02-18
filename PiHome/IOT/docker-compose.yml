@@ -1,4 +1,6 @@
 ---
+name: iot
+
 services:
   mqtt-broker:
     image: eclipse-mosquitto:latest

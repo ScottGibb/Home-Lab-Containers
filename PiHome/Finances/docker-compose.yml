@@ -1,4 +1,6 @@
 ---
+name: finances
+
 #
 # The Firefly III Data Importer will ask you for the Firefly III URL and a "Client ID".
 # You can generate the Client ID at http://localhost/profile (after registering)
