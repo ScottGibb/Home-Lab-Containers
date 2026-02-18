@@ -4,10 +4,9 @@
 name: pihome
 
 include:
-  - ../utils/docker-compose.yml
-  - ./Security/docker-compose.yml
-  - path: ../utils/Networking/docker-compose.yml
+  - path: ../utils/docker-compose.yml
     env_file: ./Networking/.env
+  - ./Security/docker-compose.yml
   - ./Networking/docker-compose.yml
   - ./IOT/docker-compose.yml
   - ./Apps/docker-compose.yml

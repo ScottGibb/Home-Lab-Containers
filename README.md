@@ -52,7 +52,6 @@ docker compose logs -f
 Each system's main `docker-compose.yml` includes:
 
 - **utils/**: Shared services (Portainer, uptime-kuma) used across all systems
-- **utils/Networking/**: Common networking service (nginx) configuration with system-specific environment variables
 - **System-specific services**: Organized in subdirectories (Networking, Storage, IOT, etc.)
 
 ### Project Names
@@ -69,6 +68,4 @@ Each system has a unified project name defined in its main compose file:
 
 ### Environment Variables
 
-System-specific environment variables are defined in `.env` files within each system's subdirectories (e.g., `HPNas/Networking/.env`). These files configure shared services with system-specific parameters like IP addresses and file paths.
-
-For other services, environment variables are defined inline in the docker-compose files. You can customize them by editing the respective `docker-compose.yml` files directly.
+All environment variables are now defined inline in the docker-compose files. You can customize them by editing the respective `docker-compose.yml` files directly.

@@ -4,8 +4,7 @@
 name: hpnas
 
 include:
-  - ../utils/docker-compose.yml
-  - path: ../utils/Networking/docker-compose.yml
+  - path: ../utils/docker-compose.yml
     env_file: ./Networking/.env
   - ./Storage/docker-compose.yml
   - ./Misc/docker-compose.yml
