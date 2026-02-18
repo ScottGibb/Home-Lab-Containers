@@ -9,7 +9,9 @@ services:
       - type: bind
         source: /var/run/docker.sock
         target: /var/run/docker.sock
-      - portainer_data:/data
+      - type: bind
+        source: /home/pi/config/portainer/data
+        target: /data
     ports:
       - 8000:8000
       - 9443:9443
@@ -54,5 +56,4 @@ services:
       - NGINX_HOST=${NGINX_HOST}
       - NGINX_PORT=${NGINX_PORT}
     restart: unless-stopped
-volumes:
-  portainer_data:
+
