@@ -7,9 +7,9 @@
 # Previously, each subdirectory had its own project name (networking, printing),
 # but with the include directive, all services are consolidated under one project name.
 
-name: printing
+name: pidesk
 
 include:
   - ../utils/docker-compose.yml
   - ./Networking/docker-compose.yml
-  - ./docker-compose.local.yml
+  - ./docker-compose-cups.yml

@@ -1,11 +1,5 @@
 ---
 # Main docker-compose file for HPNas
-# This file includes all services for the HPNas system using Docker Compose's include feature
-#
-# Project Name: hpnas
-# All included services (utils, storage, networking, misc) are part of this unified project.
-# Previously, each subdirectory had its own project name (storage, networking, misc),
-# but with the include directive, all services are consolidated under one project name.
 
 name: hpnas
 

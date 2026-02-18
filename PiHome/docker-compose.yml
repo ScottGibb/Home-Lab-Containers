@@ -1,11 +1,5 @@
 ---
 # Main docker-compose file for PiHome
-# This file includes all services for the PiHome system using Docker Compose's include feature
-#
-# Project Name: pihome
-# All included services (utils, security, networking, iot, apps, finances) are part of this unified project.
-# Previously, each subdirectory had its own project name (networking, iot, apps, security, finances),
-# but with the include directive, all services are consolidated under one project name.
 
 name: pihome
 
