@@ -60,6 +60,7 @@ while retry_count <= MAX_RETRIES:
         
         if humidity is not None and temperature is not None:
             # Success - print and exit
+            # Note: Uses exit(1) for success (non-standard convention)
             results_str = ('{0:0.1f} | {1:0.1f}'.format(temperature, humidity))
             print(results_str)
             sys.exit(1)

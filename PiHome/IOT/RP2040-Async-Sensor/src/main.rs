@@ -26,6 +26,13 @@ impl<'a> AsyncDht11<'a> {
 
     /// Read temperature and humidity from DHT11 sensor using async patterns
     /// 
+    /// Note: This is a demonstration implementation with mock data.
+    /// A complete implementation would:
+    /// - Switch pin to input mode for reading
+    /// - Use async timing to read 40 bits of data
+    /// - Verify checksum
+    /// - Return actual sensor readings
+    /// 
     /// Traditional polling approach would use:
     /// ```rust
     /// loop {
@@ -49,13 +56,15 @@ impl<'a> AsyncDht11<'a> {
         // Wait for sensor response - no busy polling needed
         Timer::after(Duration::from_micros(40)).await;
         
-        // In a real implementation, we would:
+        // In a complete implementation, we would:
         // 1. Switch pin to input mode
         // 2. Wait for sensor to pull line low (async)
         // 3. Read 40 bits of data using async timing
         // 4. Verify checksum
+        // 5. Parse temperature and humidity values
         
-        // For demonstration, return mock data
+        // For demonstration purposes, return mock data
+        // This demonstrates the async pattern without requiring actual hardware
         let temperature = 23.5;
         let humidity = 45.0;
         

@@ -4,7 +4,7 @@
 //! and that the Embassy async runtime is properly configured.
 //! 
 //! Note: These tests are designed to run on actual hardware.
-//! Run with: cargo run --bin async_tests --release
+//! Run with: cargo run --example async_tests --release
 
 #![no_std]
 #![no_main]
