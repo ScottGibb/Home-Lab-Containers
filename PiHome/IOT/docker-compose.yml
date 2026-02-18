@@ -92,7 +92,7 @@ services:
 
   # See README for more details - cant use submodule due to git layout so have to build outside and then run with this
   presence-detector:
-    image: presence_detector:v1.4.4
+    image: presence_detector:v1.4.5
     container_name: presence-detector
     restart: unless-stopped
     privileged: true
@@ -100,7 +100,7 @@ services:
       - MQTT_HOST=192.168.0.68
       - MQTT_PORT=1883
       - MQTT_CLIENT_ID=presence-detector
-      - ROOM=master-bedroom
+      - ROOM=living-room
       - SENSOR_ID=1
       - PIN=10 #GPIO10 / Physical Pin 19
       - RUST_LOG=info
