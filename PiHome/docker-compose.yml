@@ -6,7 +6,7 @@ name: pihome
 include:
   - ../utils/docker-compose.yml
   - ./Security/docker-compose.yml
-  - ../PiHomeNetworking/docker-compose.yml
+  - ./pihole-docker-compose.yml
   - ./IOT/docker-compose.yml
   - ./Apps/docker-compose.yml
   # Uncomment the following line to include Finances services
@@ -21,7 +21,7 @@ services:
         source: /home/pi/config/nginx/etc/nginx/templates
         target: /etc/nginx/templates
       - type: bind
-        source: /home/pi/Home-Lab-Containers/PiHomeNetworking/nginx.conf
+        source: /home/pi/Home-Lab-Containers/PiHome/nginx.conf
         target: /etc/nginx/nginx.conf
     ports:
       - "80:80"
