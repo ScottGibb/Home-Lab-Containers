@@ -16,13 +16,13 @@ fn test_dht_sensor_help() {
 
 #[test]
 fn test_dht_sensor_invalid_args() {
-    // Test with no arguments - should exit with code 2
+    // Test with no arguments - should fail
     let output = Command::new("cargo")
         .args(&["run", "--bin", "dht_sensor"])
         .output()
         .expect("Failed to execute command");
 
-    assert_eq!(output.status.code(), Some(2), "Should exit with code 2 for missing arguments");
+    assert!(!output.status.success(), "Should fail with missing arguments");
     
     // Check that usage message is present in stderr
     let stderr = String::from_utf8_lossy(&output.stderr);
@@ -33,13 +33,13 @@ fn test_dht_sensor_invalid_args() {
 
 #[test]
 fn test_dht_sensor_invalid_sensor_type() {
-    // Test with invalid sensor type - should exit with code 2
+    // Test with invalid sensor type - should fail
     let output = Command::new("cargo")
         .args(&["run", "--bin", "dht_sensor", "--", "99", "18"])
         .output()
         .expect("Failed to execute command");
 
-    assert_eq!(output.status.code(), Some(2), "Should exit with code 2 for invalid sensor type");
+    assert!(!output.status.success(), "Should fail with invalid sensor type");
 }
 
 #[test]

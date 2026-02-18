@@ -3,6 +3,10 @@ name = "dht_sensor"
 version = "0.1.0"
 edition = "2021"
 
+[lib]
+name = "dht_sensor"
+path = "src/lib.rs"
+
 [[bin]]
 name = "dht_sensor"
 path = "src/main.rs"
@@ -13,5 +17,5 @@ path = "src/test_dht11.rs"
 
 [dependencies]
 rppal = "0.19"
-tokio = { version = "1.41", features = ["full"] }
+tokio = { version = "1.41", features = ["rt-multi-thread", "macros", "time"] }
 anyhow = "1.0"
