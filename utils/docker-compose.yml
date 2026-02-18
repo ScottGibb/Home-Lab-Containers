@@ -1,4 +1,6 @@
 ---
+name: utils
+
 services:
   Portainer:
     image: portainer/portainer-ce:2.38.0

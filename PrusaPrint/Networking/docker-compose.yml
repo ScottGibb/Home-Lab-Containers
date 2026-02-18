@@ -1,4 +1,6 @@
 ---
+name: networking
+
 services:
   nginx:
     container_name: nginx

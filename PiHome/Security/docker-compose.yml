@@ -1,4 +1,6 @@
 ---
+name: security
+
 services:
   motion-eye:
     image: ccrisan/motioneye:master-armhf

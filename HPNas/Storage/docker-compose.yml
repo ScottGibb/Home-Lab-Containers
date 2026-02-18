@@ -1,4 +1,6 @@
 ---
+name: storage
+
 services:
   samba:
     image: dperson/samba
