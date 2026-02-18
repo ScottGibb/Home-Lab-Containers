@@ -56,4 +56,3 @@ services:
       - NGINX_HOST=${NGINX_HOST}
       - NGINX_PORT=${NGINX_PORT}
     restart: unless-stopped
-
