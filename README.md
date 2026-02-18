@@ -95,8 +95,12 @@ MEGALINTER_SOURCE_PATH=/path/to/code docker compose --profile tools run --rm meg
 MegaLinter can also be accessed from any system directory (HPNas, PiHome, etc.) since it's included in the utils compose file:
 
 ```bash
-cd PiHome  # or any other system directory
+cd PiHome  # or any other system directory (HPNas, PiDesk, PiLab, PrusaPrint)
+# Run on the repository root (parent directory)
 MEGALINTER_SOURCE_PATH=$(pwd)/.. docker compose --profile tools run --rm megalinter
+
+# Or run on the current system directory
+MEGALINTER_SOURCE_PATH=$(pwd) docker compose --profile tools run --rm megalinter
 ```
 
 For more details about MegaLinter configuration and usage, see [utils/README.md](utils/README.md#megalinter-usage).

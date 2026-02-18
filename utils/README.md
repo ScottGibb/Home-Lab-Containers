@@ -26,14 +26,33 @@ MegaLinter is available as a Docker Compose service for local linting. It's conf
 
 ### Running MegaLinter Locally
 
-From the repository root or any system directory (HPNas, PiHome, etc.):
+#### From the utils directory:
 
 ```bash
-# Run MegaLinter on the current directory
+cd utils
+
+# Run MegaLinter on the utils directory
 docker compose --profile tools run --rm megalinter
 
 # Run MegaLinter on a specific directory
 MEGALINTER_SOURCE_PATH=/path/to/code docker compose --profile tools run --rm megalinter
+
+# Run MegaLinter on the repository root
+MEGALINTER_SOURCE_PATH=$(pwd)/.. docker compose --profile tools run --rm megalinter
+```
+
+#### From any system directory (HPNas, PiHome, PiLab, PiDesk, PrusaPrint):
+
+Since these directories include the utils compose file, MegaLinter is available:
+
+```bash
+cd PiHome  # or any other system directory
+
+# Run on the repository root (parent directory)
+MEGALINTER_SOURCE_PATH=$(pwd)/.. docker compose --profile tools run --rm megalinter
+
+# Or run on the current system directory
+MEGALINTER_SOURCE_PATH=$(pwd) docker compose --profile tools run --rm megalinter
 ```
 
 ### Configuration
