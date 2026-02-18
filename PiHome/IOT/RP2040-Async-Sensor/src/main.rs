@@ -91,7 +91,8 @@ async fn sensor_task(pin: Output<'static>) {
             }
             Err(e) => {
                 warn!("Sensor read error: {}", e);
-                // Async retry with exponential backoff
+                // Retry with fixed delay
+                // Note: Could be enhanced with exponential backoff for production use
                 Timer::after(Duration::from_secs(2)).await;
                 continue;
             }

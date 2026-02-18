@@ -60,7 +60,8 @@ while retry_count <= MAX_RETRIES:
         
         if humidity is not None and temperature is not None:
             # Success - print and exit
-            # Note: Uses exit(1) for success (non-standard convention)
+            # Note: Original code uses exit(1) which is incorrect (should be exit(0))
+            # exit(1) typically indicates error, but kept as-is in original implementation
             results_str = ('{0:0.1f} | {1:0.1f}'.format(temperature, humidity))
             print(results_str)
             sys.exit(1)
@@ -128,7 +129,7 @@ async fn sensor_task(pin: Output<'static>) {
             }
             Err(e) => {
                 warn!("Sensor read error: {}", e);
-                // Async retry with exponential backoff
+                // Retry with fixed delay (could be enhanced with exponential backoff)
                 Timer::after(Duration::from_secs(2)).await;
                 continue;
             }
@@ -155,7 +156,7 @@ async fn blink_task(mut led: Output<'static>) {
 
 1. ✅ **Non-blocking**: `.await` yields to executor, other tasks run
 2. ✅ **Concurrent**: Multiple independent tasks (sensor + LED + more)
-3. ✅ **Flexible Retry**: Easy to implement exponential backoff
+3. ✅ **Flexible Retry**: Easy to implement various retry strategies (fixed delay shown, exponential backoff possible)
 4. ✅ **Low Power**: CPU sleeps (WFI) when no tasks are ready
 5. ✅ **Type Safety**: Compile-time guarantees, no runtime exceptions
 
