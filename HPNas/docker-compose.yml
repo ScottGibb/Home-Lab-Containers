@@ -17,7 +17,7 @@ services:
         source: /home/pi/config/nginx/etc/nginx/templates
         target: /etc/nginx/templates
       - type: bind
-        source: /home/pi/Home-Lab-Containers/HPNas/Networking/nginx.conf
+        source: /home/pi/Home-Lab-Containers/HPNasNetworking/nginx.conf
         target: /etc/nginx/nginx.conf
     ports:
       - "80:80"
