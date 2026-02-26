@@ -6,7 +6,6 @@ name: pihome
 include:
   - ../utils/docker-compose.yml
   - ./Security/docker-compose.yml
-  - ./Networking/docker-compose.yml
   - ./IOT/docker-compose.yml
   - ./Apps/docker-compose.yml
   # Uncomment the following line to include Finances services
