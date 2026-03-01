@@ -6,6 +6,7 @@ For the Hall Pi, the following docker stacks are enabled:
 
 - utils
 - tailscale
+- pihole
 
 ## Usage
 
