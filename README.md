@@ -69,3 +69,9 @@ Each system has a unified project name defined in its main compose file:
 ### Environment Variables
 
 All environment variables are now defined inline in the docker-compose files. You can customize them by editing the respective `docker-compose.yml` files directly.
+
+## Local Repositories
+
+According to gemini we can get Dependabot to ignore the submodules by giving it a fake path and then ovveriding that URL in git with the following line:
+
+```url = https://github.com/ScottGibb/NAS-Media-LAN-Placeholder.git```

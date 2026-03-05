@@ -37,6 +37,8 @@ updates:
       - "HPNas/NAS-Media"
     schedule:
       interval: "weekly"
+    ignore:
+      - dependency-name: "HPNas/NAS-Media"
     commit-message:
       prefix: chore
       include: scope
