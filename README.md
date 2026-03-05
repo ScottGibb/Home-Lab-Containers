@@ -74,4 +74,4 @@ All environment variables are now defined inline in the docker-compose files. Yo
 
 According to gemini we can get Dependabot to ignore the submodules by giving it a fake path and then ovveriding that URL in git with the following line:
 
-```url = https://github.com/ScottGibb/NAS-Media-LAN-Placeholder.git```
+```git config --global url."http://192.168.1.50/repo.git".insteadOf "https://github.com/your-username/internal-placeholder.git"```
