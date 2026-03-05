@@ -8,7 +8,7 @@ include:
 
 services:
   tailscale:
-    image: tailscale/tailscale:latest
+    image: tailscale/tailscale:v1.94.2
     hostname: tailscale
     container_name: Tail-Scale
     environment:
@@ -28,7 +28,7 @@ services:
 
   pihole:
     container_name: pihole
-    image: pihole/pihole:latest
+    image: pihole/pihole:2026.02.0
     # For DHCP it is recommended to remove these ports and instead add: network_mode: "host"
     ports:
       - "53:53/tcp"

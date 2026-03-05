@@ -3,7 +3,7 @@ name: iot
 
 services:
   mqtt-broker:
-    image: eclipse-mosquitto:latest
+    image: eclipse-mosquitto:2.1.2-alpine
     container_name: mqtt-broker
     ports:
       - "1883:1883" # MQTT port
@@ -16,7 +16,7 @@ services:
 
   node-red:
     container_name: Node-Red
-    image: nodered/node-red:latest
+    image: nodered/node-red:4.1.6-22
     stdin_open: true
     tty: true
     environment:
@@ -79,7 +79,7 @@ services:
 
   spoolman:
     container_name: spoolman
-    image: ghcr.io/donkie/spoolman:latest
+    image: ghcr.io/donkie/spoolman:0.23.1
     restart: unless-stopped
     volumes:
       # Mount the host machine's ./data directory into the container's /home/app/.local/share/spoolman directory
