@@ -23,6 +23,7 @@ ENABLE_LINTERS:
   - JSON_PRETTIER
   - SHELL_SHFMT
   - SHELL_SHELLCHECK
+  - DOCKERFILE_DCLINT
 
 SHOW_ELAPSED_TIME: true
 FILEIO_REPORTER: false
@@ -36,3 +37,6 @@ OUTPUT_DETAIL: detailed
 
 #  Linter Configuration
 MARKDOWN_MARKDOWNLINT_CONFIG_FILE: .markdownlint.json
+
+PLUGINS:
+  - "https://raw.githubusercontent.com/wesley-dean/mega-linter-plugin-dclint/refs/heads/main/mega-linter-plugin-dclint/dclint.megalinter-descriptor.yml"
