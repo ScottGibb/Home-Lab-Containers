@@ -10,7 +10,7 @@ name: finances
 
 services:
   app:
-    image: fireflyiii/core:latest
+    image: fireflyiii/core:version-6.5.3
     container_name: firefly_iii_core
     depends_on:
       - db
@@ -255,7 +255,7 @@ services:
       # If you're stuck I understand you get desperate but look SOMEWHERE ELSE.
       - APP_URL=http://localhost
     ports:
-      - '8080:8080'
+      - '0.0.0.0:8080:8080'
     networks:
       - firefly_iii
     restart: always
@@ -264,7 +264,7 @@ services:
     tty: true # docker run -t
 
   cron:
-    image: alpine
+    image: alpine:3.21
     container_name: firefly_iii_cron
     networks:
       - firefly_iii
@@ -283,7 +283,7 @@ services:
       - firefly_iii
 
   importer:
-    image: fireflyiii/data-importer:latest
+    image: fireflyiii/data-importer:version-1.6.1
     container_name: firefly_iii_importer
     depends_on:
       - app
@@ -426,7 +426,7 @@ services:
       # Laravel uses this to generate links on the command line, which is a feature the data importer does not use.
       - APP_URL=http://localhost
     ports:
-      - '8180:8080'
+      - '0.0.0.0:8180:8080'
     networks:
       - firefly_iii
     restart: always

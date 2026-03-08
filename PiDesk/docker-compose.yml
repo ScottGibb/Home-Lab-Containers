@@ -16,7 +16,7 @@ services:
     build: ./Cups_Dymo-450
     container_name: Cups
     ports:
-      - '631:631'
+      - '0.0.0.0:631:631'
     restart: unless-stopped
     devices:
       - /dev/bus/usb:/dev/bus/usb
