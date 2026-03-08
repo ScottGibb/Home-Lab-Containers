@@ -8,7 +8,7 @@ services:
     depends_on:
       - node-red
     ports:
-      - "0.0.0.0:5000:5000"
+      - '0.0.0.0:5000:5000'
     restart: unless-stopped
     privileged: true # Required for GPIO access
 
@@ -19,7 +19,7 @@ services:
       - fan-controller-back-end
       - node-red
     ports:
-      - "0.0.0.0:5001:80"
+      - '0.0.0.0:5001:80'
     restart: unless-stopped
 
   led-strip-controller-cli:
@@ -38,8 +38,8 @@ services:
       - /home/pi/Home-Lab-Containers/PiHome/config:/mosquitto/config
       - mosquitto_log:/mosquitto/log
     ports:
-      - "0.0.0.0:1883:1883" # MQTT port
-      - "0.0.0.0:9002:9001" # MQTT over WebSockets (optional, for MQTT over WebSocket support)
+      - '0.0.0.0:1883:1883' # MQTT port
+      - '0.0.0.0:9002:9001' # MQTT over WebSockets (optional, for MQTT over WebSocket support)
     restart: unless-stopped
 
   node-red:
@@ -87,7 +87,7 @@ services:
       - TZ=Europe/London
       - TSMT_PIN_NUMBER= 13 # BOARD
     ports:
-      - "0.0.0.0:60000:60000"
+      - '0.0.0.0:60000:60000'
     restart: unless-stopped
     privileged: true # Required for GPIO Access
     stdin_open: true
@@ -103,7 +103,7 @@ services:
         target: /home/app/.local/share/spoolman # Do NOT modify this line
     ports:
       # Map the host machine's port 7912 to the container's port 8000
-      - "0.0.0.0:7912:8000"
+      - '0.0.0.0:7912:8000'
     restart: unless-stopped
 
 volumes:
