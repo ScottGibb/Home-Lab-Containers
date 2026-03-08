@@ -436,4 +436,3 @@ networks:
     driver: bridge
 volumes:
   firefly_iii_upload:
-
