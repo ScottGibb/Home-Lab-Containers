@@ -3,7 +3,7 @@ name: apps
 
 services:
   scratchmap:
-    image: ad3m3r5/scratch-map:1.2.3
+    image: ad3m3r5/scratch-map:1.2
     container_name: scratchmap
     volumes:
       - type: bind
