@@ -10,7 +10,7 @@ name: finances
 
 services:
   app:
-    image: fireflyiii/core:version-6.5.3
+    image: fireflyiii/core:version-6.5.4
     container_name: firefly_iii_core
     depends_on:
       - db
@@ -264,7 +264,7 @@ services:
     tty: true # docker run -t
 
   cron:
-    image: alpine:3.21
+    image: alpine:3.23.3
     container_name: firefly_iii_cron
     networks:
       - firefly_iii
@@ -283,7 +283,7 @@ services:
       - firefly_iii
 
   importer:
-    image: fireflyiii/data-importer:version-1.6.1
+    image: fireflyiii/data-importer:version-2.2.1-cli
     container_name: firefly_iii_importer
     depends_on:
       - app
