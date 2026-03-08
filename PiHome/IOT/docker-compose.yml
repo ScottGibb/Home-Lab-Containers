@@ -2,25 +2,49 @@
 name: iot
 
 services:
+  fan-controller-back-end:
+    build: "./Web-Based-Fan-Controller/BackEnd"
+    container_name: Back-End
+    depends_on:
+      - node-red
+    ports:
+      - "5000:5000"
+    restart: unless-stopped
+    privileged: true # Required for GPIO access
+
+  fan-controller-front-end:
+    build: "./Web-Based-Fan-Controller/FrontEnd"
+    container_name: Front-End
+    depends_on:
+      - fan-controller-back-end
+      - node-red
+    ports:
+      - "5001:80"
+    restart: unless-stopped
+
+  led-strip-controller-cli:
+    build: "./LED-Strip-Controller-Software/Tui"
+    container_name: LED-Strip-Controller-CLI
+    network_mode: "host"
+    restart: unless-stopped
+    privileged: true
+    stdin_open: true # Keep stdin open
+    tty: true # Allocate a pseudo-TTY
   mqtt-broker:
     image: eclipse-mosquitto:2.1.2-alpine
     container_name: mqtt-broker
-    ports:
-      - "1883:1883" # MQTT port
-      - "9002:9001" # MQTT over WebSockets (optional, for MQTT over WebSocket support)
     volumes:
       - mosquitto_data:/mosquitto/data
       - /home/pi/Home-Lab-Containers/PiHome/config:/mosquitto/config
       - mosquitto_log:/mosquitto/log
+    ports:
+      - "1883:1883" # MQTT port
+      - "9002:9001" # MQTT over WebSockets (optional, for MQTT over WebSocket support)
     restart: unless-stopped
 
   node-red:
-    container_name: Node-Red
     image: nodered/node-red:4.1.6-22
-    stdin_open: true
-    tty: true
-    environment:
-      - TZ=Europe/London
+    container_name: Node-Red
     # ports:
     #   - 1880:1880
     #   - 3456:3456
@@ -28,74 +52,20 @@ services:
       - type: bind
         source: /home/pi/docker-mounts/node-red
         target: /data
-    privileged: true
-    restart: unless-stopped
-    network_mode: host
-
-  led-strip-controller-cli:
-    container_name: LED-Strip-Controller-CLI
-    build: "./LED-Strip-Controller-Software/Tui"
-    network_mode: "host"
-    restart: unless-stopped
-    privileged: true
-    stdin_open: true # Keep stdin open
-    tty: true # Allocate a pseudo-TTY
-
-  fan-controller-back-end:
-    container_name: Back-End
-    build: "./Web-Based-Fan-Controller/BackEnd"
-    ports:
-      - "5000:5000"
-    privileged: true # Required for GPIO access
-    depends_on:
-      - node-red
-    restart: unless-stopped
-
-  fan-controller-front-end:
-    container_name: Front-End
-    build: "./Web-Based-Fan-Controller/FrontEnd"
-    ports:
-      - "5001:80"
-    depends_on:
-      - fan-controller-back-end
-      - node-red
-    restart: unless-stopped
-
-  socket-rf-transmitter:
-    container_name: smart-rf-transmitter
-    build:
-      context: "./Smart-RF-Plug-Transmitter/socket_transmitter"
-    stdin_open: true
-    tty: true
     environment:
       - TZ=Europe/London
-      - TSMT_PIN_NUMBER= 13 # BOARD
-    ports:
-      - 60000:60000
-    depends_on:
-      - node-red
-    privileged: true # Required for GPIO Access
+    network_mode: host
     restart: unless-stopped
-
-  spoolman:
-    container_name: spoolman
-    image: ghcr.io/donkie/spoolman:0.23.1
-    restart: unless-stopped
-    volumes:
-      # Mount the host machine's ./data directory into the container's /home/app/.local/share/spoolman directory
-      - type: bind
-        source: /home/pi/docker-mounts/spoolman # This is where the data will be stored locally. Could also be set to for example `source: /home/pi/printer_data/spoolman`.
-        target: /home/app/.local/share/spoolman # Do NOT modify this line
-    ports:
-      # Map the host machine's port 7912 to the container's port 8000
-      - "7912:8000"
+    privileged: true
+    stdin_open: true
+    tty: true
 
   # See README for more details - cant use submodule due to git layout so have to build outside and then run with this
   presence-detector:
     image: presence_detector:v1.4.5
     container_name: presence-detector
-    restart: unless-stopped
-    privileged: true
+    depends_on:
+      - mqtt-broker
     environment:
       - MQTT_HOST=192.168.0.68
       - MQTT_PORT=1883
@@ -104,8 +74,37 @@ services:
       - SENSOR_ID=1
       - PIN=10 #GPIO10 / Physical Pin 19
       - RUST_LOG=info
+    restart: unless-stopped
+    privileged: true
+
+  socket-rf-transmitter:
+    build:
+      context: "./Smart-RF-Plug-Transmitter/socket_transmitter"
+    container_name: smart-rf-transmitter
     depends_on:
-      - mqtt-broker
+      - node-red
+    environment:
+      - TZ=Europe/London
+      - TSMT_PIN_NUMBER= 13 # BOARD
+    ports:
+      - "60000:60000"
+    restart: unless-stopped
+    privileged: true # Required for GPIO Access
+    stdin_open: true
+    tty: true
+
+  spoolman:
+    image: ghcr.io/donkie/spoolman:0.23.1
+    container_name: spoolman
+    volumes:
+      # Mount the host machine's ./data directory into the container's /home/app/.local/share/spoolman directory
+      - type: bind
+        source: /home/pi/docker-mounts/spoolman # This is where the data will be stored locally. Could also be set to for example `source: /home/pi/printer_data/spoolman`.
+        target: /home/app/.local/share/spoolman # Do NOT modify this line
+    ports:
+      # Map the host machine's port 7912 to the container's port 8000
+      - "7912:8000"
+    restart: unless-stopped
 
 volumes:
   mosquitto_data:

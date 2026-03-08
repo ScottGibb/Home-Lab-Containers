@@ -1,6 +1,5 @@
 ---
 name: finances
-
 #
 # The Firefly III Data Importer will ask you for the Firefly III URL and a "Client ID".
 # You can generate the Client ID at http://localhost/profile (after registering)
@@ -12,11 +11,9 @@ name: finances
 services:
   app:
     image: fireflyiii/core:latest
-    hostname: app
     container_name: firefly_iii_core
-    networks:
-      - firefly_iii
-    restart: always
+    depends_on:
+      - db
     volumes:
       - /home/pi/docker-mounts/firefly-iii/upload:/var/www/html/storage/upload
     environment:
@@ -258,32 +255,36 @@ services:
       # If you're stuck I understand you get desperate but look SOMEWHERE ELSE.
       - APP_URL=http://localhost
     ports:
-      - "8080:8080"
-    depends_on:
-      - db
+      - '8080:8080'
+    networks:
+      - firefly_iii
+    restart: always
+    hostname: app
     stdin_open: true # docker run -i
     tty: true # docker run -t
 
+  cron:
+    image: alpine
+    container_name: firefly_iii_cron
+    networks:
+      - firefly_iii
+    command: sh -c "echo \"0 3 * * * wget -qO- http://app:8080/api/v1/cron/REPLACEME\" | crontab - && crond -f -L /dev/stdout"
+    restart: always
+
   db:
-    container_name: firefly_iii_db
     image: "postgres:18"
+    container_name: firefly_iii_db
+    volumes:
+      - /home/pi/docker-mounts/firefly-iii/postgresql/data:/var/lib/postgresql/data
     environment:
       - POSTGRES_PASSWORD=secret_firefly_password
       - POSTGRES_USER=firefly
     networks:
       - firefly_iii
-    volumes:
-      - /home/pi/docker-mounts/firefly-iii/postgresql/data:/var/lib/postgresql/data
 
   importer:
     image: fireflyiii/data-importer:latest
-    hostname: importer
-    restart: always
     container_name: firefly_iii_importer
-    networks:
-      - firefly_iii
-    ports:
-      - "8180:8080"
     depends_on:
       - app
     environment:
@@ -424,21 +425,15 @@ services:
       # Don't open issues telling me it doesn't help because it's not supposed to.
       # Laravel uses this to generate links on the command line, which is a feature the data importer does not use.
       - APP_URL=http://localhost
-
-  cron:
-    #
-    # To make this work, set STATIC_CRON_TOKEN in your .env file or as an environment variable and replace REPLACEME below
-    # The STATIC_CRON_TOKEN must be *exactly* 32 characters long
-    #
-    image: alpine
-    container_name: firefly_iii_cron
-    restart: always
-    command: sh -c "echo \"0 3 * * * wget -qO- http://app:8080/api/v1/cron/REPLACEME\" | crontab - && crond -f -L /dev/stdout"
+    ports:
+      - '8180:8080'
     networks:
       - firefly_iii
-volumes:
-  firefly_iii_upload:
-
+    restart: always
+    hostname: importer
 networks:
   firefly_iii:
     driver: bridge
+volumes:
+  firefly_iii_upload:
+

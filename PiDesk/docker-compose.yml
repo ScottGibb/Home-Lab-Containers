@@ -1,4 +1,5 @@
 ---
+name: pidesk
 # Main docker-compose file for PiDesk
 # This file includes all services for the PiDesk system using Docker Compose's include feature
 #
@@ -7,8 +8,6 @@
 # Previously, each subdirectory had its own project name (networking, printing),
 # but with the include directive, all services are consolidated under one project name.
 
-name: pidesk
-
 include:
   - ../utils/docker-compose.yml
 
@@ -16,10 +15,10 @@ services:
   cups:
     build: ./Cups_Dymo-450
     container_name: Cups
-    restart: unless-stopped
-    stdin_open: true
-    tty: true
     ports:
-      - "631:631"
+      - '631:631'
+    restart: unless-stopped
     devices:
       - /dev/bus/usb:/dev/bus/usb
+    stdin_open: true
+    tty: true

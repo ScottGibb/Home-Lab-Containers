@@ -2,40 +2,40 @@
 name: storage
 
 services:
+
+  Gitlab:
+    image: gitlab/gitlab-ce:18.9.1-ce.0
+    container_name: GitLab
+    volumes:
+      - /mnt/USB3.0-1TB/GitLab/config:/etc/gitlab
+      - /mnt/USB3.0-1TB/GitLab/logs:/var/log/gitlab
+      - /mnt/USB3.0-1TB/GitLab/data:/var/opt/gitlab
+    ports:
+      - '1022:22'
+      - '1080:80'
+      - '1443:1443'
+    restart: unless-stopped
+    stdin_open: true
+    tty: true
   samba:
     image: dperson/samba
     container_name: samba
-    network_mode: host
-    ports:
-      - "137:137/udp"
-      - "138:138/udp"
-      - "139:139/tcp"
-      - "445:445/tcp"
-    environment:
-      - PUID:1000
-      - PGID:1000
-    tty: true
-    stdin_open: true
     volumes:
       - /mnt/USB3.0-1TB/Storage:/Storage
       - /mnt/USB3.0-1TB/Courses:/Courses
       - /home/pi/config/samba:/etc/samba
       - /mnt/MediaStorage/Books:/Books
       - /mnt/MediaStorage/AudioBooks:/AudioBooks
+    environment:
+      - PUID:1000
+      - PGID:1000
+    ports:
+      - '137:137/udp'
+      - '138:138/udp'
+      - '139:139/tcp'
+      - '445:445/tcp'
+    network_mode: host
     command: '-u "USERNAMEGOESHERE;PASSWORDGOESHERE"'
     restart: unless-stopped
-
-  Gitlab:
-    image: gitlab/gitlab-ce:18.9.1-ce.0
-    container_name: GitLab
-    restart: unless-stopped
-    ports:
-      - "1443:1443"
-      - "1080:80"
-      - "1022:22"
-    volumes:
-      - /mnt/USB3.0-1TB/GitLab/config:/etc/gitlab
-      - /mnt/USB3.0-1TB/GitLab/logs:/var/log/gitlab
-      - /mnt/USB3.0-1TB/GitLab/data:/var/opt/gitlab
     stdin_open: true
     tty: true

@@ -1,7 +1,6 @@
 ---
-# Main docker-compose file for HPNas
-
 name: hpnas
+# Main docker-compose file for HPNas
 
 include:
   - ../utils/docker-compose.yml

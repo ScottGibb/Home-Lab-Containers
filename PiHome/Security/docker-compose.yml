@@ -5,8 +5,6 @@ services:
   motion-eye:
     image: ccrisan/motioneye:master-armhf
     container_name: Motion-Eye
-    environment:
-      - TZ=Europe/London
     volumes:
       - type: bind
         source: /etc/localtime
@@ -17,6 +15,8 @@ services:
       - type: bind
         source: /home/pi/docker-mounts/motion-eye/videos
         target: /var/lib/motioneye
+    environment:
+      - TZ=Europe/London
     ports:
-      - 8765:8765
+      - "8765:8765"
     restart: unless-stopped

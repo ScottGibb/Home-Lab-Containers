@@ -1,7 +1,6 @@
 ---
-# Main docker-compose file for PiLab
-
 name: pilab
+# Main docker-compose file for PiLab
 
 include:
   - ../utils/docker-compose.yml

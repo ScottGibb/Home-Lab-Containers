@@ -1,7 +1,6 @@
 ---
-# Main docker-compose file for PiHome
-
 name: pihome
+# Main docker-compose file for PiHome
 
 include:
   - ../utils/docker-compose.yml

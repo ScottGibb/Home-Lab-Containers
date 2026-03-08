@@ -1,7 +1,6 @@
 ---
-# Main docker-compose file for PrusaPrint
-
 name: prusaprint
+# Main docker-compose file for PrusaPrint
 
 include:
   - ../utils/docker-compose.yml
