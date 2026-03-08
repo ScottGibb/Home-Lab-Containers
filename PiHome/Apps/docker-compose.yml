@@ -3,7 +3,7 @@ name: apps
 
 services:
   scratchmap:
-    image: ad3m3r5/scratch-map:latest
+    image: ad3m3r5/scratch-map:1.2.3
     container_name: scratchmap
     volumes:
       - type: bind
@@ -12,5 +12,5 @@ services:
     environment:
       DBLOCATION: "/data"
     ports:
-      - '3000:3000'
+      - '0.0.0.0:3000:3000'
     restart: unless-stopped

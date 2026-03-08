@@ -3,7 +3,7 @@ name: misc
 
 services:
   heimdall:
-    image: linuxserver/heimdall
+    image: linuxserver/heimdall:2.7.6
     container_name: heimdall
     volumes:
       - /home/pi/config/heimdall/config:/config
@@ -12,6 +12,6 @@ services:
       - PGID=1000
       - TZ=Etc/UTC
     ports:
-      - '443:443'
-      - '8080:80'
+      - '0.0.0.0:443:443'
+      - '0.0.0.0:8080:80'
     restart: unless-stopped

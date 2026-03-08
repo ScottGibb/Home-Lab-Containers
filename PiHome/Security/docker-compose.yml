@@ -18,5 +18,5 @@ services:
     environment:
       - TZ=Europe/London
     ports:
-      - "8765:8765"
+      - "0.0.0.0:8765:8765"
     restart: unless-stopped
