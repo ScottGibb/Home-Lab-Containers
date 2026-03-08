@@ -2,7 +2,6 @@
 name: utils
 
 services:
-
   Agent:
     image: portainer/agent:2.38.0
     container_name: portainer_agent
