@@ -10,7 +10,7 @@ name: finances
 
 services:
   app:
-    image: fireflyiii/core:version-6.5.4
+    image: fireflyiii/core:version-6.5.5
     container_name: firefly_iii_core
     depends_on:
       - db
