@@ -2,7 +2,6 @@
 
 ## [3.0.0](https://github.com/ScottGibb/Home-Lab-Containers/compare/v2.2.0...v3.0.0) (2026-03-15)
 
-
 ### ⚠ BREAKING CHANGES
 
 * add PiHall
@@ -13,7 +12,6 @@
 * add fstab for PiHall ([2563967](https://github.com/ScottGibb/Home-Lab-Containers/commit/256396734712d74d4cfb3e53436eeb9420cb938d))
 * add PiHall ([b6d5b46](https://github.com/ScottGibb/Home-Lab-Containers/commit/b6d5b46b233b95683df30a15c7b9eb76dbc4f6d1))
 * add vscode settings for formatters ([b16d135](https://github.com/ScottGibb/Home-Lab-Containers/commit/b16d1353c5064858b52c0d8bbd762ae7b50d2b56))
-
 
 ### Bug Fixes
 
