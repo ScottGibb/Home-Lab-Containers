@@ -3,7 +3,7 @@ name: storage
 
 services:
   Gitlab:
-    image: gitlab/gitlab-ce:18.9.1-ce.0
+    image: gitlab/gitlab-ce:18.9.2-ce.0
     container_name: GitLab
     volumes:
       - /mnt/USB3.0-1TB/GitLab/config:/etc/gitlab
