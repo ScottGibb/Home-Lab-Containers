@@ -15,7 +15,7 @@ services:
         source: /home/pi/docker-mounts/pihole/etc
         target: /etc/pihole
       - type: bind
-        source: /home/pi/Home-Lab-Containers/PiHall/dnsmasq.d
+        source: /home/pi/Home-Lab-Containers/PiHall/config/dnsmasq.d
         target: /etc/dnsmasq.d
     environment:
       TZ: "Europe/London"
