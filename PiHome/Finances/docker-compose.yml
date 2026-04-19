@@ -283,7 +283,7 @@ services:
       - firefly_iii
 
   importer:
-    image: fireflyiii/data-importer:version-2.2.3-cli
+    image: fireflyiii/data-importer:version-2.3.2-cli
     container_name: firefly_iii_importer
     depends_on:
       - app
