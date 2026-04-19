@@ -264,7 +264,7 @@ services:
     tty: true # docker run -t
 
   cron:
-    image: alpine:3.23.3
+    image: alpine:3.23.4
     container_name: firefly_iii_cron
     networks:
       - firefly_iii
