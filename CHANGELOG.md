@@ -1,5 +1,38 @@
 # Changelog
 
+## [3.0.0](https://github.com/ScottGibb/Home-Lab-Containers/compare/v2.2.0...v3.0.0) (2026-04-26)
+
+
+### ⚠ BREAKING CHANGES
+
+* add PiHall
+
+### Features
+
+* add docker compose plugin for linting ([6f1d4dc](https://github.com/ScottGibb/Home-Lab-Containers/commit/6f1d4dc986053ddf71f8da184f82fb0f4e59a57e))
+* add fstab for PiHall ([2563967](https://github.com/ScottGibb/Home-Lab-Containers/commit/256396734712d74d4cfb3e53436eeb9420cb938d))
+* add missing nginx.conf ([d42e247](https://github.com/ScottGibb/Home-Lab-Containers/commit/d42e2479d83ff1ccad2ebdf0255560e07c6b2620))
+* add PiHall ([b6d5b46](https://github.com/ScottGibb/Home-Lab-Containers/commit/b6d5b46b233b95683df30a15c7b9eb76dbc4f6d1))
+* add vscode settings for formatters ([b16d135](https://github.com/ScottGibb/Home-Lab-Containers/commit/b16d1353c5064858b52c0d8bbd762ae7b50d2b56))
+
+
+### Bug Fixes
+
+* config folder ([58ce8c2](https://github.com/ScottGibb/Home-Lab-Containers/commit/58ce8c28c166f7655804b9683cf9dcd80c369ed0))
+* dclint linting errors: add interface prefixes to ports and concrete image version tags ([2b9785e](https://github.com/ScottGibb/Home-Lab-Containers/commit/2b9785e536452e1968cf0954ad44db9ba26c96f0))
+* dependabot submodule issues ([58f32a9](https://github.com/ScottGibb/Home-Lab-Containers/commit/58f32a99c7096d85ac0ba8fb6923d98a8dc9681c))
+* Docker compose format ([c30398f](https://github.com/ScottGibb/Home-Lab-Containers/commit/c30398fb7f8d3b85e38bf63b39e3ea482581c01c))
+* **docs:** Dependabot URL configuration in README ([881e085](https://github.com/ScottGibb/Home-Lab-Containers/commit/881e085ca39fdecaff904063bfc36bcd47fb58f1))
+* folder paths ([86f77bc](https://github.com/ScottGibb/Home-Lab-Containers/commit/86f77bc8cf0a1a19a298632d29d5d397c11ab4da))
+* networking on pihome ([60ab9a5](https://github.com/ScottGibb/Home-Lab-Containers/commit/60ab9a54cde3ad1f0823d9424cdf28b4b327e39b))
+* pihall dns ([335ea88](https://github.com/ScottGibb/Home-Lab-Containers/commit/335ea889652971f1724cfb667544ee2a850d81e7))
+* Pinning Dockerfile versions ([21fe9a4](https://github.com/ScottGibb/Home-Lab-Containers/commit/21fe9a4fedc46b1abeb7da40467d553be3d857f5))
+* remove bind mount ([9a30e16](https://github.com/ScottGibb/Home-Lab-Containers/commit/9a30e162e49bcf76e3b9a4851b6d0c44b69d3bca))
+* rm ftstab ([0faebdb](https://github.com/ScottGibb/Home-Lab-Containers/commit/0faebdb3d8d1ff53152f658a91010abdae7831d4))
+* tagged versions for docker compose ([f14c549](https://github.com/ScottGibb/Home-Lab-Containers/commit/f14c5492e6287d0ee5458df185e416f8d4974f99))
+* Update dependabot.yaml to remove directories ([cfcae3d](https://github.com/ScottGibb/Home-Lab-Containers/commit/cfcae3dd36dfb2ee0d5dc3fc05c07b466252fffe))
+* wifi connect removal ([e5baa3c](https://github.com/ScottGibb/Home-Lab-Containers/commit/e5baa3c65c608bdbbdab2d3ca6232d0c92a78b9a))
+
 ## [2.2.0](https://github.com/ScottGibb/Home-Lab-Containers/compare/v2.1.1...v2.2.0) (2026-02-18)
 
 ### Features
