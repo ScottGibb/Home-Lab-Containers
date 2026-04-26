@@ -2,7 +2,6 @@
 
 ## [3.0.0](https://github.com/ScottGibb/Home-Lab-Containers/compare/v2.2.0...v3.0.0) (2026-04-26)
 
-
 ### ⚠ BREAKING CHANGES
 
 * add PiHall
@@ -14,7 +13,6 @@
 * add missing nginx.conf ([d42e247](https://github.com/ScottGibb/Home-Lab-Containers/commit/d42e2479d83ff1ccad2ebdf0255560e07c6b2620))
 * add PiHall ([b6d5b46](https://github.com/ScottGibb/Home-Lab-Containers/commit/b6d5b46b233b95683df30a15c7b9eb76dbc4f6d1))
 * add vscode settings for formatters ([b16d135](https://github.com/ScottGibb/Home-Lab-Containers/commit/b16d1353c5064858b52c0d8bbd762ae7b50d2b56))
-
 
 ### Bug Fixes
 
