@@ -62,7 +62,7 @@ services:
 
   # See README for more details - cant use submodule due to git layout so have to build outside and then run with this
   presence-detector:
-    image: presence_detector:v1.4.5
+    image: presence_detector:v1.6.0
     container_name: presence-detector
     depends_on:
       - mqtt-broker
