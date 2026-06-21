@@ -43,7 +43,7 @@ services:
     restart: unless-stopped
 
   node-red:
-    image: nodered/node-red:4.1.11-20
+    image: nodered/node-red:5.0.0-24
     container_name: Node-Red
     # ports:
     #   - 1880:1880
