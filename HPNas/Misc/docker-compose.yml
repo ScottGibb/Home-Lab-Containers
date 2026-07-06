@@ -12,6 +12,6 @@ services:
       - PGID=1000
       - TZ=Etc/UTC
     ports:
-      - "0.0.0.0:443:443"
-      - "0.0.0.0:8080:80"
+      - '0.0.0.0:443:443'
+      - '0.0.0.0:8080:80'
     restart: unless-stopped
