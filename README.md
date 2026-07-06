@@ -10,7 +10,15 @@ This repository keeps an active list of all the Docker stacks and key software c
 
 ## Downloading the Repository
 
-When downloading the repository, it is advised to recursively download all the submodules as well. To do so, please use the following commands:
+When downloading the repository, make sure the submodules are present as well. A plain clone of the top-level repository is not enough for stacks that build nested projects such as PiHall's Home Power Monitor service.
+
+To clone the repository with all submodules in one step, use:
+
+```bash
+git clone --recurse-submodules <repository-url>
+```
+
+If you already cloned the repository without submodules, run:
 
 ```bash
 git submodule update --init --recursive
@@ -59,6 +67,7 @@ Each system's main `docker-compose.yml` includes:
 Each system has a unified project name defined in its main compose file:
 
 - **HPNas**: `hpnas`
+- **PiHall**: `pihall`
 - **PiDesk**: `pidesk`
 - **PiHome**: `pihome`
 - **PiLab**: `pilab`
