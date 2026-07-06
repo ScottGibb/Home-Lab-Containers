@@ -4,6 +4,7 @@ name: pihall
 
 include:
   - ../utils/docker-compose.yml
+  - ./IOT/docker-compose.yml
 
 services:
   pihole:
@@ -29,6 +30,7 @@ services:
     # cap_add:
     # - NET_ADMIN # Required if you are using Pi-hole as your DHCP server, else not needed
     restart: unless-stopped
+
   tailscale:
     image: tailscale/tailscale:v1.94.2
     container_name: Tail-Scale

@@ -1,0 +1,112 @@
+# Docker Compose file for Home Power Monitor
+# This file is used as an example for setting up a production environment for the Home Power Monitor project.
+name: Home Power Monitor Production Environment
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: home_power_monitor_db
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: PowerMonitor
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - home_power_network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U admin -d PowerMonitor"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "5050:80"
+    depends_on:
+      - postgres
+    networks:
+      - home_power_network
+
+  home_power_monitor:
+    container_name: home_power_monitor
+    build:
+      context: ./Home-Power-Monitor
+      dockerfile: Dockerfile
+      target: prod
+      args:
+        # Add any build features here if needed
+        FEATURES: "pi-buttons pi-screen mqtt database pir"
+    environment:
+        # Cost Agent configuration
+        - ELECTRICITY_TARIFF=0.2586
+        - ELECTRICITY_STANDING_CHARGE=0.4798
+
+        # Average Agent configuration
+        - AVERAGE_CALCULATOR_CAPACITY=60
+
+        # MQTT Exporter configuration
+        - MQTT_SERVER_ADDRESS=192.168.0.68
+        - MQTT_SERVER_PORT=1883
+
+        # Database configuration
+        - DATABASE_IP_ADDRESS=127.0.0.1
+        - DATABASE_PORT=5432
+        - DATABASE_NAME=PowerMonitor
+        - DATABASE_USERNAME=admin
+        - DATABASE_PASSWORD=admin
+
+        # Power Meter configuration
+        - POWER_METER_SERIAL_PORT=/dev/ttyAMA0
+        - POWER_METER_BAUD_RATE=4800
+        - POWER_METER_PERIOD_SECONDS=1
+        - POWER_METER_ID=1
+
+        # Screen Configuration
+        - SCREEN_TIMEOUT_SECONDS=5
+        - PIR_SENSOR_PIN=12
+
+        # Terminal Button Configuration
+        - NEXT_SCREEN_KEY='a'
+        - PREVIOUS_SCREEN_KEY='b'
+        - TOGGLE_BACKLIGHT_KEY='c'
+        - TURN_ON_BACKLIGHT_KEY='d'
+        - TURN_OFF_BACKLIGHT_KEY='e'
+
+
+        # Pi Button Configuration
+        - NEXT_SCREEN_BUTTON_PIN=21
+        - PREVIOUS_SCREEN_BUTTON_PIN=16
+        - TOGGLE_BACKLIGHT_BUTTON_PIN=20
+        - BUTTON_DEBOUNCE_MILLISECONDS=50
+
+        #Pi Screen Configuration
+        - SCREEN_RESET_PIN=22
+        - SCREEN_ENABLE1_PIN=27 # Not Present on Board
+        #RW Connected to GND
+        - SCREEN_ENABLE2_PIN=17 # E
+        - SCREEN_BACKLIGHT_PIN=4
+
+        - SCREEN_DATA1_PIN=6
+        - SCREEN_DATA2_PIN=13
+        - SCREEN_DATA3_PIN=19
+        - SCREEN_DATA4_PIN=26
+    depends_on:
+      postgres:
+        condition: service_healthy
+    stdin_open: true
+    tty: true
+    networks:
+      - home_power_network
+
+networks:
+  home_power_network:
+    driver: bridge
+
+volumes:
+  postgres_data:

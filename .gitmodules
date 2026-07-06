@@ -19,3 +19,6 @@
 [submodule "PiHome/IOT/HC-SR501-Node-Red-Presence-Detector"]
 	path = PiHome/IOT/HC-SR501-Node-Red-Presence-Detector
 	url = git@github.com:ScottGibb/HC-SR501-Node-Red-Presence-Detector.git
+[submodule "PiHall/Home-Power-Monitor"]
+	path = PiHall/IOT/Home-Power-Monitor
+	url = git@github.com:ScottGibb/Home-Power-Monitor.git
