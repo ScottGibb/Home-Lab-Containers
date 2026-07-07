@@ -49,14 +49,14 @@ services:
         - MQTT_SERVER_PORT=1883
 
         # Database configuration
-        - DATABASE_IP_ADDRESS=127.0.0.1
+        - DATABASE_IP_ADDRESS=postgres
         - DATABASE_PORT=5432
         - DATABASE_NAME=PowerMonitor
         - DATABASE_USERNAME=admin
         - DATABASE_PASSWORD=admin
 
         # Power Meter configuration
-        - POWER_METER_SERIAL_PORT=/dev/ttyAMA0
+        - POWER_METER_SERIAL_PORT=/dev/ttyS0
         - POWER_METER_BAUD_RATE=4800
         - POWER_METER_PERIOD_SECONDS=1
         - POWER_METER_ID=1
@@ -94,6 +94,7 @@ services:
       postgres:
         condition: service_healthy
     stdin_open: true
+    privileged: true
     tty: true
     networks:
       - home_power_network
