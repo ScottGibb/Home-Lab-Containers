@@ -35,13 +35,7 @@ services:
 
   home_power_monitor:
     container_name: home_power_monitor
-    build:
-      context: ./Home-Power-Monitor
-      dockerfile: Dockerfile
-      target: prod
-      args:
-        # Add any build features here if needed
-        FEATURES: "pi-buttons pi-screen mqtt database pir"
+    image: ${HOME_POWER_MONITOR_IMAGE:-home-power-monitor:pi3}
     environment:
         # Cost Agent configuration
         - ELECTRICITY_TARIFF=0.2586
