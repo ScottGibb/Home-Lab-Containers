@@ -94,7 +94,7 @@ services:
     tty: true
 
   spoolman:
-    image: ghcr.io/donkie/spoolman:0.23.1
+    image: ghcr.io/donkie/spoolman:0.24.0
     container_name: spoolman
     volumes:
       # Mount the host machine's ./data directory into the container's /home/app/.local/share/spoolman directory
