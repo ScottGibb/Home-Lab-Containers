@@ -47,8 +47,7 @@ services:
       - sys_module
     devices:
       - /dev/net/tun:/dev/net/tun
-    hostname: tailscale
-
+    hostname: pihall-router
   cups:
     build:
       context: ./Cups_Dymo-450
