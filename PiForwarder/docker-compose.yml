@@ -1,0 +1,43 @@
+---
+name: pi-forwarder
+
+# The shared management stack used by the other Raspberry Pi deployments.
+include:
+  - ../utils/docker-compose.yml
+
+services:
+  tailscale:
+    image: tailscale/tailscale:v1.94.2
+    container_name: pi-forwarder-tailscale
+    hostname: ${TAILSCALE_HOSTNAME:? Set TAILSCALE_HOSTNAME in .env}
+    environment:
+      TS_AUTHKEY: ${TAILSCALE_AUTH_KEY:?Set TAILSCALE_AUTH_KEY in .env}
+      TS_EXTRA_ARGS: ${TS_EXTRA_ARGS:?Set TS_EXTRA_ARGS in .env}
+      TS_STATE_DIR: /var/lib/tailscale
+      TS_USERSPACE: "false"
+    volumes:
+      - ./tailscale/state:/var/lib/tailscale
+    devices:
+      - /dev/net/tun:/dev/net/tun
+    cap_add:
+      - net_admin
+      - sys_module
+    network_mode: host
+    restart: unless-stopped
+
+  forwarder:
+    image: nginx:1.29-alpine
+    container_name: pi-forwarder-gateway
+    environment:
+      NAS_TAILSCALE_IP: ${NAS_TAILSCALE_IP:?Set NAS_TAILSCALE_IP in .env}
+      NAS_TAILSCALE_PORT: ${NAS_TAILSCALE_PORT:?Set NAS_TAILSCALE_PORT in .env}
+    volumes:
+      - type: bind
+        source: ./config/forwarder.conf.template
+        target: /etc/nginx/templates/default.conf.template
+        read_only: true
+    # Host networking makes the forwarded service available on the Pi's LAN address.
+    network_mode: host
+    depends_on:
+      - tailscale
+    restart: unless-stopped
