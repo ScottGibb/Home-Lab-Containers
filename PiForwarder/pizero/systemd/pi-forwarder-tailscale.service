@@ -1,0 +1,14 @@
+[Unit]
+Description=Apply Pi Forwarder Tailscale settings
+After=network-online.target tailscaled.service
+Wants=network-online.target
+Requires=tailscaled.service
+
+[Service]
+Type=oneshot
+EnvironmentFile=/etc/pi-forwarder/pi-forwarder.env
+ExecStart=/usr/bin/tailscale up --hostname=${TAILSCALE_HOSTNAME} ${TS_EXTRA_ARGS}
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
