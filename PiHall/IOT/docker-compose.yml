@@ -48,6 +48,10 @@ services:
         - MQTT_SERVER_ADDRESS=192.168.0.68
         - MQTT_SERVER_PORT=1883
 
+        # HTTP server configuration
+        - HTTP_BIND_ADDRESS=127.0.0.1
+        - HTTP_PORT=3000
+
         # Database configuration
         - DATABASE_IP_ADDRESS=postgres
         - DATABASE_PORT=5432
