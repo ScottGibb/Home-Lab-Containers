@@ -40,11 +40,21 @@ Both variants use `config/forwarder.conf.template`. Its
 The Docker Nginx image substitutes those values automatically. Native Nginx on
 the Pi Zero does not, so `scripts/render-forwarder-config.sh` reads the private
 environment file, validates the forwarding port, substitutes the two values,
-and writes a usable Nginx site configuration. The Pi Zero setup calls it as:
+and writes a usable Nginx site configuration. The Pi Zero setup first copies
+`PiForwarder/.env` to `/etc/pi-forwarder/pi-forwarder.env`, then calls it as:
 
 ```sh
 ./scripts/render-forwarder-config.sh \
   /etc/pi-forwarder/pi-forwarder.env \
+  /etc/nginx/sites-available/pi-forwarder
+```
+
+If rendering manually from the `PiForwarder` directory before running setup,
+use the repository environment file instead:
+
+```sh
+sudo ./scripts/render-forwarder-config.sh \
+  ./.env \
   /etc/nginx/sites-available/pi-forwarder
 ```
 

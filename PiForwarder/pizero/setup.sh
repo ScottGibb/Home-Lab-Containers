@@ -1,7 +1,8 @@
 #!/bin/sh
 set -eu
 
-repo_dir=$(CDPATH= cd -- "$(dirname "$0")/../.." && pwd)
+script_dir=$(CDPATH= cd -- "$(dirname "$0")" && pwd)
+repo_dir=$(dirname "$script_dir")
 environment_file="$repo_dir/.env"
 service_environment=/etc/pi-forwarder/pi-forwarder.env
 nginx_site=/etc/nginx/sites-available/pi-forwarder
