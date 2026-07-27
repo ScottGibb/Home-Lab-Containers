@@ -21,7 +21,7 @@ docker buildx build \
   --platform linux/arm64 \
   --target prod \
   -t home-power-monitor:pi3 \
-  --build-arg FEATURES="pi-buttons pi-screen mqtt database pir" \
+  --build-arg FEATURES="pi-buttons pi-screen mqtt database pir http" \
   --load \
   .
 

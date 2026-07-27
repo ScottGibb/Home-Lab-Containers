@@ -50,7 +50,7 @@ services:
 
         # HTTP server configuration
         - HTTP_BIND_ADDRESS=0.0.0.0
-        - HTTP_PORT=3000
+        - HTTP_PORT=${HTTP_PORT:-3000}
 
         # Database configuration
         - DATABASE_IP_ADDRESS=postgres
@@ -98,7 +98,7 @@ services:
       postgres:
         condition: service_healthy
     ports:
-      - "3000:3000"
+      - "${HTTP_PORT:-3000}:${HTTP_PORT:-3000}"
     stdin_open: true
     privileged: true
     tty: true
