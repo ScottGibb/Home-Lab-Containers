@@ -86,8 +86,8 @@ Nginx and `envsubst`. It copies the private settings to
 `/etc/pi-forwarder/pi-forwarder.env`, renders the shared Nginx template, joins
 the Tailnet once with the auth key, and enables `tailscaled`, the PiForwarder
 settings service, and Nginx. It is safe to re-run after changing `.env`; it
-replaces only PiForwarder-owned configuration. Restart
-`pi-forwarder-tailscale` and `nginx` afterwards.
+replaces only PiForwarder-owned configuration and reloads Nginx. Restart
+`pi-forwarder-tailscale` after changing Tailscale settings.
 
 The forwarded service is then available on the recipient network at:
 

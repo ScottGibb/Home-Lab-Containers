@@ -43,5 +43,6 @@ set +f
 systemctl enable --now pi-forwarder-tailscale.service
 nginx -t
 systemctl enable --now nginx.service
+systemctl reload nginx.service
 
 echo "Pi Zero forwarder is configured. Check: systemctl status pi-forwarder-tailscale nginx"
