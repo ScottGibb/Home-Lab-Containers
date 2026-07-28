@@ -60,6 +60,18 @@ services:
     stdin_open: true
     tty: true
 
+  esphome:
+    image: ghcr.io/esphome/esphome
+    container_name: esphome
+    volumes:
+      - type: bind
+        source: /home/pi/docker-mounts/esphome
+        target: /config
+      - /etc/localtime:/etc/localtime:ro
+    network_mode: host
+    restart: unless-stopped
+    privileged: true # Required when flashing ESP devices over USB
+
   # See README for more details - cant use submodule due to git layout so have to build outside and then run with this
   presence-detector:
     image: presence_detector:v1.6.0
