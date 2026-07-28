@@ -65,7 +65,7 @@ services:
     container_name: esphome
     volumes:
       - type: bind
-        source: /home/pi/docker-mounts/esphome
+        source: /home/pi/Home-Lab-Containers/PiHome/IOT/ESPHome
         target: /config
       - /etc/localtime:/etc/localtime:ro
     network_mode: host
