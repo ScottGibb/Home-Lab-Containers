@@ -23,19 +23,15 @@ services:
     environment:
       USER: "${SAMBA_USER}"
       PASS: "${SAMBA_PASSWORD}"
-      # Define each share by suffixing numbers (1-4)
-      NAME1: "Storage"
-      NAME2: "Courses"
-      NAME3: "Books"
-      NAME4: "AudioBooks"
+      NAME: "Storage"
       RW: "true" # Enables read-write access for authenticated users
       UID: 1000
       GID: 1000
     volumes:
       # Mount each volume to its matching /storageX path
-      - /mnt/USB3.0-1TB/Storage:/storage1
-      - /mnt/USB3.0-1TB/Courses:/storage2
-      - /mnt/MediaStorage/Books:/storage3
-      - /mnt/MediaStorage/AudioBooks:/storage4
+      - /mnt/USB3.0-1TB/Storage:/Storage/Storage
+      - /mnt/USB3.0-1TB/Courses:/Storage/Courses
+      - /mnt/MediaStorage/Books:/Storage/Books
+      - /mnt/MediaStorage/AudioBooks:/Storage/AudioBooks
     network_mode: host
     restart: unless-stopped
