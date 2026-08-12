@@ -18,25 +18,24 @@ services:
     tty: true
 
   samba:
-    image: dperson/samba:amd64
+    image: dockurr/samba:4.23.10
     container_name: samba
     environment:
-      - PUID=1000
-      - PGID=1000
-      - SAMBA_USER=${SAMBA_USER}
-      - SAMBA_PASSWORD=${SAMBA_PASSWORD}
+      USER: "${SAMBA_USER}"
+      PASS: "${SAMBA_PASSWORD}"
+      # Define each share by suffixing numbers (1-4)
+      NAME1: "Storage"
+      NAME2: "Courses"
+      NAME3: "Books"
+      NAME4: "AudioBooks"
+      RW: "true" # Enables read-write access for authenticated users
+      UID: 1000
+      GID: 1000
     volumes:
-      - /mnt/USB3.0-1TB/Storage:/Storage
-      - /mnt/USB3.0-1TB/Courses:/Courses
-      - /mnt/MediaStorage/Books:/Books
-      - /mnt/MediaStorage/AudioBooks:/AudioBooks
+      # Mount each volume to its matching /storageX path
+      - /mnt/USB3.0-1TB/Storage:/storage1
+      - /mnt/USB3.0-1TB/Courses:/storage2
+      - /mnt/MediaStorage/Books:/storage3
+      - /mnt/MediaStorage/AudioBooks:/storage4
     network_mode: host
-    command: >
-      -u "${SAMBA_USER};${SAMBA_PASSWORD}"
-      -s "Storage;/Storage;yes;no;no;${SAMBA_USER}"
-      -s "Courses;/Courses;yes;no;no;${SAMBA_USER}"
-      -s "Books;/Books;yes;no;no;${SAMBA_USER}"
-      -s "AudioBooks;/AudioBooks;yes;no;no;${SAMBA_USER}"
     restart: unless-stopped
-    stdin_open: true
-    tty: true
