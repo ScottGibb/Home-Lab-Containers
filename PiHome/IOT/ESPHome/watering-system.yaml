@@ -43,6 +43,18 @@ switch:
       inverted: true # Typical relay modules are active-low
     restore_mode: ALWAYS_OFF
 
+binary_sensor:
+  - platform: gpio
+    id: balcony_motion
+    name: Balcony Motion
+    device_class: occupancy
+    pin:
+      number: GPIO14 # NodeMCU D5
+      mode:
+        input: true
+    filters:
+      - delayed_off: 3min # Keeps state 'ON' for 3 minutes after last motion
+
 sensor:
   # Assumes an LDR from 3.3 V to A0 and a 10 kOhm resistor from A0 to GND.
   # NodeMCU boards divide the external A0 voltage down for the ESP8266 ADC.
