@@ -28,10 +28,10 @@ services:
       UID: 1000
       GID: 1000
     volumes:
-      # Mount each volume to its matching /storageX path
-      - /mnt/USB3.0-1TB/Storage:/Storage/Storage
-      - /mnt/USB3.0-1TB/Courses:/Storage/Courses
-      - /mnt/MediaStorage/Books:/Storage/Books
-      - /mnt/MediaStorage/AudioBooks:/Storage/AudioBooks
+          # Mount host paths as subfolders under /storage inside the container
+          - /mnt/USB3.0-1TB/Storage:/storage/Storage
+          - /mnt/USB3.0-1TB/Courses:/storage/Courses
+          - /mnt/MediaStorage/Books:/storage/Books
+          - /mnt/MediaStorage/AudioBooks:/storage/AudioBooks
     network_mode: host
     restart: unless-stopped
