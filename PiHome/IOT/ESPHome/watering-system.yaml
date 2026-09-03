@@ -1,6 +1,6 @@
 substitutions:
   device_name: watering-device
-  friendly_name: Outdoor Watering System
+  friendly_name: Plants Watering System
 
 esphome:
   name: ${device_name}
@@ -9,7 +9,6 @@ esphome:
 
 esp8266:
   board: nodemcuv2
-  # Avoid relay transitions as early as possible while the ESP8266 starts.
   early_pin_init: false
 
 logger:
@@ -31,56 +30,95 @@ switch:
     id: watering_zone_1_relay
     name: Strawberry Plant
     pin:
-      number: GPIO4 # NodeMCU D1
-      inverted: true # Typical relay modules are active-low
+      number: GPIO5 # NodeMCU D1
+      inverted: true
     restore_mode: ALWAYS_OFF
 
   - platform: gpio
     id: watering_zone_2_relay
     name: Tomato Plant
     pin:
-      number: GPIO5 # NodeMCU D2
-      inverted: true # Typical relay modules are active-low
+      number: GPIO4 # NodeMCU D2
+      inverted: true
     restore_mode: ALWAYS_OFF
 
 binary_sensor:
   - platform: gpio
-    id: balcony_motion
-    name: Balcony Motion
+    id: indoor_plant_motion
+    name: Indoor Plant Motion
     device_class: occupancy
     pin:
       number: GPIO14 # NodeMCU D5
       mode:
         input: true
     filters:
-      - delayed_off: 3min # Keeps state 'ON' for 3 minutes after last motion
+      - delayed_off: 3min
+
+output:
+  - platform: gpio
+    id: mux_select_a
+    pin: GPIO12 # NodeMCU D6 — CD74HC4051 address line A (B, C tied to GND)
+
+globals:
+  - id: g_ldr_voltage
+    type: float
+    restore_value: false
+    initial_value: "0.0"
+  - id: g_moisture_voltage
+    type: float
+    restore_value: false
+    initial_value: "0.0"
+
+interval:
+  - interval: 5s
+    then:
+      # Switch to Channel Y0 (LDR)
+      - output.turn_off: mux_select_a
+      - delay: 50ms
+      - component.update: mux_adc
+      - lambda: id(g_ldr_voltage) = id(mux_adc).state;
+
+      # Switch to Channel Y1 (Soil Moisture)
+      - output.turn_on: mux_select_a
+      - delay: 50ms
+      - component.update: mux_adc
+      - lambda: id(g_moisture_voltage) = id(mux_adc).state;
 
 sensor:
-  # Assumes an LDR from 3.3 V to A0 and a 10 kOhm resistor from A0 to GND.
-  # NodeMCU boards divide the external A0 voltage down for the ESP8266 ADC.
   - platform: adc
+    id: mux_adc
     pin: A0
-    id: ldr_voltage
-    internal: true
-    update_interval: 60s
+    update_interval: never # only sampled on-demand from the interval above
     filters:
-      - median:
-          window_size: 5
-          send_every: 5
-          send_first_at: 1
       - multiply: 3.3
 
   - platform: template
-    name: Ambient Light
+    name: Indoor Plant Light
     device_class: illuminance
     state_class: measurement
     unit_of_measurement: lx
     accuracy_decimals: 0
-    update_interval: 60s
+    update_interval: 120s
     lambda: |-
-      const float voltage = id(ldr_voltage).state;
+      const float voltage = id(g_ldr_voltage);
       if (isnan(voltage) || voltage <= 0.01f || voltage >= 3.29f) {
         return NAN;
       }
       const float ldr_resistance_kohm = 10.0f * ((3.3f / voltage) - 1.0f);
       return 500.0f / powf(ldr_resistance_kohm, 1.4f);
+
+  - platform: template
+    name: Indoor Plant Moisture
+    device_class: moisture
+    state_class: measurement
+    unit_of_measurement: "%"
+    accuracy_decimals: 0
+    update_interval: 120s
+    lambda: return id(g_moisture_voltage);
+    filters:
+      - calibrate_linear:
+          - 0.28 -> 0 # Dry voltage -> 0%
+          - 2.34 -> 100 # Wet voltage -> 100%
+      - clamp:
+          min_value: 0
+          max_value: 100
