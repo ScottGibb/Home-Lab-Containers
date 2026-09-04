@@ -1,0 +1,8 @@
+# bedroom.yaml
+substitutions:
+  device_name: bedroom-detector
+  friendly_name: Bedroom Detector
+  device_area: Bedroom
+
+packages:
+  base: !include detector.yaml

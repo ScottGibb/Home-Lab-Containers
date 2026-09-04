@@ -1,0 +1,7 @@
+substitutions:
+  device_name: hallway-detector
+  friendly_name: Hallway Detector
+  device_area: Hallway
+
+packages:
+  base: !include detector.yaml

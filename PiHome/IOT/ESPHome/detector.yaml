@@ -1,0 +1,63 @@
+# base_detector.yaml
+esphome:
+  name: ${device_name}
+  friendly_name: ${friendly_name}
+  area: ${device_area}
+
+esp8266:
+  board: nodemcuv2
+  early_pin_init: false
+
+logger:
+
+api:
+  encryption:
+    key: !secret api_encryption_key
+
+ota:
+  - platform: esphome
+    password: !secret ota_password
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+binary_sensor:
+  - platform: gpio
+    id: pir_motion
+    name: Motion
+    device_class: occupancy
+    pin:
+      number: GPIO14 # NodeMCU D5
+      mode:
+        input: true
+    filters:
+      - delayed_off: 3min
+
+sensor:
+  - platform: adc
+    pin: A0
+    id: ldr_voltage
+    internal: true
+    update_interval: 60s
+    filters:
+      - median:
+          window_size: 5
+          send_every: 5
+          send_first_at: 1
+      - multiply: 3.3
+
+  - platform: template
+    name: Ambient Light
+    device_class: illuminance
+    state_class: measurement
+    unit_of_measurement: lx
+    accuracy_decimals: 0
+    update_interval: 60s
+    lambda: |-
+      const float voltage = id(ldr_voltage).state;
+      if (isnan(voltage) || voltage <= 0.01f || voltage >= 3.29f) {
+        return NAN;
+      }
+      const float ldr_resistance_kohm = 10.0f * ((3.3f / voltage) - 1.0f);
+      return 500.0f / powf(ldr_resistance_kohm, 1.4f);
