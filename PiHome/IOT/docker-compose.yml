@@ -48,10 +48,6 @@ services:
     # ports:
     #   - 1880:1880
     #   - 3456:3456
-    volumes:
-      - type: bind
-        source: /home/pi/Home-Lab-Containers/PiHome/config/Node-Red-Config
-        target: /data
     environment:
       - TZ=Europe/London
       - NODE_RED_ENABLE_PROJECTS=true
