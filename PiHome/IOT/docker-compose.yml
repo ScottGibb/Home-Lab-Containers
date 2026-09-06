@@ -8,7 +8,9 @@ services:
     depends_on:
       - node-red
     ports:
-      - '0.0.0.0:5000:5000'
+      # Frigate already owns host port 5000; keep Flask on container port 5000
+      # but publish it on host port 5002.
+      - '0.0.0.0:5002:5000'
     restart: unless-stopped
     privileged: true # Required for GPIO access
 
