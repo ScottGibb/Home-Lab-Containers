@@ -2,21 +2,29 @@
 name: security
 
 services:
-  motion-eye:
-    image: ccrisan/motioneye:master-armhf
-    container_name: Motion-Eye
+  frigate:
+    container_name: frigate
+    image: ghcr.io/blakeblackshear/frigate:stable
+    restart: unless-stopped
+    privileged: true
+    shm_size: "512mb"
+
+    ports:
+      - "0.0.0.0:8971:8971"
+      - "0.0.0.0:5000:5000"
+      - "0.0.0.0:8554:8554"
+      - "0.0.0.0:8555:8555/tcp"
+      - "0.0.0.0:8555:8555/udp"
+
     volumes:
       - type: bind
-        source: /etc/localtime
-        target: /etc/localtime
+        source: /home/pi/docker-mounts/frigate/config
+        target: /config
       - type: bind
-        source: /home/pi/docker-mounts/motion-eye/config
-        target: /etc/motioneye
-      - type: bind
-        source: /home/pi/docker-mounts/motion-eye/videos
-        target: /var/lib/motioneye
-    environment:
-      - TZ=Europe/London
-    ports:
-      - '0.0.0.0:8765:8765'
-    restart: unless-stopped
+        source: /home/pi/docker-mounts/frigate/media
+        target: /media/frigate
+      - /etc/localtime:/etc/localtime:ro
+      - type: tmpfs
+        target: /tmp/cache
+        tmpfs:
+          size: 1000000000
