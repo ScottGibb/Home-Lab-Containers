@@ -56,6 +56,10 @@ services:
     privileged: true
     stdin_open: true
     tty: true
+    volumes:
+      - type: bind
+        source: /home/pi/docker-mounts/node-red
+        target: /data
 
   esphome:
     image: ghcr.io/esphome/esphome
