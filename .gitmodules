@@ -24,4 +24,4 @@
 	url = git@github.com:ScottGibb/Home-Power-Monitor.git
 [submodule "PiHome/config/Node-Red-Config"]
 	path = PiHome/config/Node-Red-Config
-	url = https://github.com/ScottGibb/Node-Red-Config
+	url = git@github.com:ScottGibb/Node-Red-Config.git
