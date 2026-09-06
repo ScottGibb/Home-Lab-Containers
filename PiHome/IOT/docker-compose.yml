@@ -54,6 +54,7 @@ services:
         target: /data
     environment:
       - TZ=Europe/London
+      - NODE_RED_ENABLE_PROJECTS=true
     network_mode: host
     restart: unless-stopped
     privileged: true
