@@ -54,6 +54,10 @@ services:
     network_mode: host
     restart: unless-stopped
     privileged: true
+    group_add:
+      - "20" # dialout on PiHome, required for /dev/ttyACM0
+    devices:
+      - "/dev/ttyACM0:/dev/ttyACM0"
     stdin_open: true
     tty: true
     volumes:
