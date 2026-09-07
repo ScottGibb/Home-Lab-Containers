@@ -70,7 +70,7 @@ globals:
     initial_value: "0.0"
 
 interval:
-  - interval: 5s
+  - interval: 1s
     then:
       # Switch to Channel Y0 (LDR)
       - output.turn_off: mux_select_a
@@ -98,7 +98,7 @@ sensor:
     state_class: measurement
     unit_of_measurement: lx
     accuracy_decimals: 0
-    update_interval: 120s
+    update_interval: 30s
     lambda: |-
       const float voltage = id(g_ldr_voltage);
       if (isnan(voltage) || voltage <= 0.01f || voltage >= 3.29f) {
@@ -113,7 +113,7 @@ sensor:
     state_class: measurement
     unit_of_measurement: "%"
     accuracy_decimals: 0
-    update_interval: 120s
+    update_interval: 30s
     lambda: return id(g_moisture_voltage);
     filters:
       - calibrate_linear:
