@@ -70,7 +70,7 @@ globals:
     initial_value: "0.0"
 
 interval:
-  - interval: 1s
+  - interval: 500ms
     then:
       # Switch to Channel Y0 (LDR)
       - output.turn_off: mux_select_a
