@@ -39,7 +39,7 @@ sensor:
     pin: A0
     id: ldr_voltage
     internal: true
-    update_interval: 60s
+    update_interval: 1s
     filters:
       - median:
           window_size: 5
@@ -53,7 +53,7 @@ sensor:
     state_class: measurement
     unit_of_measurement: lx
     accuracy_decimals: 0
-    update_interval: 60s
+    update_interval: 30s
     lambda: |-
       const float voltage = id(ldr_voltage).state;
       if (isnan(voltage) || voltage <= 0.01f || voltage >= 3.29f) {
