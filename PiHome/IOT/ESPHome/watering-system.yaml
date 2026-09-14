@@ -25,6 +25,12 @@ wifi:
   ssid: !secret wifi_ssid
   password: !secret wifi_password
 
+one_wire:
+  - platform: gpio
+    id: balcony_one_wire
+    pin: GPIO2 # NodeMCU D4 — DS18B20 data; 4.7 kΩ pull-up to 3.3 V
+    # Power the DS18B20 from 3.3 V and GND.
+
 switch:
   - platform: gpio
     id: watering_zone_1_relay
@@ -101,6 +107,13 @@ interval:
       - lambda: id(g_balcony_ldr_voltage) = id(mux_adc).state;
 
 sensor:
+  - platform: dallas_temp
+    id: balcony_temperature
+    name: Balcony Temperature
+    one_wire_id: balcony_one_wire
+    # Auto-detect the single DS18B20 connected to this bus.
+    update_interval: 30s
+
   - platform: adc
     id: mux_adc
     pin: A0
