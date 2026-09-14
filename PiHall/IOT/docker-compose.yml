@@ -94,6 +94,9 @@ services:
         - SCREEN_DATA2_PIN=13
         - SCREEN_DATA3_PIN=19
         - SCREEN_DATA4_PIN=26
+
+        - DEVICE_NAME="Home Power Monitor"
+        - DEVICE_LOCATION="Hallway Cupboard"
     depends_on:
       postgres:
         condition: service_healthy
