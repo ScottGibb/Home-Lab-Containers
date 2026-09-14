@@ -28,13 +28,13 @@ binary_sensor:
     name: Motion
     device_class: occupancy
     pin:
-      number: GPIO16 # WEMO NodeMCU D0
+      number: GPIO14 # WEMO NodeMCU D5
       mode:
         input: true
     filters:
       # Log the AM312 input before the occupancy hold delays OFF events.
       - lambda: |-
-          ESP_LOGD("pir_raw", "AM312 GPIO16 (D0): %s", x ? "HIGH" : "LOW");
+          ESP_LOGD("pir_raw", "AM312 GPIO14 (D5): %s", x ? "HIGH" : "LOW");
           return x;
       - delayed_off: 3min
 
