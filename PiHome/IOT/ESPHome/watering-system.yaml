@@ -57,7 +57,10 @@ binary_sensor:
 output:
   - platform: gpio
     id: mux_select_a
-    pin: GPIO12 # NodeMCU D6 — CD74HC4051 address line A (B, C tied to GND)
+    pin: GPIO12 # NodeMCU D6 — CD74HC4051 address line A
+  - platform: gpio
+    id: mux_select_b
+    pin: GPIO13 # NodeMCU D7 — CD74HC4051 address line B (move B from GND; C stays tied to GND)
 
 globals:
   - id: g_ldr_voltage
@@ -68,21 +71,34 @@ globals:
     type: float
     restore_value: false
     initial_value: "0.0"
+  - id: g_balcony_ldr_voltage
+    type: float
+    restore_value: false
+    initial_value: "0.0"
 
 interval:
   - interval: 500ms
     then:
       # Switch to Channel Y0 (LDR)
       - output.turn_off: mux_select_a
+      - output.turn_off: mux_select_b
       - delay: 50ms
       - component.update: mux_adc
       - lambda: id(g_ldr_voltage) = id(mux_adc).state;
 
       # Switch to Channel Y1 (Soil Moisture)
       - output.turn_on: mux_select_a
+      - output.turn_off: mux_select_b
       - delay: 50ms
       - component.update: mux_adc
       - lambda: id(g_moisture_voltage) = id(mux_adc).state;
+
+      # Switch to Channel Y2 (Balcony LDR): A low, B high, C grounded
+      - output.turn_off: mux_select_a
+      - output.turn_on: mux_select_b
+      - delay: 50ms
+      - component.update: mux_adc
+      - lambda: id(g_balcony_ldr_voltage) = id(mux_adc).state;
 
 sensor:
   - platform: adc
@@ -101,6 +117,21 @@ sensor:
     update_interval: 30s
     lambda: |-
       const float voltage = id(g_ldr_voltage);
+      if (isnan(voltage) || voltage <= 0.01f || voltage >= 3.29f) {
+        return NAN;
+      }
+      const float ldr_resistance_kohm = 10.0f * ((3.3f / voltage) - 1.0f);
+      return 500.0f / powf(ldr_resistance_kohm, 1.4f);
+
+  - platform: template
+    name: Balcony Light
+    device_class: illuminance
+    state_class: measurement
+    unit_of_measurement: lx
+    accuracy_decimals: 0
+    update_interval: 30s
+    lambda: |-
+      const float voltage = id(g_balcony_ldr_voltage);
       if (isnan(voltage) || voltage <= 0.01f || voltage >= 3.29f) {
         return NAN;
       }
