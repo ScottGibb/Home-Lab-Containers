@@ -30,7 +30,7 @@ wifi:
 one_wire:
   - platform: gpio
     id: balcony_one_wire
-    pin: GPIO15 # NodeMCU D8 (TEMP pin in schematic)
+    pin: GPIO14 # NodeMCU D5 (TEMP pin in schematic)
 
 switch:
   - platform: gpio
@@ -76,13 +76,13 @@ output:
   # CD74HC4051 8-channel analog mux select lines (ADC_S0, ADC_S1, ADC_S2)
   - platform: gpio
     id: mux_select_a
-    pin: GPIO14 # NodeMCU D5 (ADC_S0)
+    pin: GPIO12 # NodeMCU 6 (ADC_S0)
   - platform: gpio
     id: mux_select_b
-    pin: GPIO12 # NodeMCU D6 (ADC_S1)
+    pin: GPIO13 # NodeMCU D7 (ADC_S1)
   - platform: gpio
     id: mux_select_c
-    pin: GPIO13 # NodeMCU D7 (ADC_S2)
+    pin: GPIO15 # NodeMCU D8 (ADC_S2)
 
 globals:
   - id: g_soil_indoor_voltage
