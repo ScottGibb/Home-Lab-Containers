@@ -188,12 +188,22 @@ sensor:
     update_interval: 30s
 
   - platform: ultrasonic
-    trigger_pin: GPIO0 # TX (WATER_LEVEL_TRIGGER)
-    echo_pin: GPIO5 # RX (WATER_LEVEL_RECEIVE)
-    name: Water Level Distance
+    trigger_pin: GPIO0 # D3
+    echo_pin: GPIO5 # D1
+    name: Water Tank
     update_interval: 1s
     pulse_time: 10us
     timeout: 5m
+    filters:
+      # Map your distances (in meters) to percentages:
+      # [Distance when Empty] -> 0%
+      # [Distance when Full]  -> 100%
+      - calibrate_linear:
+          - 0.40 -> 0 # Replace 0.40 with your empty bucket distance in meters
+          - 0.05 -> 100 # Replace 0.05 with your full water surface distance in meters
+      - clamp:
+          min_value: 0
+          max_value: 100
 
   - platform: adc
     id: mux_adc
