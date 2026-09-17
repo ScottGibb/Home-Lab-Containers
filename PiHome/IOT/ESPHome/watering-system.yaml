@@ -12,6 +12,8 @@ esp8266:
   early_pin_init: false
 
 logger:
+  # Disabling serial logger so TX (GPIO1) and RX (GPIO3) can be used for the water sensor
+  baud_rate: 0
 
 api:
   encryption:
@@ -28,108 +30,179 @@ wifi:
 one_wire:
   - platform: gpio
     id: balcony_one_wire
-    pin: GPIO2 # NodeMCU D4 — DS18B20 data; 4.7 kΩ pull-up to 3.3 V
-    # Power the DS18B20 from 3.3 V and GND.
+    pin: GPIO15 # NodeMCU D8 (TEMP pin in schematic)
 
 switch:
   - platform: gpio
-    id: watering_zone_1_relay
-    name: Strawberry Plant
+    id: relay_strawberry
+    name: Strawberry Plant Relay (Pump 0)
     pin:
-      number: GPIO5 # NodeMCU D1
+      number: GPIO4 # NodeMCU D2 (PUMP_0)
       inverted: true
     restore_mode: ALWAYS_OFF
 
   - platform: gpio
-    id: watering_zone_2_relay
-    name: Tomato Plant
+    id: relay_tomato
+    name: Tomato Plant Relay (Pump 1)
     pin:
-      number: GPIO4 # NodeMCU D2
+      number: GPIO2 # NodeMCU D4 (PUMP_1)
       inverted: true
     restore_mode: ALWAYS_OFF
 
 binary_sensor:
   - platform: gpio
-    id: indoor_plant_motion
-    name: Indoor Plant Motion
-    device_class: occupancy
+    id: pir_0
+    name: PIR 0
+    device_class: motion
     pin:
-      number: GPIO14 # NodeMCU D5
+      number: GPIO16 # NodeMCU D0 (PIR_0)
+      mode:
+        input: true
+    filters:
+      - delayed_off: 3min
+
+  - platform: gpio
+    id: pir_1
+    name: PIR 1
+    device_class: motion
+    pin:
+      number: GPIO5 # NodeMCU D1 (PIR_1)
       mode:
         input: true
     filters:
       - delayed_off: 3min
 
 output:
+  # CD74HC4051 8-channel analog mux select lines (ADC_S0, ADC_S1, ADC_S2)
   - platform: gpio
     id: mux_select_a
-    pin: GPIO12 # NodeMCU D6 — CD74HC4051 address line A
+    pin: GPIO14 # NodeMCU D5 (ADC_S0)
   - platform: gpio
     id: mux_select_b
-    pin: GPIO13 # NodeMCU D7 — CD74HC4051 address line B (move B from GND; C stays tied to GND)
+    pin: GPIO12 # NodeMCU D6 (ADC_S1)
+  - platform: gpio
+    id: mux_select_c
+    pin: GPIO13 # NodeMCU D7 (ADC_S2)
 
 globals:
-  - id: g_ldr_voltage
+  - id: g_soil_indoor_voltage
     type: float
     restore_value: false
     initial_value: "0.0"
-  - id: g_moisture_voltage
+  - id: g_light_indoor_voltage
     type: float
     restore_value: false
     initial_value: "0.0"
-  - id: g_balcony_ldr_voltage
+  - id: g_light_balcony_voltage
+    type: float
+    restore_value: false
+    initial_value: "0.0"
+  - id: g_soil_cap_1_voltage
+    type: float
+    restore_value: false
+    initial_value: "0.0"
+  - id: g_soil_cap_2_voltage
+    type: float
+    restore_value: false
+    initial_value: "0.0"
+  - id: g_soil_cap_3_voltage
+    type: float
+    restore_value: false
+    initial_value: "0.0"
+  - id: g_soil_cap_4_voltage
     type: float
     restore_value: false
     initial_value: "0.0"
 
 interval:
-  - interval: 500ms
+  - interval: 1s
     then:
-      # Switch to Channel Y0 (LDR)
+      # Y0 — Soil Indoor (A=0 B=0 C=0)
       - output.turn_off: mux_select_a
       - output.turn_off: mux_select_b
+      - output.turn_off: mux_select_c
       - delay: 50ms
       - component.update: mux_adc
-      - lambda: id(g_ldr_voltage) = id(mux_adc).state;
+      - lambda: id(g_soil_indoor_voltage) = id(mux_adc).state;
 
-      # Switch to Channel Y1 (Soil Moisture)
+      # Y1 — Light Indoor (A=1 B=0 C=0)
       - output.turn_on: mux_select_a
       - output.turn_off: mux_select_b
+      - output.turn_off: mux_select_c
       - delay: 50ms
       - component.update: mux_adc
-      - lambda: id(g_moisture_voltage) = id(mux_adc).state;
+      - lambda: id(g_light_indoor_voltage) = id(mux_adc).state;
 
-      # Switch to Channel Y2 (Balcony LDR): A low, B high, C grounded
+      # Y2 — Light Balcony (A=0 B=1 C=0)
       - output.turn_off: mux_select_a
       - output.turn_on: mux_select_b
+      - output.turn_off: mux_select_c
       - delay: 50ms
       - component.update: mux_adc
-      - lambda: id(g_balcony_ldr_voltage) = id(mux_adc).state;
+      - lambda: id(g_light_balcony_voltage) = id(mux_adc).state;
+
+      # Y3 — Soil Capacitive 1 (A=1 B=1 C=0)
+      - output.turn_on: mux_select_a
+      - output.turn_on: mux_select_b
+      - output.turn_off: mux_select_c
+      - delay: 50ms
+      - component.update: mux_adc
+      - lambda: id(g_soil_cap_1_voltage) = id(mux_adc).state;
+
+      # Y4 — Soil Capacitive 2 (A=0 B=0 C=1)
+      - output.turn_off: mux_select_a
+      - output.turn_off: mux_select_b
+      - output.turn_on: mux_select_c
+      - delay: 50ms
+      - component.update: mux_adc
+      - lambda: id(g_soil_cap_2_voltage) = id(mux_adc).state;
+
+      # Y5 — Soil Capacitive 3 (A=1 B=0 C=1)
+      - output.turn_on: mux_select_a
+      - output.turn_off: mux_select_b
+      - output.turn_on: mux_select_c
+      - delay: 50ms
+      - component.update: mux_adc
+      - lambda: id(g_soil_cap_3_voltage) = id(mux_adc).state;
+
+      # Y6 — Soil Capacitive 4 (A=0 B=1 C=1)
+      - output.turn_off: mux_select_a
+      - output.turn_on: mux_select_b
+      - output.turn_on: mux_select_c
+      - delay: 50ms
+      - component.update: mux_adc
+      - lambda: id(g_soil_cap_4_voltage) = id(mux_adc).state;
 
 sensor:
   - platform: dallas_temp
-    id: balcony_temperature
+    id: temp_balcony
     name: Balcony Temperature
     one_wire_id: balcony_one_wire
-    # Auto-detect the single DS18B20 connected to this bus.
     update_interval: 30s
+
+  - platform: ultrasonic
+    trigger_pin: GPIO1 # TX (WATER_LEVEL_TRIGGER)
+    echo_pin: GPIO3 # RX (WATER_LEVEL_RECEIVE)
+    name: Water Level Distance
+    update_interval: 60s
 
   - platform: adc
     id: mux_adc
     pin: A0
-    update_interval: never # only sampled on-demand from the interval above
+    update_interval: never
     filters:
       - multiply: 3.3
 
   - platform: template
-    name: Indoor Plant Light
+    id: light_indoor
+    name: Indoor Light
     device_class: illuminance
     state_class: measurement
     unit_of_measurement: lx
     accuracy_decimals: 0
     update_interval: 30s
     lambda: |-
-      const float voltage = id(g_ldr_voltage);
+      const float voltage = id(g_light_indoor_voltage);
       if (isnan(voltage) || voltage <= 0.01f || voltage >= 3.29f) {
         return NAN;
       }
@@ -137,6 +210,7 @@ sensor:
       return 500.0f / powf(ldr_resistance_kohm, 1.4f);
 
   - platform: template
+    id: light_balcony
     name: Balcony Light
     device_class: illuminance
     state_class: measurement
@@ -144,7 +218,7 @@ sensor:
     accuracy_decimals: 0
     update_interval: 30s
     lambda: |-
-      const float voltage = id(g_balcony_ldr_voltage);
+      const float voltage = id(g_light_balcony_voltage);
       if (isnan(voltage) || voltage <= 0.01f || voltage >= 3.29f) {
         return NAN;
       }
@@ -152,17 +226,86 @@ sensor:
       return 500.0f / powf(ldr_resistance_kohm, 1.4f);
 
   - platform: template
-    name: Indoor Plant Moisture
+    id: soil_indoor
+    name: Indoor Soil Moisture
     device_class: moisture
     state_class: measurement
     unit_of_measurement: "%"
     accuracy_decimals: 0
     update_interval: 30s
-    lambda: return id(g_moisture_voltage);
+    lambda: return id(g_soil_indoor_voltage);
     filters:
       - calibrate_linear:
-          - 0.28 -> 0 # Dry voltage -> 0%
-          - 2.34 -> 100 # Wet voltage -> 100%
+          - 0.28 -> 0
+          - 2.34 -> 100
+      - clamp:
+          min_value: 0
+          max_value: 100
+
+  - platform: template
+    id: soil_cap_1
+    name: Capacitive Soil 1
+    device_class: moisture
+    state_class: measurement
+    unit_of_measurement: "%"
+    accuracy_decimals: 0
+    update_interval: 30s
+    lambda: return id(g_soil_cap_1_voltage);
+    filters:
+      - calibrate_linear:
+          - 2.90 -> 0
+          - 1.20 -> 100
+      - clamp:
+          min_value: 0
+          max_value: 100
+
+  - platform: template
+    id: soil_cap_2
+    name: Capacitive Soil 2
+    device_class: moisture
+    state_class: measurement
+    unit_of_measurement: "%"
+    accuracy_decimals: 0
+    update_interval: 30s
+    lambda: return id(g_soil_cap_2_voltage);
+    filters:
+      - calibrate_linear:
+          - 2.90 -> 0
+          - 1.20 -> 100
+      - clamp:
+          min_value: 0
+          max_value: 100
+
+  - platform: template
+    id: soil_cap_3
+    name: Capacitive Soil 3
+    device_class: moisture
+    state_class: measurement
+    unit_of_measurement: "%"
+    accuracy_decimals: 0
+    update_interval: 30s
+    lambda: return id(g_soil_cap_3_voltage);
+    filters:
+      - calibrate_linear:
+          - 2.90 -> 0
+          - 1.20 -> 100
+      - clamp:
+          min_value: 0
+          max_value: 100
+
+  - platform: template
+    id: soil_cap_4
+    name: Capacitive Soil 4
+    device_class: moisture
+    state_class: measurement
+    unit_of_measurement: "%"
+    accuracy_decimals: 0
+    update_interval: 30s
+    lambda: return id(g_soil_cap_4_voltage);
+    filters:
+      - calibrate_linear:
+          - 2.90 -> 0
+          - 1.20 -> 100
       - clamp:
           min_value: 0
           max_value: 100
