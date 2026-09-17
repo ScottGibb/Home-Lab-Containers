@@ -261,7 +261,7 @@ sensor:
     lambda: return id(g_soil_cap_1_voltage);
     filters:
       - calibrate_linear:
-          - 2.90 -> 0
+          - 2.1 -> 0
           - 1.20 -> 100
       - clamp:
           min_value: 0
@@ -278,7 +278,7 @@ sensor:
     lambda: return id(g_soil_cap_2_voltage);
     filters:
       - calibrate_linear:
-          - 2.90 -> 0
+          - 2.1 -> 0
           - 1.20 -> 100
       - clamp:
           min_value: 0
@@ -295,7 +295,7 @@ sensor:
     lambda: return id(g_soil_cap_3_voltage);
     filters:
       - calibrate_linear:
-          - 2.90 -> 0
+          - 2.1 -> 0
           - 1.20 -> 100
       - clamp:
           min_value: 0
@@ -312,7 +312,7 @@ sensor:
     lambda: return id(g_soil_cap_4_voltage);
     filters:
       - calibrate_linear:
-          - 2.90 -> 0
+          - 2.1 -> 0
           - 1.20 -> 100
       - clamp:
           min_value: 0
