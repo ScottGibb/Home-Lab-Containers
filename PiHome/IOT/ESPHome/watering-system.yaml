@@ -37,7 +37,7 @@ switch:
     id: relay_strawberry
     name: Strawberry Plant Relay (Pump 0)
     pin:
-      number: GPIO4 # NodeMCU D2 (PUMP_0)
+      number: GPIO16 # NodeMCU D0 (PUMP_0)
       inverted: true
     restore_mode: ALWAYS_OFF
 
@@ -45,7 +45,7 @@ switch:
     id: relay_tomato
     name: Tomato Plant Relay (Pump 1)
     pin:
-      number: GPIO2 # NodeMCU D4 (PUMP_1)
+      number: GPIO5 # NodeMCU D1 (PUMP_1)
       inverted: true
     restore_mode: ALWAYS_OFF
 
@@ -55,7 +55,7 @@ binary_sensor:
     name: Living Room Motion Sensor
     device_class: motion
     pin:
-      number: GPIO16 # NodeMCU D0 (PIR_0)
+      number: GPIO4 # NodeMCU D2 (PIR_0)
       mode:
         input: true
     filters:
@@ -189,7 +189,7 @@ sensor:
 
   - platform: ultrasonic
     trigger_pin: GPIO0 # D3
-    echo_pin: GPIO5 # D1
+    echo_pin: GPIO2 # D4
     name: Water Tank
     update_interval: 1s
     pulse_time: 10us
