@@ -193,6 +193,7 @@ sensor:
     name: Water Tank
     update_interval: 1s
     pulse_time: 10us
+    unit_of_measurement: "%"
     timeout: 5m
     filters:
       # Map your distances (in meters) to percentages:
