@@ -51,8 +51,8 @@ switch:
 
 binary_sensor:
   - platform: gpio
-    id: pir_0
-    name: PIR 0
+    id: pir_living_room
+    name: Living Room Motion Sensor
     device_class: motion
     pin:
       number: GPIO16 # NodeMCU D0 (PIR_0)
@@ -62,8 +62,8 @@ binary_sensor:
       - delayed_off: 3min
 
   - platform: gpio
-    id: pir_1
-    name: PIR 1
+    id: pir_balcony
+    name: Balcony Motion Sensor
     device_class: motion
     pin:
       number: GPIO5 # NodeMCU D1 (PIR_1)
@@ -89,7 +89,7 @@ globals:
     type: float
     restore_value: false
     initial_value: "0.0"
-  - id: g_light_indoor_voltage
+  - id: g_living_room_light_voltage
     type: float
     restore_value: false
     initial_value: "0.0"
@@ -131,7 +131,7 @@ interval:
       - output.turn_off: mux_select_c
       - delay: 50ms
       - component.update: mux_adc
-      - lambda: id(g_light_indoor_voltage) = id(mux_adc).state;
+      - lambda: id(g_living_room_light_voltage) = id(mux_adc).state;
 
       # Y2 — Light Balcony (A=0 B=1 C=0)
       - output.turn_off: mux_select_a
@@ -173,6 +173,13 @@ interval:
       - component.update: mux_adc
       - lambda: id(g_soil_cap_4_voltage) = id(mux_adc).state;
 
+      # Print all raw voltage readings directly to logger
+      - lambda: |-
+          ESP_LOGI("raw_adc", "Soil Indoor: %.3fV | Light Indoor: %.3fV | Light Balcony: %.3fV",
+            id(g_soil_indoor_voltage), id(g_living_room_light_voltage), id(g_light_balcony_voltage));
+          ESP_LOGI("raw_adc", "Cap Soil 1: %.3fV | Cap Soil 2: %.3fV | Cap Soil 3: %.3fV | Cap Soil 4: %.3fV",
+            id(g_soil_cap_1_voltage), id(g_soil_cap_2_voltage), id(g_soil_cap_3_voltage), id(g_soil_cap_4_voltage));
+
 sensor:
   - platform: dallas_temp
     id: temp_balcony
@@ -193,16 +200,17 @@ sensor:
     filters:
       - multiply: 3.3
 
+  # --- Processed Sensors ---
   - platform: template
-    id: light_indoor
-    name: Indoor Light
+    id: living_room_light
+    name: Living Room Light
     device_class: illuminance
     state_class: measurement
     unit_of_measurement: lx
     accuracy_decimals: 0
     update_interval: 30s
     lambda: |-
-      const float voltage = id(g_light_indoor_voltage);
+      const float voltage = id(g_living_room_light_voltage);
       if (isnan(voltage) || voltage <= 0.01f || voltage >= 3.29f) {
         return NAN;
       }
@@ -309,3 +317,74 @@ sensor:
       - clamp:
           min_value: 0
           max_value: 100
+
+  # --- Raw Mux Voltage Sensors ---
+  - platform: template
+    id: raw_voltage_soil_indoor
+    name: Raw Voltage Soil Indoor
+    unit_of_measurement: "V"
+    device_class: voltage
+    state_class: measurement
+    accuracy_decimals: 3
+    update_interval: 1s
+    lambda: return id(g_soil_indoor_voltage);
+
+  - platform: template
+    id: raw_voltage_living_room_light
+    name: Raw Voltage Light Indoor
+    unit_of_measurement: "V"
+    device_class: voltage
+    state_class: measurement
+    accuracy_decimals: 3
+    update_interval: 1s
+    lambda: return id(g_living_room_light_voltage);
+
+  - platform: template
+    id: raw_voltage_light_balcony
+    name: Raw Voltage Light Balcony
+    unit_of_measurement: "V"
+    device_class: voltage
+    state_class: measurement
+    accuracy_decimals: 3
+    update_interval: 1s
+    lambda: return id(g_light_balcony_voltage);
+
+  - platform: template
+    id: raw_voltage_soil_cap_1
+    name: Raw Voltage Capacitive Soil 1
+    unit_of_measurement: "V"
+    device_class: voltage
+    state_class: measurement
+    accuracy_decimals: 3
+    update_interval: 1s
+    lambda: return id(g_soil_cap_1_voltage);
+
+  - platform: template
+    id: raw_voltage_soil_cap_2
+    name: Raw Voltage Capacitive Soil 2
+    unit_of_measurement: "V"
+    device_class: voltage
+    state_class: measurement
+    accuracy_decimals: 3
+    update_interval: 1s
+    lambda: return id(g_soil_cap_2_voltage);
+
+  - platform: template
+    id: raw_voltage_soil_cap_3
+    name: Raw Voltage Capacitive Soil 3
+    unit_of_measurement: "V"
+    device_class: voltage
+    state_class: measurement
+    accuracy_decimals: 3
+    update_interval: 1s
+    lambda: return id(g_soil_cap_3_voltage);
+
+  - platform: template
+    id: raw_voltage_soil_cap_4
+    name: Raw Voltage Capacitive Soil 4
+    unit_of_measurement: "V"
+    device_class: voltage
+    state_class: measurement
+    accuracy_decimals: 3
+    update_interval: 1s
+    lambda: return id(g_soil_cap_4_voltage);
