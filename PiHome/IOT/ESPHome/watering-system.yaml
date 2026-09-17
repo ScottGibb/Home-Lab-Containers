@@ -133,7 +133,7 @@ interval:
       - component.update: mux_adc
       - lambda: id(g_light_balcony_voltage) = id(mux_adc).state;
 
-      # Y2 — Resistive oil Indoor  (A=0 B=1 C=0)
+      # Y2 — Resistive Soil Indoor  (A=0 B=1 C=0)
       - output.turn_off: mux_select_a
       - output.turn_on: mux_select_b
       - output.turn_off: mux_select_c
