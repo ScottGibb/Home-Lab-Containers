@@ -61,16 +61,16 @@ binary_sensor:
     filters:
       - delayed_off: 3min
 
-  - platform: gpio
-    id: pir_balcony
-    name: Balcony Motion Sensor
-    device_class: motion
-    pin:
-      number: GPIO5 # NodeMCU D1 (PIR_1)
-      mode:
-        input: true
-    filters:
-      - delayed_off: 3min
+  # - platform: gpio
+  #   id: pir_balcony
+  #   name: Balcony Motion Sensor
+  #   device_class: motion
+  #   pin:
+  #     number: GPIO5 # NodeMCU D1 (PIR_1)
+  #     mode:
+  #       input: true
+  #   filters:
+  #     - delayed_off: 3min
 
 output:
   # CD74HC4051 8-channel analog mux select lines (ADC_S0, ADC_S1, ADC_S2)
@@ -188,10 +188,12 @@ sensor:
     update_interval: 30s
 
   - platform: ultrasonic
-    trigger_pin: GPIO1 # TX (WATER_LEVEL_TRIGGER)
-    echo_pin: GPIO3 # RX (WATER_LEVEL_RECEIVE)
+    trigger_pin: GPIO0 # TX (WATER_LEVEL_TRIGGER)
+    echo_pin: GPIO5 # RX (WATER_LEVEL_RECEIVE)
     name: Water Level Distance
-    update_interval: 60s
+    update_interval: 1s
+    pulse_time: 10us
+    timeout: 5m
 
   - platform: adc
     id: mux_adc
