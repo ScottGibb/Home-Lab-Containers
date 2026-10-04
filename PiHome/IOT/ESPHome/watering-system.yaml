@@ -30,7 +30,7 @@ wifi:
 one_wire:
   - platform: gpio
     id: balcony_one_wire
-    pin: GPIO14 # NodeMCU D5 (TEMP pin in schematic)
+    pin: GPIO14 # NodeMCU D5 (TEMP_ONE_WIRE)
 
 switch:
   - platform: gpio
@@ -55,7 +55,7 @@ binary_sensor:
     name: Living Room Motion Sensor
     device_class: motion
     pin:
-      number: GPIO4 # NodeMCU D2 (PIR_0)
+      number: GPIO4 # NodeMCU D2 (PIR)
       mode:
         input: true
     filters:
@@ -76,7 +76,7 @@ output:
   # CD74HC4051 8-channel analog mux select lines (ADC_S0, ADC_S1, ADC_S2)
   - platform: gpio
     id: mux_select_a
-    pin: GPIO12 # NodeMCU 6 (ADC_S0)
+    pin: GPIO12 # NodeMCU D6 (ADC_S0)
   - platform: gpio
     id: mux_select_b
     pin: GPIO13 # NodeMCU D7 (ADC_S1)
@@ -97,6 +97,10 @@ globals:
     type: float
     restore_value: false
     initial_value: "0.0"
+  - id: g_soil_cap_0_voltage
+    type: float
+    restore_value: false
+    initial_value: "0.0"
   - id: g_soil_cap_1_voltage
     type: float
     restore_value: false
@@ -106,10 +110,6 @@ globals:
     restore_value: false
     initial_value: "0.0"
   - id: g_soil_cap_3_voltage
-    type: float
-    restore_value: false
-    initial_value: "0.0"
-  - id: g_soil_cap_4_voltage
     type: float
     restore_value: false
     initial_value: "0.0"
@@ -141,44 +141,44 @@ interval:
       - component.update: mux_adc
       - lambda: id(g_soil_indoor_voltage) = id(mux_adc).state;
 
-      # Y3 — Soil Capacitive 1 (A=1 B=1 C=0)
+      # Y3 — Soil Capacitive 0 (A=1 B=1 C=0)
       - output.turn_on: mux_select_a
       - output.turn_on: mux_select_b
       - output.turn_off: mux_select_c
       - delay: 50ms
       - component.update: mux_adc
+      - lambda: id(g_soil_cap_0_voltage) = id(mux_adc).state;
+
+      # Y4 — Soil Capacitive 1 (A=0 B=0 C=1)
+      - output.turn_off: mux_select_a
+      - output.turn_off: mux_select_b
+      - output.turn_on: mux_select_c
+      - delay: 50ms
+      - component.update: mux_adc
       - lambda: id(g_soil_cap_1_voltage) = id(mux_adc).state;
 
-      # Y4 — Soil Capacitive 2 (A=0 B=0 C=1)
-      - output.turn_off: mux_select_a
+      # Y5 — Soil Capacitive 2 (A=1 B=0 C=1)
+      - output.turn_on: mux_select_a
       - output.turn_off: mux_select_b
       - output.turn_on: mux_select_c
       - delay: 50ms
       - component.update: mux_adc
       - lambda: id(g_soil_cap_2_voltage) = id(mux_adc).state;
 
-      # Y5 — Soil Capacitive 3 (A=1 B=0 C=1)
-      - output.turn_on: mux_select_a
-      - output.turn_off: mux_select_b
-      - output.turn_on: mux_select_c
-      - delay: 50ms
-      - component.update: mux_adc
-      - lambda: id(g_soil_cap_3_voltage) = id(mux_adc).state;
-
-      # Y6 — Soil Capacitive 4 (A=0 B=1 C=1)
+      # Y6 — Soil Capacitive 3 (A=0 B=1 C=1)
       - output.turn_off: mux_select_a
       - output.turn_on: mux_select_b
       - output.turn_on: mux_select_c
       - delay: 50ms
       - component.update: mux_adc
-      - lambda: id(g_soil_cap_4_voltage) = id(mux_adc).state;
+      - lambda: id(g_soil_cap_3_voltage) = id(mux_adc).state;
 
       # Print all raw voltage readings directly to logger
       - lambda: |-
           ESP_LOGI("raw_adc", "Soil Indoor: %.3fV | Light Indoor: %.3fV | Light Balcony: %.3fV",
             id(g_soil_indoor_voltage), id(g_living_room_light_voltage), id(g_light_balcony_voltage));
-          ESP_LOGI("raw_adc", "Cap Soil 1: %.3fV | Cap Soil 2: %.3fV | Cap Soil 3: %.3fV | Cap Soil 4: %.3fV",
-            id(g_soil_cap_1_voltage), id(g_soil_cap_2_voltage), id(g_soil_cap_3_voltage), id(g_soil_cap_4_voltage));
+          ESP_LOGI("raw_adc", "Cap Soil 0: %.3fV | Cap Soil 1: %.3fV | Cap Soil 2: %.3fV | Cap Soil 3: %.3fV",
+            id(g_soil_cap_0_voltage), id(g_soil_cap_1_voltage), id(g_soil_cap_2_voltage), id(g_soil_cap_3_voltage));
 
 sensor:
   - platform: dallas_temp
@@ -188,8 +188,8 @@ sensor:
     update_interval: 30s
 
   - platform: ultrasonic
-    trigger_pin: GPIO0 # D3
-    echo_pin: GPIO2 # D4
+    trigger_pin: GPIO0 # NodeMCU D3 (ULTRASONIC_TRIG)
+    echo_pin: GPIO2 # NodeMCU D4 (ULTRASONIC_ECHO)
     name: Water Tank
     update_interval: 1s
     pulse_time: 10us
@@ -208,7 +208,7 @@ sensor:
 
   - platform: adc
     id: mux_adc
-    pin: A0
+    pin: A0 # ANALOGUE_IN
     update_interval: never
     filters:
       - multiply: 3.3
@@ -264,6 +264,23 @@ sensor:
           max_value: 100
 
   - platform: template
+    id: soil_cap_0
+    name: Capacitive Soil 0
+    device_class: moisture
+    state_class: measurement
+    unit_of_measurement: "%"
+    accuracy_decimals: 0
+    update_interval: 30s
+    lambda: return id(g_soil_cap_0_voltage);
+    filters:
+      - calibrate_linear:
+          - 2.1 -> 0
+          - 1.20 -> 100
+      - clamp:
+          min_value: 0
+          max_value: 100
+
+  - platform: template
     id: soil_cap_1
     name: Capacitive Soil 1
     device_class: moisture
@@ -314,23 +331,6 @@ sensor:
           min_value: 0
           max_value: 100
 
-  - platform: template
-    id: soil_cap_4
-    name: Capacitive Soil 4
-    device_class: moisture
-    state_class: measurement
-    unit_of_measurement: "%"
-    accuracy_decimals: 0
-    update_interval: 30s
-    lambda: return id(g_soil_cap_4_voltage);
-    filters:
-      - calibrate_linear:
-          - 2.1 -> 0
-          - 1.20 -> 100
-      - clamp:
-          min_value: 0
-          max_value: 100
-
   # --- Raw Mux Voltage Sensors ---
   - platform: template
     id: raw_voltage_soil_indoor
@@ -363,6 +363,16 @@ sensor:
     lambda: return id(g_light_balcony_voltage);
 
   - platform: template
+    id: raw_voltage_soil_cap_0
+    name: Raw Voltage Capacitive Soil 0
+    unit_of_measurement: "V"
+    device_class: voltage
+    state_class: measurement
+    accuracy_decimals: 3
+    update_interval: 1s
+    lambda: return id(g_soil_cap_0_voltage);
+
+  - platform: template
     id: raw_voltage_soil_cap_1
     name: Raw Voltage Capacitive Soil 1
     unit_of_measurement: "V"
@@ -391,13 +401,3 @@ sensor:
     accuracy_decimals: 3
     update_interval: 1s
     lambda: return id(g_soil_cap_3_voltage);
-
-  - platform: template
-    id: raw_voltage_soil_cap_4
-    name: Raw Voltage Capacitive Soil 4
-    unit_of_measurement: "V"
-    device_class: voltage
-    state_class: measurement
-    accuracy_decimals: 3
-    update_interval: 1s
-    lambda: return id(g_soil_cap_4_voltage);
