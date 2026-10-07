@@ -274,8 +274,8 @@ sensor:
     lambda: return id(g_soil_cap_0_voltage);
     filters:
       - calibrate_linear:
-          - 2.1 -> 0
-          - 1.20 -> 100
+          - 1.734 -> 0 # Dry blade in air, measured 2026-10-07
+          - 0.738 -> 100 # Blade in water, measured 2026-10-07
       - clamp:
           min_value: 0
           max_value: 100
@@ -291,8 +291,8 @@ sensor:
     lambda: return id(g_soil_cap_1_voltage);
     filters:
       - calibrate_linear:
-          - 2.1 -> 0
-          - 1.20 -> 100
+          - 1.720 -> 0 # Dry blade in air, measured 2026-10-07
+          - 0.751 -> 100 # Blade in water, measured 2026-10-07
       - clamp:
           min_value: 0
           max_value: 100
@@ -308,8 +308,8 @@ sensor:
     lambda: return id(g_soil_cap_2_voltage);
     filters:
       - calibrate_linear:
-          - 2.1 -> 0
-          - 1.20 -> 100
+          - 1.747 -> 0 # Dry blade in air, measured 2026-10-07
+          - 0.751 -> 100 # Blade in water, measured 2026-10-07
       - clamp:
           min_value: 0
           max_value: 100
@@ -325,8 +325,8 @@ sensor:
     lambda: return id(g_soil_cap_3_voltage);
     filters:
       - calibrate_linear:
-          - 2.1 -> 0
-          - 1.20 -> 100
+          - 1.450 -> 0 # Dry blade in air, measured 2026-10-07
+          - 0.735 -> 100 # Blade in water, measured 2026-10-07
       - clamp:
           min_value: 0
           max_value: 100
