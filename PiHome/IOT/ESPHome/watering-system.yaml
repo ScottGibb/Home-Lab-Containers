@@ -191,7 +191,7 @@ sensor:
     trigger_pin: GPIO0 # NodeMCU D3 (ULTRASONIC_TRIG)
     echo_pin: GPIO2 # NodeMCU D4 (ULTRASONIC_ECHO)
     name: Water Tank
-    update_interval: 1s
+    update_interval: 30s
     pulse_time: 10us
     unit_of_measurement: "%"
     timeout: 5m
