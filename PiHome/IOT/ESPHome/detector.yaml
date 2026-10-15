@@ -23,6 +23,14 @@ wifi:
   password: !secret wifi_password
 
 binary_sensor:
+  - platform: template
+    name: Ambient Light Saturated
+    entity_category: diagnostic
+    lambda: |-
+      const float voltage = id(ldr_voltage).state;
+      if (!std::isfinite(voltage)) return {};
+      return voltage >= 3.29f;
+
   - platform: gpio
     id: pir_motion
     name: Motion
@@ -60,8 +68,11 @@ sensor:
     update_interval: 30s
     lambda: |-
       const float voltage = id(ldr_voltage).state;
-      if (isnan(voltage) || voltage <= 0.01f || voltage >= 3.29f) {
-        return NAN;
-      }
-      const float ldr_resistance_kohm = 10.0f * ((3.3f / voltage) - 1.0f);
-      return 500.0f / powf(ldr_resistance_kohm, 1.4f);
+      if (!std::isfinite(voltage) || voltage < 0.0f) return NAN;
+      if (voltage <= 0.01f) return 0.0f;
+      // NORPS-12 to +3V3, 10k to GND. Cap the estimate at the ADC rail.
+      const float bounded_voltage = fminf(voltage, 3.29f);
+      const float ldr_resistance_kohm = 10.0f * ((3.3f / bounded_voltage) - 1.0f);
+      // Typical graph fit: R ~= 45 kohm * footcandles^-0.825.
+      // Approximate; extrapolated above the plotted 100 footcandles.
+      return 10.76f * powf(45.0f / ldr_resistance_kohm, 1.0f / 0.825f);
