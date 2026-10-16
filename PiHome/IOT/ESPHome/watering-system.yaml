@@ -289,7 +289,7 @@ sensor:
 
   - platform: template
     id: soil_cap_0
-    name: Capacitive Soil 0
+    name: Capacitive Soil 0 # HA display: Strawberry Top Right (C0); retain name for entity identity.
     device_class: moisture
     state_class: measurement
     unit_of_measurement: "%"
@@ -307,7 +307,7 @@ sensor:
 
   - platform: template
     id: soil_cap_1
-    name: Capacitive Soil 1
+    name: Capacitive Soil 1 # HA display: Tomato (C1); retain name for entity identity.
     device_class: moisture
     state_class: measurement
     unit_of_measurement: "%"
@@ -325,7 +325,7 @@ sensor:
 
   - platform: template
     id: soil_cap_2
-    name: Capacitive Soil 2
+    name: Capacitive Soil 2 # HA display: Strawberry Top Left (C2); retain name for entity identity.
     device_class: moisture
     state_class: measurement
     unit_of_measurement: "%"
@@ -343,7 +343,7 @@ sensor:
 
   - platform: template
     id: soil_cap_3
-    name: Capacitive Soil 3
+    name: Capacitive Soil 3 # HA display: Strawberry Bottom Left (C3); retain name for entity identity.
     device_class: moisture
     state_class: measurement
     unit_of_measurement: "%"
@@ -392,7 +392,7 @@ sensor:
 
   - platform: template
     id: raw_voltage_soil_cap_0
-    name: Raw Voltage Capacitive Soil 0
+    name: Raw Voltage Capacitive Soil 0 # HA display: Strawberry Top Right Raw Voltage (C0).
     unit_of_measurement: "V"
     device_class: voltage
     state_class: measurement
@@ -402,7 +402,7 @@ sensor:
 
   - platform: template
     id: raw_voltage_soil_cap_1
-    name: Raw Voltage Capacitive Soil 1
+    name: Raw Voltage Capacitive Soil 1 # HA display: Tomato Raw Voltage (C1).
     unit_of_measurement: "V"
     device_class: voltage
     state_class: measurement
@@ -412,7 +412,7 @@ sensor:
 
   - platform: template
     id: raw_voltage_soil_cap_2
-    name: Raw Voltage Capacitive Soil 2
+    name: Raw Voltage Capacitive Soil 2 # HA display: Strawberry Top Left Raw Voltage (C2).
     unit_of_measurement: "V"
     device_class: voltage
     state_class: measurement
@@ -422,7 +422,7 @@ sensor:
 
   - platform: template
     id: raw_voltage_soil_cap_3
-    name: Raw Voltage Capacitive Soil 3
+    name: Raw Voltage Capacitive Soil 3 # HA display: Strawberry Bottom Left Raw Voltage (C3).
     unit_of_measurement: "V"
     device_class: voltage
     state_class: measurement
