@@ -108,6 +108,35 @@ services:
     networks:
       - home_power_network
 
+  home_power_monitor_analytics:
+    container_name: home_power_monitor_analytics
+    image: ${HOME_POWER_MONITOR_ANALYTICS_IMAGE:-home-power-monitor-analytics:pi3}
+    restart: unless-stopped
+    environment:
+      HTTP_BIND_ADDRESS: 0.0.0.0
+      HTTP_PORT: "8080"
+      HTTP_MAX_SERIES_BUCKETS: ${ANALYTICS_MAX_SERIES_BUCKETS:-10000}
+      HTTP_MCP_ALLOWED_HOSTS: >-
+        ${ANALYTICS_MCP_ALLOWED_HOSTS:-localhost,127.0.0.1,
+        localhost:${ANALYTICS_HTTP_PORT:-8081},127.0.0.1:${ANALYTICS_HTTP_PORT:-8081},
+        pihall,pihall:${ANALYTICS_HTTP_PORT:-8081},
+        pihall.local,pihall.local:${ANALYTICS_HTTP_PORT:-8081}}
+      DATABASE_IP_ADDRESS: postgres
+      DATABASE_PORT: "5432"
+      DATABASE_NAME: PowerMonitor
+      DATABASE_USERNAME: admin
+      DATABASE_PASSWORD: admin
+      MONITOR_BASE_URL: http://home_power_monitor:${HTTP_PORT:-3000}
+    depends_on:
+      postgres:
+        condition: service_healthy
+      home_power_monitor:
+        condition: service_started
+    ports:
+      - "${ANALYTICS_HTTP_PORT:-8081}:8080"
+    networks:
+      - home_power_network
+
 networks:
   home_power_network:
     driver: bridge

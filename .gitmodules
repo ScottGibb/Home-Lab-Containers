@@ -28,3 +28,6 @@
 [submodule "PiHome/IOT/ESPHome/hardware/ESP-Presence-Detector"]
 	path = PiHome/IOT/ESPHome/hardware/ESP-Presence-Detector
 	url = https://github.com/ScottGibb/ESP-Presence-Detector.git
+[submodule "PiHall/IOT/Home-Power-Monitor-Analytics"]
+	path = PiHall/IOT/Home-Power-Monitor-Analytics
+	url = https://github.com/ScottGibb/Home-Power-Monitor-Analytics.git
