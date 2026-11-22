@@ -33,7 +33,7 @@ services:
     stdin_open: true # Keep stdin open
     tty: true # Allocate a pseudo-TTY
   mqtt-broker:
-    image: eclipse-mosquitto:2.1.2-alpine
+    image: eclipse-mosquitto:2.1.4-alpine
     container_name: mqtt-broker
     volumes:
       - mosquitto_data:/mosquitto/data
